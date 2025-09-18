@@ -6,8 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "ng lint --fix",
     "prepare": "husky"
   },
   "prettier": {
@@ -40,12 +42,13 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^20.0.0",
     "@angular-eslint/builder": "20.3.0",
     "@angular/build": "^20.3.2",
     "@angular/cli": "^20.3.2",
     "@angular/compiler-cli": "^20.3.0",
     "@eslint/js": "^9.35.0",
-    "@types/jasmine": "~5.1.0",
+    "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^8.44.0",
     "@typescript-eslint/parser": "^8.44.0",
     "angular-eslint": "20.3.0",
@@ -55,24 +58,13 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unused-imports": "^4.2.0",
     "husky": "^9.1.7",
-    "jasmine-core": "~5.9.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
+    "jest": "^30.1.3",
+    "jest-environment-jsdom": "^30.1.2",
+    "jest-preset-angular": "^15.0.1",
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "prettier-eslint": "^16.4.2",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.40.0"
-  },
-  "lint-staged": {
-    "*.{ts,html,scss,css,md}": [
-      "ng lint FormCraftify --fix"
-    ],
-    "*.json": [
-      "prettier --write"
-    ]
   }
 }
