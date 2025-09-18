@@ -68,8 +68,11 @@
     "typescript-eslint": "8.40.0"
   },
   "lint-staged": {
-    "*.{ts,html,scss,css,json,md}": [
-      "ng lint --fix"
+    "*.{ts,html,scss,css,md}": [
+      "ng lint FormCraftify --fix"
+    ],
+    "*.json": [
+      "prettier --write"
     ]
   }
 }
