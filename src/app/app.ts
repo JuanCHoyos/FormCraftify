@@ -5,9 +5,11 @@ import { FormlyFieldConfig, FormlyForm } from '@ngx-formly/core';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { ButtonModule } from 'primeng/button';
 import { Options } from 'sortablejs';
+
+import { Icon } from './shared/components/icon/icon';
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, SortablejsModule, ButtonModule, ReactiveFormsModule, FormlyForm],
+  imports: [CommonModule, SortablejsModule, ButtonModule, ReactiveFormsModule, FormlyForm, Icon],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

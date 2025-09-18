@@ -26,6 +26,15 @@ importers:
       '@angular/router':
         specifier: ^20.3.0
         version: 20.3.1(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@20.3.1(@angular/animations@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
+      '@ng-icons/core':
+        specifier: ^32.1.0
+        version: 32.1.0(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
+      '@ng-icons/heroicons':
+        specifier: ^32.1.0
+        version: 32.1.0
+      '@ng-icons/ionicons':
+        specifier: ^32.1.0
+        version: 32.1.0
       '@ngx-formly/core':
         specifier: ^7.0.0
         version: 7.0.0(@angular/forms@20.3.1(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@20.3.1(@angular/animations@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))(rxjs@7.8.2)
@@ -1853,6 +1862,19 @@ packages:
 
   '@napi-rs/wasm-runtime@1.0.5':
     resolution: {integrity: sha512-TBr9Cf9onSAS2LQ2+QHx6XcC6h9+RIzJgbqG3++9TUZSH204AwEy5jg3BTQ0VATsyoGj4ee49tN/y6rvaOOtcg==}
+
+  '@ng-icons/core@32.1.0':
+    resolution: {integrity: sha512-QMZSJIZYFg6THQKL9cQDEf7IbBcALcM09wCBmlIf0slmozRWcNJR25T9huiXy9/15OH1APegaRW+606e9bsOIg==}
+    peerDependencies:
+      '@angular/common': '>=20.0.0'
+      '@angular/core': '>=20.0.0'
+      rxjs: ^6.5.3 || ^7.4.0
+
+  '@ng-icons/heroicons@32.1.0':
+    resolution: {integrity: sha512-Vn7MaxCsUKefAt822chmlor0JtyRrZcydvtElU5AaKXiqyQ8oy5DW0cLv8tB9OyY//bo97WHIQ0JbgAYWzGAgA==}
+
+  '@ng-icons/ionicons@32.1.0':
+    resolution: {integrity: sha512-S4gge8Nf9NAD9w7XjGBlJXDZVRUjm3xDtmdjnRWstYAxAYWnjHHytPrMgVfDePsefrNg8sU/iKopMp0DEalRnA==}
 
   '@ngtools/webpack@20.3.2':
     resolution: {integrity: sha512-i5sbPfhQI6suMF+02KV3PzLBITlXZhiEKPjnQHUK/kCRc+tV+WQidxaO/UTkgSzqhzWGVHkmtE1Sau08K5Wi+A==}
@@ -8588,6 +8610,21 @@ snapshots:
       '@emnapi/runtime': 1.5.0
       '@tybys/wasm-util': 0.10.1
     optional: true
+
+  '@ng-icons/core@32.1.0(@angular/common@20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)':
+    dependencies:
+      '@angular/common': 20.3.1(@angular/core@20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
+      '@angular/core': 20.3.1(@angular/compiler@20.3.1)(rxjs@7.8.2)(zone.js@0.15.1)
+      rxjs: 7.8.2
+      tslib: 2.8.1
+
+  '@ng-icons/heroicons@32.1.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@ng-icons/ionicons@32.1.0':
+    dependencies:
+      tslib: 2.8.1
 
   '@ngtools/webpack@20.3.2(@angular/compiler-cli@20.3.1(@angular/compiler@20.3.1)(typescript@5.9.2))(typescript@5.9.2)(webpack@5.101.2(esbuild@0.25.9))':
     dependencies:
