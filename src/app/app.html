@@ -1,15 +1,4 @@
-<div class="grid grid-cols-2 gap-4 px-4">
-  <ul class="list-group sortable" [nxtSortablejs]="cloneList1" [config]="clone1Options">
-    @for (item of cloneList1; track item) {
-      <li class="list-group-item border p-4 cursor-grab">Element {{ item }}</li>
-    }
-  </ul>
-
-  <ul class="list-group sortable grid grid-cols-2" [nxtSortablejs]="cloneList2" [config]="clone2Options">
-    @for (item of cloneList2; track item) {
-      <li class="list-group-item border p-4 cursor-grab">Element {{ item }}</li>
-    }
-  </ul>
-</div>
-<br />
-{{ cloneList2 | json }}
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+  <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

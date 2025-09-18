@@ -4,6 +4,8 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideFormlyCore } from '@ngx-formly/core';
+import { withFormlyPrimeNG } from '@ngx-formly/primeng';
 import Aura from '@primeuix/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 
@@ -19,5 +21,6 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
+    provideFormlyCore(withFormlyPrimeNG()),
   ],
 };

@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormlyFieldConfig, FormlyForm } from '@ngx-formly/core';
 import { SortablejsModule } from 'nxt-sortablejs';
+import { ButtonModule } from 'primeng/button';
 import { Options } from 'sortablejs';
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, SortablejsModule],
+  imports: [CommonModule, SortablejsModule, ButtonModule, ReactiveFormsModule, FormlyForm],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -25,4 +28,21 @@ export class App {
   clone2Options: Options = {
     group: 'clone-group',
   };
+  form = new FormGroup({});
+  model = { email: 'email@gmail.com' };
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'email',
+      type: 'input',
+      props: {
+        label: 'Email address',
+        placeholder: 'Enter email',
+        required: true,
+      },
+    },
+  ];
+
+  onSubmit(model: unknown) {
+    console.log(model);
+  }
 }
