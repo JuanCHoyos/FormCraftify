@@ -1,0 +1,42 @@
+<aside
+  aria-label="settings panel"
+  class="absolute top-0 w-80 bg-white z-10 border-gray-300 flex flex-col transition-all duration-300 overflow-hidden h-full md:relative md:left-0 md:z-0"
+  [ngClass]="{
+    'md:w-[73px]': isCollapsed(),
+    'md:w-80': !isCollapsed(),
+    'border-l': position() === AsidePosition.right,
+    'border-r': position() === AsidePosition.left,
+    'left-0': showSideBar() && position() === AsidePosition.left,
+    '-left-full': !showSideBar() && position() === AsidePosition.left,
+    'right-0': showSideBar() && position() === AsidePosition.right,
+    '-right-full': !showSideBar() && position() === AsidePosition.right,
+  }"
+  [attr.aria-hidden]="!showSideBar() || isCollapsed()"
+>
+  <header class="flex items-center justify-between gap-2 p-4 py-2 border-b border-gray-300">
+    <div class="block" [ngClass]="{ 'md:hidden': isCollapsed() }">
+      <ui-title [heading]="Heading.h4">{{ title() }}</ui-title>
+      @if (subtitle()) {
+        <p class="text-xs text-gray-500">
+          {{ subtitle() }}
+        </p>
+      }
+    </div>
+    <p-button
+      [text]="true"
+      severity="secondary"
+      ariaLabel="Toggle Sidebar"
+      class="hidden md:block transition-transform delay-300 duration-300"
+      [class.rotate-180]="!isCollapsed()"
+      (click)="toggleCollapse()"
+      (keydown.enter)="toggleCollapse()"
+    >
+      <ui-icon
+        [name]="position() === 'left' ? 'lucidePanelLeftOpen' : 'lucidePanelLeftClose'"
+      ></ui-icon>
+    </p-button>
+  </header>
+  <div class="block" [ngClass]="{ 'md:hidden': isCollapsed() }">
+    <ng-content></ng-content>
+  </div>
+</aside>

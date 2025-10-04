@@ -1,0 +1,13 @@
+<p-iconfield iconPosition="left">
+  <p-inputicon>
+    <ui-icon name="lucideSearch"></ui-icon>
+  </p-inputicon>
+  <input
+    type="text"
+    pInputText
+    (input)="onInputChange($event.target.value)"
+    [placeholder]="placeholder()"
+    [variant]="variant()"
+    fluid
+  />
+</p-iconfield>

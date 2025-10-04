@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { UISidebar } from '@shared/index';
+
+import { AsidePosition } from '../../../../shared/components/ui-sidebar/ui-sidebar';
 
 @Component({
   selector: 'app-form-settings-panel',
-  imports: [],
+  imports: [CommonModule, UISidebar],
   templateUrl: './form-settings-panel.html',
-  styleUrl: './form-settings-panel.scss',
 })
-export class FormSettingsPanel {}
+export class FormSettingsPanel {
+  isCollapsed = signal<boolean>(false);
+  AsidePosition = AsidePosition;
+}

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Icon } from './icon';
+import { FormFieldList } from './form-field-list';
 
-describe('Icon', () => {
-  let component: Icon;
-  let fixture: ComponentFixture<Icon>;
+describe('FormFieldList', () => {
+  let component: FormFieldList;
+  let fixture: ComponentFixture<FormFieldList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Icon],
+      imports: [FormFieldList],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Icon);
+    fixture = TestBed.createComponent(FormFieldList);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,8 +4,6 @@
     "source.fixAll": "always",
     "source.fixAll.eslint": "always"
   },
-  "eslint.validate": [
-    "typescript",
-    "html"
-  ]
+  "eslint.validate": ["typescript", "html"],
+  "i18n-ally.localesPaths": ["public/assets/i18n"]
 }

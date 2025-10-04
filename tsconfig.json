@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -15,6 +16,11 @@
     "target": "ES2022",
     "module": "preserve",
     "esModuleInterop": true,
+    "paths": {
+      "@env/*": ["src/environments/*"],
+      "@shared/*": ["src/app/shared/components/*"],
+      "@pages/*": ["src/app/pages/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

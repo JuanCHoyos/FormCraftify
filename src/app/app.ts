@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormlyFieldConfig, FormlyForm } from '@ngx-formly/core';
-import { SortablejsModule } from 'nxt-sortablejs';
-import { ButtonModule } from 'primeng/button';
+import { FormGroup } from '@angular/forms';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormBuilder } from '@pages/form-builder/form-builder';
 import { Options } from 'sortablejs';
 
-import { Icon } from './shared/components/icon/icon';
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, SortablejsModule, ButtonModule, ReactiveFormsModule, FormlyForm, Icon],
+  imports: [CommonModule, FormBuilder],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

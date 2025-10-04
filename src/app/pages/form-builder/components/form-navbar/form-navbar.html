@@ -1,0 +1,64 @@
+<header class="p-4 border-b border-gray-300 bg-[#fcfcfc]">
+  <nav class="flex justify-between">
+    <div class="flex items-center gap-2">
+      <p-button
+        [outlined]="true"
+        size="small"
+        ariaLabel="Menu"
+        severity="secondary"
+        class="md:hidden"
+        (click)="openFormInputsPanel()"
+      >
+        <ui-icon name="lucideMenu"></ui-icon>
+      </p-button>
+      <ui-title [heading]="Heading.h2">Form builders</ui-title>
+    </div>
+    <div class="flex items-center gap-2">
+      @for (item of menu(); track item.label) {
+        <p-button
+          size="small"
+          [outlined]="true"
+          (click)="item.command($event)"
+          [ngClass]="{
+            'hidden md:block': item.visibleOn.includes('desktop'),
+            'md:hidden': item.visibleOn.includes('mobile'),
+          }"
+          (keydown.enter)="item.command($event)"
+          [pTooltip]="item.label"
+          tooltipPosition="bottom"
+          severity="secondary"
+        >
+          <div class="flex text-sm font-semibold items-center gap-2">
+            <ui-icon [name]="item.icon"></ui-icon>
+            @if (item.label) {
+              <span
+                [ngClass]="{
+                  'hidden md:block': item.visibleOn.includes('all'),
+                }"
+                >{{ item.label }}</span
+              >
+            }
+          </div>
+        </p-button>
+      }
+    </div>
+  </nav>
+</header>
+
+<p-popover #menuTemplate [style]="{ '--p-popover-content-padding': '4px' }">
+  <ul class="list-none w-32 p-0 m-0 flex flex-col">
+    @for (item of menuShowOnMobile(); track item.label) {
+      <li class="hover:bg-gray-100 cursor-pointer rounded-border">
+        <button
+          class="flex items-center gap-4 p-2 w-full text-sm bg-transparent cursor-pointer"
+          (click)="item.command($event)"
+          (keydown.enter)="item.command($event)"
+          tabindex="0"
+        >
+          <ui-icon [name]="item.icon"></ui-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </li>
+    }
+  </ul>
+</p-popover>
