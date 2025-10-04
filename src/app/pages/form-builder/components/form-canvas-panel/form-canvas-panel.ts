@@ -18,6 +18,5 @@ import { FormCanvasHeader } from './components/header/canvas-header';
     UIICon,
   ],
   templateUrl: './form-canvas-panel.html',
-  styleUrl: './form-canvas-panel.scss',
 })
 export class FormCanvasPanel {}

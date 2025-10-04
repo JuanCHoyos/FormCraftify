@@ -10,7 +10,6 @@ import { FormFieldItem } from '../form-field-item/form-field-item';
   selector: 'app-form-field-list',
   imports: [CommonModule, AccordionModule, FormFieldItem, SortablejsModule, UIICon],
   templateUrl: './form-field-list.html',
-  styleUrl: './form-field-list.scss',
 })
 export class FormFieldList {
   sortableConfig: Options = {
