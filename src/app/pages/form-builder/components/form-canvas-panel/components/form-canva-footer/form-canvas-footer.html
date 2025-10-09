@@ -1,0 +1,69 @@
+<footer
+  class="min-h-16 flex gap-4 flex-col w-full pt-0 pb-4 bg-white items-center justify-between"
+  appArrowNavigation
+  (arrowLeft)="formCanvasNavigation.goToPreviousSection()"
+  (arrowRight)="formCanvasNavigation.goToNextSection()"
+>
+  <p-progressbar
+    [value]="formCanvasNavigation.progressPercentage()"
+    [showValue]="false"
+    class="w-full h-2! rounded-[0]!"
+  />
+
+  <div class="w-full flex justify-center gap-4 md:gap-8 items-center px-4">
+    <p-button
+      size="small"
+      [outlined]="true"
+      severity="secondary"
+      [disabled]="formCanvasNavigation.activeSectionIndex() === 0"
+      (onClick)="formCanvasNavigation.goToPreviousSection()"
+    >
+      <div class="flex text-sm font-semibold items-center gap-2">
+        <ui-icon name="lucideChevronLeft"></ui-icon>
+        Previous
+      </div>
+    </p-button>
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex md:gap-2">
+        @for (page of formCanvasNavigation.sectionList(); track $index) {
+          <button
+            class="size-2 bg-gray-300 rounded-full transition-all duration-300 hover:cursor-pointer"
+            [ngClass]="{
+              'w-6 bg-indigo-500': formCanvasNavigation.activeSectionIndex() === page.value,
+            }"
+            (click)="formCanvasNavigation.activeSectionIndex.set($index)"
+            (keydown.enter)="formCanvasNavigation.activeSectionIndex.set($index)"
+            aria-label="section {{ $index + 1 }}"
+          ></button>
+        }
+      </div>
+      <p-select
+        [options]="formCanvasNavigation.sectionList()"
+        (onChange)="formCanvasNavigation.activeSectionIndex.set($event.value)"
+        [ngModel]="formCanvasNavigation.activeSectionIndex()"
+        size="small"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select a Section"
+        class="w-full md:w-32"
+      />
+    </div>
+
+    <p-button
+      size="small"
+      [outlined]="true"
+      tooltipPosition="bottom"
+      severity="secondary"
+      [disabled]="
+        formCanvasNavigation.activeSectionIndex() === formCanvasNavigation.sectionList().length - 1
+      "
+      (onClick)="formCanvasNavigation.goToNextSection()"
+    >
+      <div class="flex text-sm font-semibold items-center gap-2">
+        Next
+        <ui-icon name="lucideChevronRight"></ui-icon>
+      </div>
+    </p-button>
+  </div>
+  <span class="text-xs text-gray-500">Usa las flechas ← → del teclado para navegar</span>
+</footer>

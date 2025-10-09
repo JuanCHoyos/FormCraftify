@@ -1,43 +1,25 @@
-<div class="bg-[#f5f5f5] w-full h-full px-4 py-8">
-  <div class="max-w-full md:max-w-2xl mx-auto flex flex-col gap-4">
-    <app-canvas-header></app-canvas-header>
-    <section
-      class="bg-white w-full min-h-96 mx-auto border-2 border-gray-300 rounded-lg p-6 relative flex flex-col gap-4"
-    >
-      @if (false) {
-        <app-canvas-empty-message></app-canvas-empty-message>
-      }
-      <article
-        class="flex flex-col justify-between gap-2 border border-gray-300 hover:border-indigo-500 rounded px-2 py-4 md:p-4 md:pt-12 relative group"
+<div class="flex flex-col bg-[#f5f5f5] w-full h-full min-h-full relative overflow-hidden">
+  <div class="flex-1 overflow-y-scroll px-4 py-8" #canvasPanelContainer>
+    <div class="max-w-full md:max-w-2xl mx-auto flex flex-col gap-4">
+      <app-canvas-header></app-canvas-header>
+      <app-form-canvas-sections [fields]="fields()"></app-form-canvas-sections>
+    </div>
+    @if (isScrollAvailable()) {
+      <p-button
+        class="absolute right-8"
+        size="small"
+        (onClick)="scrollToTop()"
+        [ngClass]="{
+          'bottom-36': formCanvasNavigation.viewMode() === NavigationMode.SECTION,
+          'bottom-8': formCanvasNavigation.viewMode() === NavigationMode.SCROLL,
+        }"
       >
-        <div
-          class="flex items-center justify-between w-full relative p-0 md:absolute md:top-0 md:left-0 md:px-4 md:py-2"
-        >
-          <span class="md:invisible md:group-hover:visible cursor-grab">
-            <ui-icon name="lucideGripVertical"></ui-icon
-          ></span>
-
-          <ul class="flex gap-1 md:invisible md:group-hover:visible">
-            <li>
-              <p-button size="small" variant="text" severity="secondary">
-                <ui-icon name="lucideSquarePen"></ui-icon>
-              </p-button>
-            </li>
-            <li>
-              <p-button size="small" variant="text" severity="secondary">
-                <ui-icon name="lucideCopy"></ui-icon>
-              </p-button>
-            </li>
-            <li>
-              <p-button size="small" variant="text" severity="danger">
-                <ui-icon name="lucideTrash2"></ui-icon>
-              </p-button>
-            </li>
-          </ul>
-        </div>
-        <div class="border h-16 w-full"></div>
-      </article>
-      <app-add-component-placeholder></app-add-component-placeholder>
-    </section>
+        <ui-icon name="lucideChevronUp"></ui-icon>
+      </p-button>
+    }
   </div>
+
+  @if (formCanvasNavigation.viewMode() === NavigationMode.SECTION) {
+    <app-form-canvas-footer></app-form-canvas-footer>
+  }
 </div>
