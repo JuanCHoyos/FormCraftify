@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { UITitle } from '@shared/index';
+import { UIICon, UITitle } from '@shared/index';
 
 import { Heading } from '../../../../../../shared/components/ui-title/ui-title';
 
 @Component({
   selector: 'app-canvas-empty-message',
-  imports: [UITitle],
+  imports: [UITitle, UIICon],
   templateUrl: './canvas-empty-message.html',
 })
 export class FormCanvasEmptyMessage {
