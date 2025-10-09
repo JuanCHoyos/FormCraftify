@@ -113,5 +113,19 @@ export const MyPreset = definePreset(Aura, {
         }
       `,
     },
+    popover: {
+      content: {
+        padding: '0',
+      },
+      root: {
+        borderRadius: '0.25rem',
+        gutter: '0.5rem',
+      },
+      css: `
+      .p-popover:before, .p-popover:after {
+        display: none
+      }
+      `,
+    },
   },
 });
