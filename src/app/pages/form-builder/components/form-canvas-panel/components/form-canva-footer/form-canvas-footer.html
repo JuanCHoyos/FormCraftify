@@ -25,11 +25,11 @@
     </p-button>
     <div class="flex items-center gap-4">
       <div class="hidden md:flex md:gap-2">
-        @for (page of formCanvasNavigation.sectionList(); track $index) {
+        @for (section of formCanvasNavigation.sectionList(); track section.label) {
           <button
             class="size-2 bg-gray-300 rounded-full transition-all duration-300 hover:cursor-pointer"
             [ngClass]="{
-              'w-6 bg-indigo-500': formCanvasNavigation.activeSectionIndex() === page.value,
+              'w-6 bg-indigo-500': formCanvasNavigation.activeSectionIndex() === section.value,
             }"
             (click)="formCanvasNavigation.activeSectionIndex.set($index)"
             (keydown.enter)="formCanvasNavigation.activeSectionIndex.set($index)"

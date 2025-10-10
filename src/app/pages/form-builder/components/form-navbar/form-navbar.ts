@@ -25,7 +25,7 @@ export class FormNavbar {
     }[]
   >([
     {
-      label: '',
+      label: '.',
       icon: 'lucideUndo',
       visibleOn: ['all'],
       command: () => {
@@ -33,7 +33,7 @@ export class FormNavbar {
       },
     },
     {
-      label: '',
+      label: '..',
       icon: 'lucideRedo',
       visibleOn: ['all'],
       command: () => {
@@ -85,7 +85,7 @@ export class FormNavbar {
       },
     },
     {
-      label: '',
+      label: '...',
       icon: 'lucideEllipsis',
       visibleOn: ['mobile'],
       command: (event: Event) => {

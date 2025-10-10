@@ -1,11 +1,8 @@
 <header class="flex flex-col gap-4">
-  <span class="text-xs text-gray-500 text-end pb-4">Última actualización: Hace un momento</span>
-  <div>
-    <ui-title [heading]="Heading.h3">Vista previa del formulario</ui-title>
-    <p class="text-xs md:text-sm text-gray-500">
-      Arrastra componentes desde el panel izquierdo o haz clic para agregar un componente
-    </p>
-  </div>
+  <span class="text-xs text-gray-500 font-semibold text-end pb-4"
+    >Última actualización: Hace un momento</span
+  >
+
   <div class="flex flex-row gap-8 md:items-center">
     <p-button class="flex items-center justify-between" size="small" (onClick)="op.toggle($event)">
       <ui-icon name="lucideFilePlus"></ui-icon>
@@ -29,6 +26,7 @@
       </ng-template></p-selectbutton
     >
   </div>
+  <ui-title [heading]="Heading.h3">Vista previa del formulario</ui-title>
 </header>
 
 <p-popover class="[--p-popover-content-padding=0]" #op>
