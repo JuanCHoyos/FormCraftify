@@ -1,3 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
 
+.ghost-element {
+  position: relative;
+  height: 2px;
+  background-color: var(--color-indigo-500);
+}
+
+.ghost-element * {
+  opacity: 0;
+}

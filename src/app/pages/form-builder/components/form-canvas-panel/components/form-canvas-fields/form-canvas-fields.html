@@ -1,6 +1,31 @@
-<div class="flex flex-col gap-4">
-  @for (field of fields(); track field.id) {
-    <app-form-canvas-field [field]="field"></app-form-canvas-field>
+<article
+  class="w-full min-h-64 md:min-h-96 flex flex-col gap-4 border-1 border-gray-300 rounded-lg p-4 md:p-6 relative"
+  [ngClass]="{
+    'bg-white': fields().length !== 0 || !isDragOver(),
+    'bg-indigo-50': fields().length === 0 && isDragOver(),
+    'border-indigo-300': isDragOver(),
+  }"
+>
+  @if (title()) {
+    <div class="border-b border-b-gray-100 pb-2">
+      <ui-title [heading]="Heading.h4">{{ title() }}</ui-title>
+    </div>
   }
-  <app-add-component-placeholder></app-add-component-placeholder>
-</div>
+  <div
+    class="relative flex flex-col flex-1 gap-4 h-full"
+    [ngClass]="{ 'pb-18': fields().length !== 0 }"
+    [nxtSortablejs]="fields()"
+    [config]="sortableConfig"
+  >
+    @for (field of fields(); track field.id) {
+      <app-form-canvas-field [field]="field" data-sort="true"></app-form-canvas-field>
+    }
+    @if (fields().length !== 0) {
+      <div class="absolute left-0 bottom-0 w-full">
+        <app-add-component-placeholder data-sort="false"></app-add-component-placeholder>
+      </div>
+    } @else {
+      <app-canvas-empty-message data-sort="false"></app-canvas-empty-message>
+    }
+  </div>
+</article>

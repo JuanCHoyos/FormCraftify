@@ -22,7 +22,7 @@ export class FormCanvasField {
     }[]
   >([
     {
-      label: '',
+      label: 'edit',
       icon: 'lucideSquarePen',
       handle: () => {
         console.log('');
@@ -30,7 +30,7 @@ export class FormCanvasField {
       severity: 'secondary',
     },
     {
-      label: '',
+      label: 'copy',
       icon: 'lucideCopy',
       handle: () => {
         console.log('');
@@ -38,7 +38,7 @@ export class FormCanvasField {
       severity: 'secondary',
     },
     {
-      label: '',
+      label: 'trash',
       icon: 'lucideTrash2',
       handle: () => {
         console.log('');

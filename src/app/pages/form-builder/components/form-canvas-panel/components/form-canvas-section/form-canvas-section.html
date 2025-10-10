@@ -1,13 +1,4 @@
-<article
-  class="bg-white w-full min-h-64 md:min-h-96 mx-auto border-2 border-gray-300 rounded-lg p-6 relative flex flex-col gap-4"
-  [ngClass]="{
-    'border-dashed border-2 hover:border-indigo-500': !fieldGroup.length,
-  }"
->
-  <ui-title [heading]="Heading.h4"> {{ fieldGroup().props?.label }}</ui-title>
-  @if (fieldGroup().fieldGroup?.length) {
-    <app-form-canvas-fields [fields]="fieldGroup().fieldGroup!"></app-form-canvas-fields>
-  } @else {
-    <app-canvas-empty-message></app-canvas-empty-message>
-  }
-</article>
+<app-form-canvas-fields
+  [fields]="field().fieldGroup!"
+  [title]="field().props?.label"
+></app-form-canvas-fields>

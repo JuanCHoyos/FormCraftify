@@ -5,7 +5,7 @@ import { Heading } from '../../../../../../shared/components/ui-title/ui-title';
 
 @Component({
   selector: 'app-canvas-empty-message',
-  imports: [UITitle, UIICon],
+  imports: [UIICon, UITitle],
   templateUrl: './canvas-empty-message.html',
 })
 export class FormCanvasEmptyMessage {

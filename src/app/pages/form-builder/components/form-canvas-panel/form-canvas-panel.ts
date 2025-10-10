@@ -5,7 +5,6 @@ import {
   effect,
   ElementRef,
   inject,
-  OnDestroy,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -40,7 +39,7 @@ import { FormCanvasSections } from './components/form-canvas-sections/form-canva
     }
   `,
 })
-export class FormCanvasPanel implements AfterViewInit, OnDestroy {
+export class FormCanvasPanel implements AfterViewInit {
   canvasPanelContainer = signal<ElementRef | null>(null);
   @ViewChild('canvasPanelContainer') set canvasPanelContainerRef(ref: ElementRef) {
     this.canvasPanelContainer.set(ref);
@@ -52,16 +51,17 @@ export class FormCanvasPanel implements AfterViewInit, OnDestroy {
     fieldGroup: [
       {
         id: '1',
-
+        key: 'personalData',
         props: { label: 'Personal data' },
         fieldGroup: [],
       },
       {
         id: '2',
+        key: 'destination',
         props: { label: 'Destination' },
         fieldGroup: [
           {
-            key: 'country',
+            key: 'destination_country_1',
             type: 'input',
             props: {
               label: 'Country',
@@ -69,7 +69,7 @@ export class FormCanvasPanel implements AfterViewInit, OnDestroy {
             },
           },
           {
-            key: 'country',
+            key: 'destination_country_2',
             type: 'input',
             props: {
               label: 'Country',
@@ -77,25 +77,26 @@ export class FormCanvasPanel implements AfterViewInit, OnDestroy {
             },
           },
           {
-            key: 'country<<',
+            key: 'destination_country_group',
             props: {
-              label: 'Countryaa',
+              label: 'Country group',
               required: true,
+              cols: 2,
             },
             fieldGroup: [
               {
-                key: 'country<<',
+                key: 'destination_country_group_countryA',
                 type: 'input',
                 props: {
-                  label: 'CountryA',
+                  label: 'Country A',
                   required: true,
                 },
               },
               {
-                key: 'countryAA',
+                key: 'destination_country_group_countryB',
                 type: 'input',
                 props: {
-                  label: 'CountryB',
+                  label: 'Country B',
                   required: true,
                 },
               },
@@ -104,11 +105,12 @@ export class FormCanvasPanel implements AfterViewInit, OnDestroy {
         ],
       },
       {
-        id: '2',
+        id: '3',
+        key: 'tripDay',
         props: { label: 'Day of the trip' },
         fieldGroup: [
           {
-            key: 'day',
+            key: 'tripDay_date',
             type: 'input',
             props: {
               type: 'date',
@@ -128,16 +130,10 @@ export class FormCanvasPanel implements AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit() {
-    const container = this.canvasPanelContainer()?.nativeElement;
+  ngAfterViewInit(): void {
+    const container: HTMLDivElement = this.canvasPanelContainer()?.nativeElement;
     if (!container) return;
-    //container.addEventListener('scroll', this.onScroll);
-  }
-
-  ngOnDestroy(): void {
-    const container = this.canvasPanelContainer()?.nativeElement;
-    if (!container) return;
-    container.removeEventListener('scroll', this.onScroll);
+    container.addEventListener('scroll', this.onScroll);
   }
 
   onScroll = () => {
@@ -146,7 +142,7 @@ export class FormCanvasPanel implements AfterViewInit, OnDestroy {
     const scrollTop = container.scrollTop;
     const scrollHeight = container.scrollHeight - container.clientHeight;
     const scrollPercentage = (scrollTop / scrollHeight) * 100;
-    this.isScrollAvailable.set(scrollPercentage > 10);
+    this.isScrollAvailable.set(scrollPercentage > 25);
   };
 
   addSection() {

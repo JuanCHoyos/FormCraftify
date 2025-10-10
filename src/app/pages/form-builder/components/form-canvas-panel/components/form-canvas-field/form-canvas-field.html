@@ -1,10 +1,10 @@
 <article
   class="flex flex-col justify-between gap-2 border border-gray-300 hover:border-indigo-500 rounded px-2 py-4 md:p-4 md:pt-12 relative group"
 >
-  <div
+  <header
     class="flex items-center justify-between w-full relative p-0 md:absolute md:top-0 md:left-0 md:px-4 md:py-2"
   >
-    <span class="md:invisible md:group-hover:visible cursor-grab">
+    <span class="md:invisible md:group-hover:visible cursor-grab handle">
       <ui-icon name="lucideGripVertical"></ui-icon>
     </span>
 
@@ -17,7 +17,7 @@
         </li>
       }
     </ul>
-  </div>
+  </header>
 
   <formly-form [fields]="[field()]"></formly-form>
 </article>
