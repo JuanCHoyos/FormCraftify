@@ -1,16 +1,13 @@
-import {
-  Directive,
-  ElementRef,
-  HostListener,
-  inject,
-  output,
-  Renderer2,
-  signal,
-} from '@angular/core';
+import { Directive, ElementRef, inject, output, Renderer2, signal } from '@angular/core';
 
 @Directive({
   selector: '[appArrowNavigation]',
   standalone: true,
+  host: {
+    '(keydown)': 'handleKeyboardEvent($event)',
+    '(focus)': 'onFocus()',
+    '(blur)': 'onBlur()',
+  },
 })
 export class ArrowNavigation {
   private readonly el = inject(ElementRef);
@@ -26,17 +23,14 @@ export class ArrowNavigation {
     this.renderer.setAttribute(this.el.nativeElement, 'tabindex', '0');
   }
 
-  @HostListener('focus')
   onFocus() {
     this.isFocused.set(true);
   }
 
-  @HostListener('blur')
   onBlur() {
     this.isFocused.set(false);
   }
 
-  @HostListener('keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (!this.isFocused()) return;
 
