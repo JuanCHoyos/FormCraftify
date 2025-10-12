@@ -1,4 +1,4 @@
-import { HERO_ICONS } from '@shared/icon/constants/icons';
+import { LucideIcon } from '@shared/icon/constants/icons';
 
 export enum NavigationMode {
   SCROLL = 'SCROLL',
@@ -8,7 +8,7 @@ export enum NavigationMode {
 export interface CanvasMode {
   label: string;
   value: NavigationMode;
-  icon: keyof typeof HERO_ICONS;
+  icon: LucideIcon;
 }
 
 export interface Section {

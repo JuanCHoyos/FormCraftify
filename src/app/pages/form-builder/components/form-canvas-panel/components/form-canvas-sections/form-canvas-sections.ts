@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { AnyFieldType } from '@core/formly/models/form-field-item';
 import { NavigationMode } from '@pages/form-builder/model/form-builder';
 import { FormCanvasNavigation } from '@pages/form-builder/services/form-canvas-navigation';
 import { Heading } from '@shared/index';
@@ -14,7 +14,7 @@ import { FormCanvasSection } from '../form-canvas-section/form-canvas-section';
   templateUrl: './form-canvas-sections.html',
 })
 export class FormCanvasSections {
-  fields = input.required<FormlyFieldConfig>();
+  fields = input.required<AnyFieldType[]>();
   public readonly formCanvasNavigation = inject(FormCanvasNavigation);
   NavigationMode = NavigationMode;
 

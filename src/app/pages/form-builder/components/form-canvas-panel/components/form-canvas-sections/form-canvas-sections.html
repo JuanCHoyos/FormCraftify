@@ -2,7 +2,7 @@
   @if (formCanvasNavigation.viewMode() === NavigationMode.SECTION) {
     <p-stepper [value]="formCanvasNavigation.activeSectionIndex()">
       <p-step-panels class="p-0!">
-        @for (field of fields().fieldGroup; track field.key) {
+        @for (field of fields(); track field.key) {
           <p-step-panel [value]="$index">
             <ng-template #content let-activateCallback="activateCallback">
               <app-form-canvas-section [field]="field"></app-form-canvas-section>
@@ -12,7 +12,7 @@
       </p-step-panels>
     </p-stepper>
   } @else {
-    @for (field of fields().fieldGroup; track field.key) {
+    @for (field of fields(); track field.key) {
       <app-form-canvas-section [field]="field"></app-form-canvas-section>
     }
   }

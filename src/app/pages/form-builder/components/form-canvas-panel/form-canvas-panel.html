@@ -2,7 +2,7 @@
   <div class="flex-1 overflow-y-scroll px-4 py-8" #canvasPanelContainer>
     <div class="max-w-full md:max-w-2xl mx-auto flex flex-col gap-4">
       <app-canvas-header></app-canvas-header>
-      <app-form-canvas-sections [fields]="fields()"></app-form-canvas-sections>
+      <app-form-canvas-sections [fields]="fields().fieldGroup"></app-form-canvas-sections>
     </div>
     @if (isScrollAvailable()) {
       <p-button

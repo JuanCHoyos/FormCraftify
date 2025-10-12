@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, input, signal } from '@angular/core';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { Component, effect, Input, input, signal } from '@angular/core';
+import { AlertFieldBuilder } from '@core/formly/builders';
+import { FieldBuilderFactory } from '@core/formly/factory/field-builder-factory';
+import {
+  AnyFieldType,
+  FormType,
+  SeverityType,
+  TextFormattingOptionType,
+} from '@core/formly/models/form-field-item';
 import { Heading, UITitle } from '@shared/index';
 import { SortablejsModule } from 'nxt-sortablejs';
-import { SortableOptions } from 'sortablejs';
+import { SortableEvent, SortableOptions } from 'sortablejs';
 
 import { AddComponentPlaceholder } from '../add-component-placeholder/add-component-placeholder';
 import { FormCanvasEmptyMessage } from '../empty-message/canvas-empty-message';
@@ -29,13 +36,16 @@ import { FormCanvasField } from '../form-canvas-field/form-canvas-field';
   templateUrl: './form-canvas-fields.html',
 })
 export class FormCanvasFields {
-  fields = input.required<FormlyFieldConfig[]>();
+  _fields = signal<AnyFieldType[]>([]);
+  @Input() set fields(fields: AnyFieldType[]) {
+    this._fields.set(fields);
+  }
   title = input<string | undefined>('');
   Heading = Heading;
   isDragOver = signal<boolean>(false);
   constructor() {
     effect(() => {
-      this.fields();
+      console.log(this._fields(), 'aa');
     });
   }
 
@@ -58,5 +68,18 @@ export class FormCanvasFields {
     fallbackOnBody: true,
     ghostClass: 'ghost-element',
     swapThreshold: 0.5,
+    onAdd: (event: SortableEvent) => {
+      const formType = event.item.getAttribute('field-type') as FormType;
+      if (!formType) return;
+      const newField = new FieldBuilderFactory().create(formType).setDescription('Escriba algo');
+      if (newField instanceof AlertFieldBuilder) {
+        newField.setTextFormatting(TextFormattingOptionType.Underline);
+        newField.setSeverity(SeverityType.Error);
+      }
+
+      const fields = [...this._fields()];
+      fields.splice(event.newIndex ?? 0, 1, newField.build());
+      this._fields.set(fields);
+    },
   };
 }

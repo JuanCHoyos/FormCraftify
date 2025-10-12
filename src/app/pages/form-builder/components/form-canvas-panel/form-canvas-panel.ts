@@ -8,7 +8,7 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormType, GroupFieldType, WrapperType } from '@core/formly/models/form-field-item';
 import { FormCanvasNavigation } from '@pages/form-builder/services/form-canvas-navigation';
 import { UIICon } from '@shared/index';
 import { ButtonModule } from 'primeng/button';
@@ -47,75 +47,101 @@ export class FormCanvasPanel implements AfterViewInit {
 
   public readonly formCanvasNavigation = inject(FormCanvasNavigation);
   NavigationMode = NavigationMode;
-  fields = signal<FormlyFieldConfig>({
+  fields = signal<GroupFieldType>({
+    key: 'dsfgsdf',
+    type: FormType.group,
+    wrappers: [WrapperType.Field],
+    props: {
+      label: '1',
+      cols: 1,
+    },
     fieldGroup: [
       {
-        id: '1',
-        key: 'personalData',
-        props: { label: 'Personal data' },
-        fieldGroup: [],
-      },
-      {
-        id: '2',
-        key: 'destination',
-        props: { label: 'Destination' },
+        key: 'userInfo',
+        type: FormType.group,
+        wrappers: [WrapperType.Field],
+        props: {
+          cols: 2,
+          label: 'User Information',
+        },
         fieldGroup: [
           {
-            key: 'destination_country_1',
-            type: 'input',
+            key: 'firstName',
+            type: FormType.text,
+            wrappers: [WrapperType.Field],
             props: {
-              label: 'Country',
+              label: 'First Name',
+              description: 'Enter your first name',
+              tooltip: 'Your given name',
               required: true,
+              readonly: false,
+              disabled: true,
+              tabindex: 1,
+              placeholder: 'John',
+              minLength: 2,
+              maxLength: 50,
             },
           },
           {
-            key: 'destination_country_2',
-            type: 'input',
+            key: 'age',
+            type: FormType.number,
+            wrappers: [WrapperType.Field],
             props: {
-              label: 'Country',
+              label: 'Age',
+              description: 'Enter your age',
+              tooltip: 'Must be between 18 and 99',
               required: true,
+              readonly: false,
+              disabled: false,
+              tabindex: 2,
+              placeholder: '25',
+              min: 18,
+              max: 99,
             },
-          },
-          {
-            key: 'destination_country_group',
-            props: {
-              label: 'Country group',
-              required: true,
-              cols: 2,
-            },
-            fieldGroup: [
-              {
-                key: 'destination_country_group_countryA',
-                type: 'input',
-                props: {
-                  label: 'Country A',
-                  required: true,
-                },
-              },
-              {
-                key: 'destination_country_group_countryB',
-                type: 'input',
-                props: {
-                  label: 'Country B',
-                  required: true,
-                },
-              },
-            ],
           },
         ],
       },
       {
-        id: '3',
-        key: 'tripDay',
-        props: { label: 'Day of the trip' },
+        key: 'userInfo',
+        type: FormType.group,
+        wrappers: [WrapperType.Field],
+        props: {
+          cols: 2,
+          label: 'User Information',
+        },
         fieldGroup: [
           {
-            key: 'tripDay_date',
-            type: 'input',
+            key: 'firstName',
+            type: FormType.text,
+            wrappers: [WrapperType.Field],
             props: {
-              type: 'date',
-              label: 'Day of the trip',
+              label: 'First Name',
+              description: 'Enter your first name',
+              tooltip: 'Your given name',
               required: true,
+              readonly: false,
+              disabled: false,
+              tabindex: 1,
+              placeholder: 'John',
+              minLength: 2,
+              maxLength: 50,
+            },
+          },
+          {
+            key: 'age',
+            type: FormType.number,
+            wrappers: [WrapperType.Field],
+            props: {
+              label: 'Age',
+              description: 'Enter your age',
+              tooltip: 'Must be between 18 and 99',
+              required: true,
+              readonly: false,
+              disabled: false,
+              tabindex: 2,
+              placeholder: '25',
+              min: 18,
+              max: 99,
             },
           },
         ],
@@ -144,32 +170,6 @@ export class FormCanvasPanel implements AfterViewInit {
     const scrollPercentage = (scrollTop / scrollHeight) * 100;
     this.isScrollAvailable.set(scrollPercentage > 25);
   };
-
-  addSection() {
-    const updatedFields = {
-      ...this.fields(),
-      fieldGroup: [
-        ...(this.fields().fieldGroup ?? []),
-        {
-          id: '2',
-          props: { label: 'Day of the trip' },
-          fieldGroup: [
-            {
-              key: 'day',
-              type: 'input',
-              props: {
-                type: 'date',
-                label: 'Day of the trip',
-                required: true,
-              },
-            },
-          ],
-        },
-      ],
-    };
-
-    this.fields.set(updatedFields);
-  }
 
   scrollToTop(): void {
     const container = this.canvasPanelContainer()?.nativeElement;

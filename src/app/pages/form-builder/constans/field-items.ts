@@ -1,0 +1,126 @@
+import { FormFieldCategoryType, FormType } from '@core/formly/models/form-field-item';
+
+export const FORM_FIELD_CATEGORIES: FormFieldCategoryType[] = [
+  {
+    id: 'layout',
+    title: 'Layout',
+    items: [
+      {
+        id: 'layout-container',
+        label: 'Container',
+        icon: 'lucideSquare',
+        field: FormType.group,
+        description: 'Groups fields together.',
+      },
+      {
+        id: 'layout-divider',
+        label: 'Divider',
+        icon: 'lucideMinus',
+        field: FormType.divider,
+        description: 'Adds a horizontal separator.',
+      },
+      {
+        id: 'layout-title',
+        label: 'Title',
+        icon: 'lucideHeading1',
+        field: FormType.title,
+        description: 'Displays a section heading.',
+      },
+      {
+        id: 'layout-paragraph',
+        label: 'Paragraph',
+        icon: 'lucideFileText',
+        field: FormType.paragraph,
+        description: 'Adds descriptive text.',
+      },
+      {
+        id: 'layout-message',
+        label: 'Message',
+        icon: 'lucideInfo',
+        field: FormType.alert,
+        description: 'Shows an informational alert.',
+      },
+    ],
+  },
+  {
+    id: 'fields',
+    title: 'Fields',
+    items: [
+      {
+        id: 'fields-text',
+        label: 'Text',
+        icon: 'lucideType',
+        field: FormType.text,
+        description: 'Single-line text input.',
+      },
+      {
+        id: 'fields-textarea',
+        label: 'Textarea',
+        icon: 'lucideAlignLeft',
+        field: FormType.textarea,
+        description: 'Multi-line text input.',
+      },
+      {
+        id: 'fields-number',
+        label: 'Number',
+        icon: 'lucideHash',
+        field: FormType.number,
+        description: 'Numeric input field.',
+      },
+      {
+        id: 'fields-email',
+        label: 'Email',
+        icon: 'lucideMail',
+        field: FormType.email,
+        description: 'Email address input.',
+      },
+      {
+        id: 'fields-select',
+        label: 'Select',
+        icon: 'lucideChevronsUpDown',
+        field: FormType.select,
+        description: 'Dropdown selection.',
+      },
+      {
+        id: 'fields-multiselect',
+        label: 'Multiselect',
+        icon: 'lucideChevronsUpDown',
+        field: FormType.multiselect,
+        description: 'Multiple options selection.',
+      },
+      {
+        id: 'fields-checkbox',
+        label: 'Checkbox',
+        icon: 'lucideSquareCheck',
+        field: FormType.checkbox,
+        description: 'Single checkbox option.',
+      },
+      {
+        id: 'fields-checkbox-group',
+        label: 'Checkbox group',
+        icon: 'lucideSquareCheck',
+        field: FormType.multicheckbox,
+        description: 'Multiple checkboxes.',
+      },
+      {
+        id: 'fields-radio',
+        label: 'Radio',
+        icon: 'lucideCircleDot',
+        field: FormType.radio,
+        description: 'Single-choice radio buttons.',
+      },
+      {
+        id: 'fields-rating',
+        label: 'Rating',
+        icon: 'lucideStar',
+        field: FormType.rating,
+        description: 'Star rating input.',
+      },
+    ],
+  },
+  {
+    id: 'advanced-fields',
+    title: 'Advanced Fields',
+    items: [],
+  },
+] as const;

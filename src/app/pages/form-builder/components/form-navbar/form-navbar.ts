@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, output, signal, ViewChild } from '@angular/core';
-import { HeroIcon } from '@shared/icon/constants/icons';
+import { LucideIcon } from '@shared/icon/constants/icons';
 import { UIICon } from '@shared/icon/ui-icon';
 import { Heading, UITitle } from '@shared/index';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +18,7 @@ export class FormNavbar {
   menu = signal<
     {
       label: string;
-      icon: HeroIcon;
+      icon: LucideIcon;
       visibleOn: ('mobile' | 'desktop' | 'all')[];
       command: ($event: Event) => void;
       disabled?: boolean;

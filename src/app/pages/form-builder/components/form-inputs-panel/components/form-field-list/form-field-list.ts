@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { FormFieldCategoryType } from '@core/formly/models/form-field-item';
+import { FORM_FIELD_CATEGORIES } from '@pages/form-builder/constans/field-items';
 import { UIICon } from '@shared/index';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { AccordionModule } from 'primeng/accordion';
@@ -12,7 +14,8 @@ import { FormFieldItem } from '../form-field-item/form-field-item';
   templateUrl: './form-field-list.html',
 })
 export class FormFieldList {
-  sortableConfig: Options = {
+  formFieldCategories = signal<FormFieldCategoryType[]>(FORM_FIELD_CATEGORIES);
+  sortableOptions = signal<Options>({
     group: {
       name: 'shared',
       pull: 'clone',
@@ -20,5 +23,5 @@ export class FormFieldList {
     },
     animation: 300,
     sort: false,
-  };
+  });
 }

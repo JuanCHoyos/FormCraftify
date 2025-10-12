@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormlyFieldConfig, FormlyForm } from '@ngx-formly/core';
-import { HERO_ICONS } from '@shared/icon/constants/icons';
+import { AnyFieldType } from '@core/formly/models/form-field-item';
+import { FormlyForm } from '@ngx-formly/core';
+import { LucideIcon } from '@shared/icon/constants/icons';
 import { UIICon } from '@shared/index';
 import { ButtonModule, ButtonSeverity } from 'primeng/button';
 
@@ -12,11 +13,11 @@ import { ButtonModule, ButtonSeverity } from 'primeng/button';
   templateUrl: './form-canvas-field.html',
 })
 export class FormCanvasField {
-  field = input.required<FormlyFieldConfig>();
+  field = input.required<AnyFieldType>();
   options = signal<
     {
       label: string;
-      icon: keyof typeof HERO_ICONS;
+      icon: LucideIcon;
       handle: () => void;
       severity: ButtonSeverity;
     }[]

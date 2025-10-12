@@ -1,11 +1,16 @@
-<div class="flex items-center justify-between gap-16 p-2 cursor-grab hover:bg-gray-100">
+<div
+  class="grid grid-cols-[11fr_1fr] items-center justify-between gap-4 p-2 cursor-grab hover:bg-gray-100"
+  [attr.field-type]="item().field"
+>
   <div class="flex items-center gap-2">
-    <div class="w-8 h-8 flex items-center justify-center bg-indigo-100 text-indigo-500 rounded">
-      <ui-icon name="lucideType"></ui-icon>
+    <div
+      class="min-w-8 min-h-8 flex items-center justify-center bg-indigo-100 text-indigo-500 rounded"
+    >
+      <ui-icon [name]="item().icon"></ui-icon>
     </div>
     <div>
-      <p class="text-sm font-semibold">Text</p>
-      <small class="text-xs text-gray-500">Single line text input</small>
+      <p class="text-sm font-semibold">{{ item().label }}</p>
+      <small class="text-xs text-gray-500">{{ item().description }}</small>
     </div>
   </div>
   <ui-icon class="text-gray-500" name="lucideGripVertical"></ui-icon>

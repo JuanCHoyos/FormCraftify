@@ -1,12 +1,12 @@
 import { Component, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 
-import { HERO_ICONS } from './constants/icons';
+import { LUCIDE_ICONS, LucideIcon } from './constants/icons';
 
 @Component({
   selector: 'ui-icon',
   imports: [NgIcon],
-  viewProviders: [provideIcons(HERO_ICONS)],
+  viewProviders: [provideIcons(LUCIDE_ICONS)],
   template: ` <ng-icon name="{{ name() }}"> </ng-icon>`,
   styles: [
     `
@@ -17,6 +17,6 @@ import { HERO_ICONS } from './constants/icons';
   ],
 })
 export class UIICon {
-  name = input.required<keyof typeof HERO_ICONS>();
+  name = input.required<LucideIcon>();
   size = input<string | number>(18);
 }
