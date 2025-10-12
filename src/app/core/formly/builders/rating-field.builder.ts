@@ -1,0 +1,41 @@
+import {
+  FormType,
+  RatingFieldType,
+  RatingPropsType,
+  RatingType,
+  WrapperType,
+} from '@core/formly/models/form-field-item';
+
+import { BaseFieldBuilder } from './base/base-field.builder';
+
+export class RatingFieldBuilder extends BaseFieldBuilder<RatingPropsType, RatingFieldBuilder> {
+  constructor() {
+    super({
+      type: RatingType.Star,
+      starts: 5,
+    });
+  }
+
+  newInstance(): RatingFieldBuilder {
+    return new RatingFieldBuilder();
+  }
+
+  setType(type: RatingType) {
+    this.props.type = type;
+    return this;
+  }
+
+  setStarts(starts: number) {
+    this.props.starts = starts;
+    return this;
+  }
+
+  override build(): RatingFieldType {
+    return {
+      ...super.build(),
+      type: FormType.rating,
+      props: this.props,
+      wrappers: [WrapperType.Field],
+    };
+  }
+}

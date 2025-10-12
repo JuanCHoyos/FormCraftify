@@ -1,0 +1,12 @@
+<p
+  class="text-base break-words"
+  [ngClass]="{
+    'font-bold': props.textFormattingOptions.includes(TextFormattingOption.Bold),
+    'line-through': props.textFormattingOptions.includes(TextFormattingOption.Strikethrough),
+    italic: props.textFormattingOptions.includes(TextFormattingOption.Italic),
+    underline: props.textFormattingOptions.includes(TextFormattingOption.Underline),
+  }"
+  [style.textAlign]="props.align"
+>
+  {{ props.description }}
+</p>

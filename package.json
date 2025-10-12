@@ -50,6 +50,7 @@
     "tailwindcss": "^4.1.13",
     "tslib": "^2.3.0",
     "tw-colors": "^3.3.2",
+    "uuid": "^13.0.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

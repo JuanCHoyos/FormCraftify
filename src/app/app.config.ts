@@ -14,6 +14,7 @@ import { providePrimeNG } from 'primeng/config';
 import { MyPreset } from 'src/themes/primeng/theme';
 
 import { routes } from './app.routes';
+import { formlyConfig } from './core/formly/formly.config';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -26,7 +27,7 @@ export const appConfig: ApplicationConfig = {
         preset: MyPreset,
       },
     }),
-    provideFormlyCore(withFormlyPrimeNG()),
+    provideFormlyCore({ ...withFormlyPrimeNG(), ...formlyConfig }),
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: '/assets/i18n/',

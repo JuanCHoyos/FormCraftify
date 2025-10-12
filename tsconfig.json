@@ -16,6 +16,8 @@
     "module": "preserve",
     "esModuleInterop": true,
     "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@core/formly/*": ["src/app/core/formly/*"],
       "@env/*": ["src/environments/*"],
       "@shared/*": ["src/app/shared/components/*"],
       "@pages/*": ["src/app/pages/*"]

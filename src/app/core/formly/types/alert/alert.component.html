@@ -1,0 +1,10 @@
+<p-message
+  [severity]="props.severity"
+  [text]="props.description"
+  [ngClass]="{
+    bold: props['textFormattingOptions'].includes(TextFormattingOptionType.Bold),
+    strikethrough: props['textFormattingOptions'].includes(TextFormattingOptionType.Strikethrough),
+    italic: props['textFormattingOptions'].includes(TextFormattingOptionType.Italic),
+    underline: props['textFormattingOptions'].includes(TextFormattingOptionType.Underline),
+  }"
+/>
