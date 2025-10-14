@@ -1,0 +1,19 @@
+<p-selectbutton
+  [options]="items()"
+  [(ngModel)]="value"
+  [unselectable]="true"
+  optionLabel="label"
+  optionValue="value"
+  aria-labelledby="page option"
+  class="w-full mb-4"
+>
+  <ng-template #item let-item>
+    <span class="flex items-center gap-2 text-sm font-semibold"
+      ><ui-icon [name]="item.icon"></ui-icon> {{ item.label }}</span
+    >
+  </ng-template>
+</p-selectbutton>
+
+@if (currentActiveTab()) {
+  <ng-container *ngTemplateOutlet="currentActiveTab()?.template()"></ng-container>
+}
