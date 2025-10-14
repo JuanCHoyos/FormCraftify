@@ -1,9 +1,20 @@
-<article
-  class="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 hover:border-indigo-500 rounded cursor-pointer group"
+<button
+  class="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 hover:border-indigo-500 rounded cursor-pointer group"
+  aria-label="Add new field component"
+  aria-haspopup="menu"
+  tabindex="0"
+  (click)="toggleFieldListPopover($event)"
+  (keydown.enter)="toggleFieldListPopover($event)"
 >
   <p
     class="text-xs md:text-sm text-gray-500 font-semibold flex items-center gap-2 group-hover:text-indigo-500"
   >
     <ui-icon name="lucidePlus"></ui-icon> <span>Haz clic para agregar un componente</span>
   </p>
-</article>
+</button>
+<ui-menu-popover
+  [items]="formFieldCategories()"
+  [search]="true"
+  [tree]="true"
+  #fieldListMenuTemplate
+></ui-menu-popover>

@@ -4,7 +4,7 @@
   >
 
   <div class="flex flex-row gap-8 md:items-center">
-    <p-button class="flex items-center justify-between" size="small" (onClick)="op.toggle($event)">
+    <p-button class="flex items-center justify-between" size="small" (onClick)="open($event)">
       <ui-icon name="lucideFilePlus"></ui-icon>
       <span>New section</span>
       <ui-icon name="lucideChevronDown"></ui-icon>
@@ -26,33 +26,7 @@
       </ng-template></p-selectbutton
     >
   </div>
-  <ui-title [heading]="Heading.h3">Vista previa del formulario</ui-title>
+  <ui-title [heading]="HeadingType.H3">Vista previa del formulario</ui-title>
 </header>
 
-<p-popover class="[--p-popover-content-padding=0]" #op>
-  <ul class="flex flex-col p-2">
-    <li class="flex items-center gap-2 hover:bg-gray-50 hover:cursor-pointer px-4 py-2">
-      <ui-icon class="text-indigo-500" name="lucideFilePlus"></ui-icon>
-      <div class="flex flex-col">
-        <p class="text-sm font-semibold">Sección Vacia</p>
-        <small class="text-xs text-gray-500">Comienza desde cero</small>
-      </div>
-    </li>
-    <li class="flex items-center gap-2 hover:bg-gray-50 hover:cursor-pointer px-4 py-2">
-      <ui-icon class="text-indigo-500" name="lucideContainer"></ui-icon>
-      <div class="flex flex-col">
-        <p class="text-sm font-semibold">Formulario de contacto</p>
-        <small class="text-xs text-gray-500">Nombre, Apellidos, Correo, telefono y mensaje</small>
-      </div>
-    </li>
-    <li class="flex text-base items-center gap-2 hover:bg-gray-50 hover:cursor-pointer px-4 py-2">
-      <ui-icon class="text-indigo-500" name="lucideList"></ui-icon>
-      <div class="flex flex-col">
-        <p class="text-sm font-semibold">Datos personales</p>
-        <small class="text-xs text-gray-500"
-          >Nombre, Apellidos, Correo, telefono, fecha y genero</small
-        >
-      </div>
-    </li>
-  </ul>
-</p-popover>
+<ui-menu-popover [items]="items()" #sectionMenu></ui-menu-popover>

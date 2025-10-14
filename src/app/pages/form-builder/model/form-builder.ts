@@ -1,4 +1,4 @@
-import { LucideIcon } from '@shared/icon/constants/icons';
+import { LucideIconType } from '@shared/types/ui.types';
 
 export enum NavigationMode {
   SCROLL = 'SCROLL',
@@ -8,7 +8,7 @@ export enum NavigationMode {
 export interface CanvasMode {
   label: string;
   value: NavigationMode;
-  icon: LucideIcon;
+  icon: LucideIconType;
 }
 
 export interface Section {

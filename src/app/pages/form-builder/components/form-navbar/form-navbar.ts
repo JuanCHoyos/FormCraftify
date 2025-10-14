@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, output, signal, ViewChild } from '@angular/core';
-import { LucideIcon } from '@shared/icon/constants/icons';
-import { UIICon } from '@shared/icon/ui-icon';
-import { Heading, UITitle } from '@shared/index';
+import { Component, computed, output, signal, viewChild } from '@angular/core';
+import { UIICon, UITitle } from '@shared/components/index';
+import { HeadingType, LucideIconType } from '@shared/types/ui.types';
 import { ButtonModule } from 'primeng/button';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
@@ -13,12 +12,12 @@ import { TooltipModule } from 'primeng/tooltip';
   templateUrl: './form-navbar.html',
 })
 export class FormNavbar {
-  @ViewChild('menuTemplate') menuTemplate!: Popover;
-  Heading = Heading;
+  menuTemplate = viewChild.required<Popover>('menuTemplate');
+  HeadingType = HeadingType;
   menu = signal<
     {
       label: string;
-      icon: LucideIcon;
+      icon: LucideIconType;
       visibleOn: ('mobile' | 'desktop' | 'all')[];
       command: ($event: Event) => void;
       disabled?: boolean;
@@ -89,7 +88,7 @@ export class FormNavbar {
       icon: 'lucideEllipsis',
       visibleOn: ['mobile'],
       command: (event: Event) => {
-        this.menuTemplate.toggle(event);
+        this.menuTemplate().toggle(event);
       },
     },
   ]);
@@ -101,7 +100,7 @@ export class FormNavbar {
   });
 
   closeMenu() {
-    this.menuTemplate.hide();
+    this.menuTemplate().hide();
   }
 
   openFormInputsPanel() {

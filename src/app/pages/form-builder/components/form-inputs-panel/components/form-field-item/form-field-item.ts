@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { FormFieldOptionType } from '@core/formly/models/form-field-item';
-import { UIICon } from '@shared/index';
+import { UIICon } from '@shared/components/index';
+import { MenuItemType } from '@shared/types/ui.types';
 
 @Component({
   selector: 'app-form-field-item',
@@ -9,5 +9,5 @@ import { UIICon } from '@shared/index';
   templateUrl: './form-field-item.html',
 })
 export class FormFieldItem {
-  item = input.required<FormFieldOptionType>();
+  item = input.required<MenuItemType>();
 }

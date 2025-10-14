@@ -6,6 +6,7 @@
     type="text"
     pInputText
     (input)="onInputChange($event.target.value)"
+    [value]="search()"
     [placeholder]="placeholder()"
     [variant]="variant()"
     fluid

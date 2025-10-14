@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { UIICon, UITitle } from '@shared/index';
-
-import { Heading } from '../../../../../../shared/components/ui-title/ui-title';
+import { UIICon, UITitle } from '@shared/components/index';
+import { HeadingType } from '@shared/types/ui.types';
 
 @Component({
   selector: 'app-canvas-empty-message',
@@ -9,5 +8,5 @@ import { Heading } from '../../../../../../shared/components/ui-title/ui-title';
   templateUrl: './canvas-empty-message.html',
 })
 export class FormCanvasEmptyMessage {
-  Heading = Heading;
+  HeadingType = HeadingType;
 }

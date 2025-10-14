@@ -1,20 +1,5 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyFieldProps } from '@ngx-formly/primeng/form-field';
-import { LucideIcon } from '@shared/icon/constants/icons';
-
-export interface FormFieldCategoryType {
-  id: string;
-  title: string;
-  items: FormFieldOptionType[];
-}
-
-export interface FormFieldOptionType {
-  id: string;
-  label: string;
-  icon: LucideIcon;
-  field: FormType;
-  description: string;
-}
 
 export enum FormType {
   alert = 'alert',
@@ -55,7 +40,7 @@ export enum HeadingType {
 }
 
 export enum RatingType {
-  Star = 'start',
+  Stars = 'stars',
   Numbers = 'numbers',
 }
 
@@ -193,7 +178,7 @@ export interface RadioFieldType extends FieldBaseType<RadioPropsType> {
 
 export interface RatingPropsType extends FieldPropsBaseType {
   type: RatingType;
-  starts: number;
+  stars: number;
 }
 
 export interface RatingFieldType extends FieldBaseType<RatingPropsType> {

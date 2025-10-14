@@ -1,13 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, signal } from '@angular/core';
-import { UIICon } from '@shared/icon/ui-icon';
-import { Heading, UITitle } from '@shared/ui-title/ui-title';
 import { ButtonModule } from 'primeng/button';
 
-export enum AsidePosition {
-  left = 'left',
-  right = 'right',
-}
+import { AsidePosition, HeadingType } from '../../types/ui.types';
+import { UIICon } from '../icon/ui-icon';
+import { UITitle } from '../ui-title/ui-title';
 
 @Component({
   selector: 'ui-sidebar',
@@ -15,13 +12,13 @@ export enum AsidePosition {
   templateUrl: './ui-sidebar.html',
 })
 export class UISidebar {
-  position = input<AsidePosition>(AsidePosition.right);
+  position = input<AsidePosition>(AsidePosition.Right);
   showSideBar = input<boolean>(false);
   title = input.required<string>();
   subtitle = input<string>();
 
   isCollapsed = signal<boolean>(false);
-  Heading = Heading;
+  HeadingType = HeadingType;
   AsidePosition = AsidePosition;
 
   toggleCollapse() {

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormType, GroupFieldType, WrapperType } from '@core/formly/models/form-field-item';
 import { FormCanvasNavigation } from '@pages/form-builder/services/form-canvas-navigation';
-import { UIICon } from '@shared/index';
+import { UIICon } from '@shared/components/index';
 import { ButtonModule } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SelectModule } from 'primeng/select';

@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { UISidebar } from '@shared/index';
-
-import { AsidePosition } from '../../../../shared/components/ui-sidebar/ui-sidebar';
+import { UISidebar } from '@shared/components/index';
+import { AsidePosition } from '@shared/types/ui.types';
 
 @Component({
   selector: 'app-form-settings-panel',

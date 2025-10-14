@@ -8,7 +8,8 @@ import {
   SeverityType,
   TextFormattingOptionType,
 } from '@core/formly/models/form-field-item';
-import { Heading, UITitle } from '@shared/index';
+import { UITitle } from '@shared/components/index';
+import { HeadingType } from '@shared/types/ui.types';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { SortableEvent, SortableOptions } from 'sortablejs';
 
@@ -41,7 +42,7 @@ export class FormCanvasFields {
     this._fields.set(fields);
   }
   title = input<string | undefined>('');
-  Heading = Heading;
+  HeadingType = HeadingType;
   isDragOver = signal<boolean>(false);
   constructor() {
     effect(() => {

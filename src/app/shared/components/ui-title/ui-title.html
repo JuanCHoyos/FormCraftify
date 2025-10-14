@@ -1,20 +1,20 @@
 @switch (heading()) {
-  @case (Heading.h1) {
+  @case (HeadingType.H1) {
     <h1 class="text-lg md:text-xl lg:text-2xl font-semibold">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </h1>
   }
-  @case (Heading.h2) {
+  @case (HeadingType.H2) {
     <h2 class="text-base md:text-lg lg:text-xl font-semibold">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </h2>
   }
-  @case (Heading.h3) {
+  @case (HeadingType.H3) {
     <h3 class="text-sm md:text-base lg:text-lg font-semibold">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </h3>
   }
-  @case (Heading.h4) {
+  @case (HeadingType.H4) {
     <h4 class="text-xs md:text-sm lg:text-base font-semibold">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </h4>

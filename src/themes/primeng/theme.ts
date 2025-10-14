@@ -122,9 +122,26 @@ export const MyPreset = definePreset(Aura, {
         gutter: '0.5rem',
       },
       css: `
-      .p-popover:before, .p-popover:after {
-        display: none
-      }
+        .p-popover:before, .p-popover:after {
+          display: none
+        }
+      `,
+    },
+    selectbutton: {
+      root: {
+        borderRadius: '0.25rem',
+      },
+      extend: {
+        '--p-togglebutton-content-border-radius': '0.25rem',
+      },
+      css: `
+        .p-selectbutton .p-togglebutton {
+          width: 100%
+        }
+
+        .p-togglebutton-content {
+          --p-togglebutton-content-border-radius: 0.25rem;
+        }
       `,
     },
   },

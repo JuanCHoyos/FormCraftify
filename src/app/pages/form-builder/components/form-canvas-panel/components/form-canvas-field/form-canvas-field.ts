@@ -3,8 +3,8 @@ import { Component, input, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AnyFieldType } from '@core/formly/models/form-field-item';
 import { FormlyForm } from '@ngx-formly/core';
-import { LucideIcon } from '@shared/icon/constants/icons';
-import { UIICon } from '@shared/index';
+import { UIICon } from '@shared/components/index';
+import { LucideIconType } from '@shared/types/ui.types';
 import { ButtonModule, ButtonSeverity } from 'primeng/button';
 
 @Component({
@@ -17,7 +17,7 @@ export class FormCanvasField {
   options = signal<
     {
       label: string;
-      icon: LucideIcon;
+      icon: LucideIconType;
       handle: () => void;
       severity: ButtonSeverity;
     }[]

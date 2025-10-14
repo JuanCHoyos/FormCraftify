@@ -4,18 +4,18 @@
   [ngClass]="{
     'md:w-[73px]': isCollapsed(),
     'md:w-80': !isCollapsed(),
-    'border-l': position() === AsidePosition.right,
-    'border-r': position() === AsidePosition.left,
-    'left-0': showSideBar() && position() === AsidePosition.left,
-    '-left-full': !showSideBar() && position() === AsidePosition.left,
-    'right-0': showSideBar() && position() === AsidePosition.right,
-    '-right-full': !showSideBar() && position() === AsidePosition.right,
+    'border-l': position() === AsidePosition.Right,
+    'border-r': position() === AsidePosition.Left,
+    'left-0': showSideBar() && position() === AsidePosition.Left,
+    '-left-full': !showSideBar() && position() === AsidePosition.Left,
+    'right-0': showSideBar() && position() === AsidePosition.Right,
+    '-right-full': !showSideBar() && position() === AsidePosition.Right,
   }"
   [attr.aria-hidden]="!showSideBar() || isCollapsed()"
 >
   <header class="flex items-center justify-between gap-2 p-4 py-2 border-b border-gray-300">
     <div class="block" [ngClass]="{ 'md:hidden': isCollapsed() }">
-      <ui-title [heading]="Heading.h4">{{ title() }}</ui-title>
+      <ui-title [heading]="HeadingType.H4">{{ title() }}</ui-title>
       @if (subtitle()) {
         <p class="text-xs text-gray-500">
           {{ subtitle() }}

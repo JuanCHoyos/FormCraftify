@@ -11,8 +11,8 @@ import { BaseFieldBuilder } from './base/base-field.builder';
 export class RatingFieldBuilder extends BaseFieldBuilder<RatingPropsType, RatingFieldBuilder> {
   constructor() {
     super({
-      type: RatingType.Star,
-      starts: 5,
+      type: RatingType.Stars,
+      stars: 5,
     });
   }
 
@@ -25,8 +25,8 @@ export class RatingFieldBuilder extends BaseFieldBuilder<RatingPropsType, Rating
     return this;
   }
 
-  setStarts(starts: number) {
-    this.props.starts = starts;
+  setStarts(stars: number) {
+    this.props.stars = stars;
     return this;
   }
 
