@@ -1,7 +1,8 @@
 import { Component, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 
-import { LUCIDE_ICONS, LucideIcon } from './constants/icons';
+import { LucideIconType } from '../../types/ui.types';
+import { LUCIDE_ICONS } from './constants/icons';
 
 @Component({
   selector: 'ui-icon',
@@ -17,6 +18,6 @@ import { LUCIDE_ICONS, LucideIcon } from './constants/icons';
   ],
 })
 export class UIICon {
-  name = input.required<LucideIcon>();
+  name = input.required<LucideIconType>();
   size = input<string | number>(18);
 }
