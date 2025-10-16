@@ -11,8 +11,7 @@
     </p-button>
     <p-selectbutton
       [options]="formCanvasNavigation.viewModeOptions()"
-      (onChange)="formCanvasNavigation.setViewMode($event.value)"
-      [ngModel]="formCanvasNavigation.viewMode()"
+      [(ngModel)]="formCanvasNavigation.viewMode"
       [unselectable]="true"
       optionLabel="label"
       optionValue="value"

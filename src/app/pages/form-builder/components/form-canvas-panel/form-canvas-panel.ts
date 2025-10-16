@@ -8,7 +8,13 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { FormType, GroupFieldType, WrapperType } from '@core/formly/models/form-field-item';
+import {
+  AlignType,
+  FormType,
+  GroupFieldType,
+  SeverityType,
+  WrapperType,
+} from '@core/formly/models/form-field-item';
 import { FormCanvasNavigation } from '@pages/form-builder/services/form-canvas-navigation';
 import { UIICon } from '@shared/components/index';
 import { ButtonModule } from 'primeng/button';
@@ -83,20 +89,20 @@ export class FormCanvasPanel implements AfterViewInit {
             },
           },
           {
-            key: 'age',
-            type: FormType.number,
+            key: 'firstName',
+            type: FormType.alert,
             wrappers: [WrapperType.Field],
             props: {
-              label: 'Age',
-              description: 'Enter your age',
-              tooltip: 'Must be between 18 and 99',
+              label: 'First Name',
+              description: 'Enter your first name',
+              tooltip: 'Your given name',
               required: true,
               readonly: false,
-              disabled: false,
-              tabindex: 2,
-              placeholder: '25',
-              min: 18,
-              max: 99,
+              disabled: true,
+              tabindex: 1,
+              align: AlignType.Left,
+              severity: SeverityType.Info,
+              textFormattingOptions: [],
             },
           },
         ],
@@ -125,23 +131,6 @@ export class FormCanvasPanel implements AfterViewInit {
               placeholder: 'John',
               minLength: 2,
               maxLength: 50,
-            },
-          },
-          {
-            key: 'age',
-            type: FormType.number,
-            wrappers: [WrapperType.Field],
-            props: {
-              label: 'Age',
-              description: 'Enter your age',
-              tooltip: 'Must be between 18 and 99',
-              required: true,
-              readonly: false,
-              disabled: false,
-              tabindex: 2,
-              placeholder: '25',
-              min: 18,
-              max: 99,
             },
           },
         ],

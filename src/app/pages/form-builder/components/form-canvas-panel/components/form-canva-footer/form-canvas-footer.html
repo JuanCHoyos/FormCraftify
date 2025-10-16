@@ -15,7 +15,7 @@
       size="small"
       [outlined]="true"
       severity="secondary"
-      [disabled]="formCanvasNavigation.activeSectionIndex() === 0"
+      [disabled]="!formCanvasNavigation.isPreviousSectionActive()"
       (onClick)="formCanvasNavigation.goToPreviousSection()"
     >
       <div class="flex text-sm font-semibold items-center gap-2">
@@ -31,16 +31,15 @@
             [ngClass]="{
               'w-6 bg-indigo-500': formCanvasNavigation.activeSectionIndex() === section.value,
             }"
-            (click)="formCanvasNavigation.activeSectionIndex.set($index)"
-            (keydown.enter)="formCanvasNavigation.activeSectionIndex.set($index)"
+            (click)="formCanvasNavigation.goToSection($index)"
+            (keydown.enter)="formCanvasNavigation.goToSection($index)"
             aria-label="section {{ $index + 1 }}"
           ></button>
         }
       </div>
       <p-select
         [options]="formCanvasNavigation.sectionList()"
-        (onChange)="formCanvasNavigation.activeSectionIndex.set($event.value)"
-        [ngModel]="formCanvasNavigation.activeSectionIndex()"
+        [(ngModel)]="formCanvasNavigation.activeSectionIndex"
         size="small"
         optionLabel="label"
         optionValue="value"
@@ -54,9 +53,7 @@
       [outlined]="true"
       tooltipPosition="bottom"
       severity="secondary"
-      [disabled]="
-        formCanvasNavigation.activeSectionIndex() === formCanvasNavigation.sectionList().length - 1
-      "
+      [disabled]="!formCanvasNavigation.isNextSectionActive()"
       (onClick)="formCanvasNavigation.goToNextSection()"
     >
       <div class="flex text-sm font-semibold items-center gap-2">

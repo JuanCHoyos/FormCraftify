@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
 import { CanvasMode, NavigationMode, Section } from '../model/form-builder';
@@ -8,17 +8,28 @@ import { CanvasMode, NavigationMode, Section } from '../model/form-builder';
 })
 export class FormCanvasNavigation {
   sectionList = signal<Section[]>([]);
-  activeSectionIndex = signal<number>(0);
-  viewMode = signal<NavigationMode>(NavigationMode.SCROLL);
   viewModeOptions = signal<CanvasMode[]>([
     { label: 'Scroll', value: NavigationMode.SCROLL, icon: 'lucideScrollText' },
     { label: 'Section', value: NavigationMode.SECTION, icon: 'lucideFileText' },
   ]);
+  viewMode = signal<NavigationMode>(NavigationMode.SCROLL);
+  activeSectionIndex = signal<number>(0);
 
   progressPercentage = computed(() => {
     const total = this.sectionList().length || 1;
     return ((this.activeSectionIndex() + 1) / total) * 100;
   });
+  isPreviousSectionActive = computed<boolean>(() => this.activeSectionIndex() > 0);
+  isNextSectionActive = computed<boolean>(
+    () => this.activeSectionIndex() < this.sectionList().length - 1,
+  );
+
+  constructor() {
+    effect(() => {
+      this.viewMode();
+      this.activeSectionIndex.set(0);
+    });
+  }
 
   buildSections(fields: FormlyFieldConfig): void {
     const fieldGroups = fields?.fieldGroup ?? [];
@@ -31,15 +42,9 @@ export class FormCanvasNavigation {
     this.sectionList.set(sections);
   }
 
-  setViewMode(mode: NavigationMode): void {
-    this.viewMode.set(mode);
-    this.handleViewModeChange();
-  }
-
-  handleViewModeChange(): void {
-    if (this.isViewSectionMode()) {
-      this.activeSectionIndex.set(0);
-    }
+  goToSection(index: number) {
+    if (index < 0 || index >= this.sectionList().length) return;
+    this.activeSectionIndex.set(index);
   }
 
   goToNextSection(): void {
@@ -54,13 +59,5 @@ export class FormCanvasNavigation {
     if (index > 0) {
       this.activeSectionIndex.set(index - 1);
     }
-  }
-
-  isViewSectionMode() {
-    return this.viewMode() === NavigationMode.SECTION;
-  }
-
-  isViewScrollMode() {
-    return this.viewMode() === NavigationMode.SCROLL;
   }
 }
