@@ -1,8 +1,7 @@
 import { Directive, ElementRef, inject, output, Renderer2, signal } from '@angular/core';
 
 @Directive({
-  selector: '[appArrowNavigation]',
-  standalone: true,
+  selector: '[arrowNavigation]',
   host: {
     '(keydown)': 'handleKeyboardEvent($event)',
     '(focus)': 'onFocus()',

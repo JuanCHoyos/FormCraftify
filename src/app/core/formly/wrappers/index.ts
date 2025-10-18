@@ -1,1 +1,1 @@
-export * from './field-wrapper/field-wrapper.component';
+export * from './field-wrapper/field-wrapper';

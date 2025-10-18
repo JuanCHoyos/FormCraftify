@@ -1,0 +1,8 @@
+<div class="max-w-fit">
+  @if (props.type === RatingType.Numbers) {
+    <ui-rating [stars]="props.stars" [formControl]="formControl"></ui-rating>
+  } @else {
+    <p-rating [formControl]="formControl" [stars]="props.stars" />
+  }
+</div>
+{{ formControl.value }}

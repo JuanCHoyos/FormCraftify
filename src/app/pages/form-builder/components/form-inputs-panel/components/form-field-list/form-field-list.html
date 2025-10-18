@@ -1,35 +1,21 @@
 @let filteredCategories = formFieldCategories() | search: searchText() : ['items.label'];
 @let isSearchEmpty = searchText().length === 0;
-@let activeIndex = isSearchEmpty ? 0 : [0, 1, 2, 3];
-<p-accordion [value]="activeIndex" [multiple]="!isSearchEmpty">
-  @for (category of filteredCategories; track category.id) {
-    <p-accordion-panel class="border-gray-200!" [value]="$index">
-      <p-accordion-header>
-        <ng-template #toggleicon let-isActive="active">
-          @if (isActive) {
-            <ui-icon name="lucideChevronDown"></ui-icon>
-          } @else {
-            <ui-icon name="lucideChevronRight"></ui-icon>
-          }
-        </ng-template>
-
-        <span class="text-sm font-semibold text-black">{{ category.label }}</span>
-        <small class="text-xs font-semibold text-gray-500 ml-auto mr-2">
-          {{ category.items.length }}
-        </small>
-      </p-accordion-header>
-
-      <p-accordion-content class="p-0!">
-        <div [nxtSortablejs]="category.items" [config]="sortableOptions()">
-          @for (item of category.items; track item.id) {
-            <app-form-field-item
-              class="border-b border-gray-100 block last:border-0"
-              [item]="item"
-              [attr.field-type]="item.value"
-            ></app-form-field-item>
-          }
-        </div>
-      </p-accordion-content>
-    </p-accordion-panel>
-  }
-</p-accordion>
+<div class="flex flex-col gap-4">
+  <ui-accordion
+    [items]="filteredCategories"
+    [expandAll]="!isSearchEmpty"
+    [multiple]="!isSearchEmpty"
+  >
+    <ng-template [appGenericContextGuard]="filteredCategories[0].items" let-items #content
+      ><div [nxtSortablejs]="items" [config]="sortableOptions()">
+        @for (item of items; track item.id) {
+          <app-form-field-item
+            class="border-b border-gray-100 block last:border-0"
+            [item]="item"
+            [attr.field-type]="item.value"
+          ></app-form-field-item>
+        }
+      </div>
+    </ng-template>
+  </ui-accordion>
+</div>

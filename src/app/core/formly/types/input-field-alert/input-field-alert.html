@@ -1,0 +1,11 @@
+@let textFormattingOptions = props.textFormattingOptions;
+<ui-alert
+  [severity]="props.severity"
+  [align]="props.align"
+  [bold]="textFormattingOptions.includes(TextFormattingOptionType.Bold)"
+  [strikethrough]="textFormattingOptions.includes(TextFormattingOptionType.Strikethrough)"
+  [italic]="textFormattingOptions.includes(TextFormattingOptionType.Italic)"
+  [underline]="textFormattingOptions.includes(TextFormattingOptionType.Underline)"
+>
+  {{ props.description }}
+</ui-alert>

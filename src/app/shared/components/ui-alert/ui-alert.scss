@@ -1,0 +1,13 @@
+:host ::ng-deep {
+  .left .p-message-content {
+    justify-content: left;
+  }
+
+  .right .p-message-content {
+    justify-content: right;
+  }
+
+  .center .p-message-content {
+    justify-content: center;
+  }
+}

@@ -60,6 +60,10 @@ export class FormCanvasPanel implements AfterViewInit {
     props: {
       label: '1',
       cols: 1,
+      required: true,
+      readonly: false,
+      disabled: false,
+      tabindex: 1,
     },
     fieldGroup: [
       {
@@ -69,6 +73,10 @@ export class FormCanvasPanel implements AfterViewInit {
         props: {
           cols: 2,
           label: 'User Information',
+          required: true,
+          readonly: false,
+          disabled: false,
+          tabindex: 1,
         },
         fieldGroup: [
           {
@@ -114,6 +122,10 @@ export class FormCanvasPanel implements AfterViewInit {
         props: {
           cols: 2,
           label: 'User Information',
+          required: true,
+          readonly: false,
+          disabled: false,
+          tabindex: 1,
         },
         fieldGroup: [
           {

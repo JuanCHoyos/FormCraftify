@@ -1,0 +1,31 @@
+<ul
+  class="flex flex-col gap-2 pl-3 borde border-gray-300 relative"
+  [ngClass]="{ 'overflow-y-clip my-4': principal() }"
+  [nxtSortablejs]="flat()"
+  [config]="sortableOptions()"
+>
+  @if (principal()) {
+    <ui-title [heading]="HeadingType.H5">
+      <span class="flex items-center gap-2 overflow-hidden">
+        <ui-icon name="lucideFileText" class="bg-white text-indigo-500"></ui-icon>
+        <span class="overflow-hidden whitespace-nowrap text-ellipsis">Contact form</span></span
+      >
+    </ui-title>
+  }
+  @for (item of items(); track $index) {
+    <li>
+      <span
+        class="absolute -top-[24px] left-0 block h-full w-[1px] bg-gray-300 z-0"
+      ></span>
+      <ui-tree-item [item]="item" #treeItem></ui-tree-item>
+
+      @if ('nodes' in item) {
+        <ui-tree
+          [items]="item.nodes!"
+          [principal]="false"
+          [ngClass]="{ 'hidden pb-4': !treeItem.expanded() }"
+        ></ui-tree>
+      }
+    </li>
+  }
+</ul>

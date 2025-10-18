@@ -1,6 +1,6 @@
 <aside
   aria-label="settings panel"
-  class="absolute top-0 w-80 bg-white z-10 border-gray-300 flex flex-col transition-all duration-300 overflow-hidden h-full md:relative md:left-0 md:z-0"
+  class="absolute top-0 w-80 bg-white z-10 border-gray-300 grid grid-rows-[70px_1fr] transition-all duration-300 overflow-hidden h-full md:relative md:left-0 md:z-0"
   [ngClass]="{
     'md:w-[73px]': isCollapsed(),
     'md:w-80': !isCollapsed(),
@@ -36,7 +36,7 @@
       ></ui-icon>
     </p-button>
   </header>
-  <div class="block flex-1 h-full" [ngClass]="{ 'md:hidden': isCollapsed() }">
+  <div class="overflow-y-auto" [ngClass]="{ 'md:hidden': isCollapsed() }">
     <ng-content></ng-content>
   </div>
 </aside>

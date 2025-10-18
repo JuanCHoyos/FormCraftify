@@ -1,13 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, Input, input, signal } from '@angular/core';
-import { AlertFieldBuilder } from '@core/formly/builders';
 import { FieldBuilderFactory } from '@core/formly/factory/field-builder-factory';
-import {
-  AnyFieldType,
-  FormType,
-  SeverityType,
-  TextFormattingOptionType,
-} from '@core/formly/models/form-field-item';
+import { AnyFieldType, FormType } from '@core/formly/models/form-field-item';
 import { UITitle } from '@shared/components/index';
 import { HeadingType } from '@shared/types/ui.types';
 import { SortablejsModule } from 'nxt-sortablejs';
@@ -73,10 +67,6 @@ export class FormCanvasFields {
       const formType = event.item.getAttribute('field-type') as FormType;
       if (!formType) return;
       const newField = new FieldBuilderFactory().create(formType).setDescription('Escriba algo');
-      if (newField instanceof AlertFieldBuilder) {
-        newField.setTextFormatting(TextFormattingOptionType.Underline);
-        newField.setSeverity(SeverityType.Error);
-      }
 
       const fields = [...this._fields()];
       fields.splice(event.newIndex ?? 0, 1, newField.build());

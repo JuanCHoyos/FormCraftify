@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-divider',
-  standalone: true,
-  imports: [],
+  selector: 'input-field-divider',
   template: `<hr />`,
 })
-export class DividerComponent extends FieldType {}
+export class InputFieldDivider extends FieldType {}

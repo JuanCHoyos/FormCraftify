@@ -1,5 +1,10 @@
-import { FieldBaseType, FieldPropsBaseType } from '@core/formly/models/form-field-item';
+import { FieldPropsBaseType } from '@core/formly/models/form-field-item';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { v4 as uuidv4 } from 'uuid';
+export type OptionalStrict<T> = {
+  [K in keyof T]?: T[K];
+};
+
 export abstract class BaseFieldBuilder<
   TProps extends FieldPropsBaseType,
   TBuilder extends BaseFieldBuilder<TProps, TBuilder>,
@@ -8,12 +13,12 @@ export abstract class BaseFieldBuilder<
   protected props: TProps;
   abstract newInstance(): TBuilder;
 
-  constructor(defaultProps: TProps) {
+  constructor(defaultProps?: Omit<TProps, keyof FieldPropsBaseType> & Partial<FieldPropsBaseType>) {
     this.key = `${uuidv4()}`;
     this.props = {
       ...this.defaultBaseProps(),
       ...defaultProps,
-    };
+    } as TProps;
   }
 
   protected defaultBaseProps(): FieldPropsBaseType {
@@ -85,7 +90,7 @@ export abstract class BaseFieldBuilder<
     return builder;
   }
 
-  build(): FieldBaseType {
+  build(): FormlyFieldConfig {
     return {
       key: this.key,
       props: this.props,

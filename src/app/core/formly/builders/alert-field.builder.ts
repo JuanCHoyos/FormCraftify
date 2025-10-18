@@ -13,8 +13,12 @@ export class AlertFieldBuilder extends BaseFieldBuilder<AlertPropsType, AlertFie
   constructor() {
     super({
       severity: SeverityType.Info,
-      align: AlignType.Left,
-      textFormattingOptions: [],
+      align: AlignType.Center,
+      textFormattingOptions: [
+        TextFormattingOptionType.Bold,
+        TextFormattingOptionType.Italic,
+        TextFormattingOptionType.Underline,
+      ],
     });
   }
   newInstance(): AlertFieldBuilder {

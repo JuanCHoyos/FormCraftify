@@ -26,9 +26,10 @@ export const MyPreset = definePreset(Aura, {
         padding: '0',
       },
       header: {
-        padding: '1rem 0',
-        hoverBackground: '{gray.100}',
+        padding: '0.85rem 0.25rem',
+        hoverBackground: '{gray.50}',
         borderRadius: '0.25rem',
+        borderColor: '{gray.50}',
       },
     },
     button: {

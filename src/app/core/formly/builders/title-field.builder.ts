@@ -12,8 +12,8 @@ import { BaseFieldBuilder } from './base/base-field.builder';
 export class TitleFieldBuilder extends BaseFieldBuilder<TitlePropsType, TitleFieldBuilder> {
   constructor() {
     super({
-      headingType: HeadingType.H1,
       align: AlignType.Left,
+      headingType: HeadingType.H1,
       textFormattingOptions: [],
     });
   }

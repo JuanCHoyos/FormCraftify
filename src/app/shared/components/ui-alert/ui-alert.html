@@ -1,0 +1,15 @@
+<p-message [severity]="severity()" [class]="align()">
+  <ng-template #icon>
+    <ui-icon [name]="severityIcon()"></ui-icon>
+  </ng-template>
+  <span
+    class="text-sm block w-full"
+    [ngClass]="{
+      'font-normal': !bold(),
+      'font-bold': bold(),
+      'line-through': strikethrough(),
+      italic: italic(),
+      underline: underline(),
+    }"
+    ><ng-content></ng-content></span
+></p-message>

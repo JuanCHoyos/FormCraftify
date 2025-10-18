@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input, model, signal, viewChild } from '@angular/core';
+import { GenericTemplateTypeGuard } from '@core/directives/template-type-guard';
 import { SearchPipe } from '@shared/pipes/search-pipe';
 import { Popover, PopoverModule } from 'primeng/popover';
 
@@ -10,7 +11,15 @@ import { UITitle } from '../ui-title/ui-title';
 
 @Component({
   selector: 'ui-menu-popover',
-  imports: [CommonModule, PopoverModule, SearchPipe, UIICon, UISearchInput, UITitle],
+  imports: [
+    CommonModule,
+    PopoverModule,
+    GenericTemplateTypeGuard,
+    SearchPipe,
+    UIICon,
+    UISearchInput,
+    UITitle,
+  ],
   templateUrl: './ui-menu-popover.html',
 })
 export class UIMenuPopover {

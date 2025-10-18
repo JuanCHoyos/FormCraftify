@@ -17,7 +17,6 @@ import { UIICon } from '../icon/ui-icon';
 @Component({
   selector: 'ui-tab',
   template: ` <ng-template #contentTemplate><ng-content></ng-content></ng-template> `,
-  standalone: true,
 })
 export class UITab {
   value = input.required<MenuItemType['value']>();

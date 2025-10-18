@@ -1,21 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
-  FieldBaseType,
   HeadingType,
   TextFormattingOptionType,
   TitlePropsType,
 } from '@core/formly/models/form-field-item';
-import { FieldType } from '@ngx-formly/core';
+import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-title-wrapper',
-  standalone: true,
+  selector: 'input-field-title',
   imports: [CommonModule],
-  templateUrl: './title.component.html',
-  styleUrl: './title.component.css',
+  templateUrl: './input-field-title.html',
 })
-export class TitleWrapperComponent extends FieldType<FieldBaseType<TitlePropsType>> {
+export class InputFieldTitle extends FieldType<FormlyFieldConfig<TitlePropsType>> {
   HeadingType = HeadingType;
   get customClass() {
     return {

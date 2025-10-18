@@ -1,7 +1,6 @@
 @let filteredItems =
   treeItems() || leafItems() | search: searchText() : ['items.label', 'items.description'];
 <p-popover
-  class="[--p-popover-content-padding=0]"
   styleClass="max-h-[50vh] overflow-y-auto transition-all duration-300"
   [dismissable]="true"
   #menuElement
@@ -37,7 +36,7 @@
     }
   </div>
 </p-popover>
-<ng-template let-items #menu>
+<ng-template let-items [appGenericContextGuard]="leafItems()" #menu>
   <ul class="flex flex-col">
     @for (item of items; track item.id) {
       <li>
