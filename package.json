@@ -41,8 +41,6 @@
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@ng-icons/core": "^32.1.0",
-    "@ng-icons/heroicons": "^32.1.0",
-    "@ng-icons/ionicons": "^32.1.0",
     "@ng-icons/lucide": "^32.1.0",
     "@ngx-formly/core": "^7.0.0",
     "@ngx-formly/primeng": "^7.0.0",

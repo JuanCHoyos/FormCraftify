@@ -1,0 +1,20 @@
+<button
+  class="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 hover:border-indigo-500 focus:border-indigo-500 rounded cursor-pointer group outline-0"
+  aria-label="Add new field element"
+  aria-haspopup="menu"
+  tabindex="0"
+  (click)="toggleFieldListPopover($event)"
+  (keydown.enter)="toggleFieldListPopover($event)"
+>
+  <p
+    class="text-xs md:text-sm text-gray-500 font-semibold flex items-center gap-2 group-hover:text-indigo-500"
+  >
+    <ui-icon name="lucidePlus"></ui-icon> <span>Click to add an element</span>
+  </p>
+</button>
+<ui-menu-popover
+  [items]="formElementCategories()"
+  [search]="true"
+  [tree]="true"
+  #fieldListMenuTemplate
+></ui-menu-popover>

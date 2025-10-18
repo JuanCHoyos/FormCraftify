@@ -22,7 +22,7 @@
       "@env/*": ["src/environments/*"],
       "@shared/*": ["src/app/shared/*"],
       "@shared/components/*": ["src/app/shared/components/*"],
-      "@pages/*": ["src/app/pages/*"]
+      "@features/*": ["src/app/features/*"]
     }
   },
   "angularCompilerOptions": {

@@ -1,5 +1,7 @@
 import { LUCIDE_ICONS } from '@shared/components/icon/constants/icons';
 
+export type LucideIconType = keyof typeof LUCIDE_ICONS;
+
 export interface MenuItemType<T = unknown> {
   id: string;
   label: string;
@@ -32,5 +34,3 @@ export enum HeadingType {
   H4 = 'h4',
   H5 = 'h5',
 }
-
-export type LucideIconType = keyof typeof LUCIDE_ICONS;

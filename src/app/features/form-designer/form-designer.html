@@ -1,0 +1,13 @@
+<div class="form-designer-container">
+  <app-form-design-navbar></app-form-design-navbar>
+  
+  <div class="form-designer-content">
+    <app-form-elements-panel [showSideBar]="showFormElementsPanel()"></app-form-elements-panel>
+    
+    <main class="form-designer-main">
+      <app-form-design-canvas></app-form-design-canvas>
+    </main>
+    
+    <app-form-settings-panel></app-form-settings-panel>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+@let filteredCategories = formElementCategories() | search: searchText() : ['items.label'];
+@let isSearchEmpty = searchText().length === 0;
+<div class="flex flex-col gap-4">
+  <ui-accordion
+    [items]="filteredCategories"
+    [expandAll]="!isSearchEmpty"
+    [multiple]="!isSearchEmpty"
+  >
+    <ng-template [appGenericContextGuard]="filteredCategories[0].items" let-items #content
+      ><div [nxtSortablejs]="items" [config]="sortableOptions()">
+        @for (item of items; track item.id) {
+          <app-form-element-item
+            class="border-b border-gray-100 block last:border-0"
+            [item]="item"
+            [attr.field-type]="item.value"
+          ></app-form-element-item>
+        }
+      </div>
+    </ng-template>
+  </ui-accordion>
+</div>

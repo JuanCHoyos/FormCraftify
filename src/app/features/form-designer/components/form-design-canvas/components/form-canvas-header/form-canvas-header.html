@@ -1,0 +1,31 @@
+<header class="flex flex-col gap-4">
+  <span class="text-xs text-gray-500 font-semibold text-end pb-4"
+    >Last updated: A moment ago</span
+  >
+
+  <div class="flex flex-row gap-8 md:items-center">
+    <p-button class="flex items-center justify-between" size="small" (onClick)="open($event)">
+      <ui-icon name="lucideFilePlus"></ui-icon>
+      <span>New section</span>
+      <ui-icon name="lucideChevronDown"></ui-icon>
+    </p-button>
+    <p-selectbutton
+      [options]="formDesignNavigation.viewModeOptions()"
+      [(ngModel)]="formDesignNavigation.viewMode"
+      [unselectable]="true"
+      optionLabel="label"
+      optionValue="value"
+      aria-labelledby="page option"
+      class="w-full md:w-fit md:min-w-fit md:ml-auto"
+    >
+      <ng-template #item let-item>
+        <span class="flex items-center gap-2 text-sm font-semibold"
+          ><ui-icon [name]="item.icon"></ui-icon> {{ item.label }}</span
+        >
+      </ng-template></p-selectbutton
+    >
+  </div>
+  <ui-title [heading]="HeadingType.H3">Form Preview</ui-title>
+</header>
+
+<ui-menu-popover [items]="items()" #sectionMenu></ui-menu-popover>

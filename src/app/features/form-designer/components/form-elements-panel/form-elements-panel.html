@@ -1,0 +1,20 @@
+<ui-sidebar
+  title="Form Elements"
+  subtitle="Manage form elements and components"
+  [position]="AsidePosition.Left"
+  [showSideBar]="showSideBar()"
+>
+  <div class="flex flex-col py-4 gap-4 ">
+    <div class="border-b p-4 pt-0 border-gray-300">
+      <ui-search-input placeholder="Search an element" [(search)]="searchText"></ui-search-input>
+    </div>
+    <div class="px-4">
+      <ui-tabs [items]="items()" [value]="items()[0].value">
+        <ui-tab [value]="0">
+          <app-form-elements-list [searchText]="searchText()"></app-form-elements-list>
+        </ui-tab>
+        <ui-tab [value]="1"> <ui-tree></ui-tree> </ui-tab>
+      </ui-tabs>
+    </div>
+  </div>
+</ui-sidebar>

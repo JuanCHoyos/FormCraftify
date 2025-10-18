@@ -1,0 +1,17 @@
+.form-designer-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-designer-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.form-designer-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,31 @@
+<article
+  class="w-full min-h-64 md:min-h-96 flex flex-col gap-4 border-1 border-gray-300 rounded-lg p-4 md:p-6 relative"
+  [ngClass]="{
+    'bg-white': _fields().length !== 0 || !isDragOver(),
+    'bg-indigo-50': _fields().length === 0 && isDragOver(),
+    'border-indigo-300': isDragOver(),
+  }"
+>
+  @if (title()) {
+    <div class="border-b border-b-gray-100 pb-2">
+      <ui-title [heading]="HeadingType.H4">{{ title() }}</ui-title>
+    </div>
+  }
+  <div
+    class="relative flex flex-col flex-1 gap-4 h-full"
+    [ngClass]="{ 'pb-18': _fields().length !== 0 }"
+    [nxtSortablejs]="_fields()"
+    [config]="sortableConfig"
+  >
+    @for (field of _fields(); track field.id) {
+      <app-form-canvas-field [field]="field" data-sort="true"></app-form-canvas-field>
+    }
+    @if (_fields().length !== 0) {
+      <div class="absolute left-0 bottom-0 w-full">
+        <app-form-canvas-add-element-placeholder data-sort="false"></app-form-canvas-add-element-placeholder>
+      </div>
+    } @else {
+      <app-form-canvas-empty-message data-sort="false"></app-form-canvas-empty-message>
+    }
+  </div>
+</article>
