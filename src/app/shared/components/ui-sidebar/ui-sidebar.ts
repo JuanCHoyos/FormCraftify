@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 import { AsidePosition, HeadingType } from '../../types/ui.types';
@@ -16,8 +16,8 @@ export class UISidebar {
   showSideBar = input<boolean>(false);
   title = input.required<string>();
   subtitle = input<string>();
+  isCollapsed = model<boolean>(false);
 
-  isCollapsed = signal<boolean>(false);
   HeadingType = HeadingType;
   AsidePosition = AsidePosition;
 

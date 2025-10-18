@@ -70,6 +70,12 @@ export const MyPreset = definePreset(Aura, {
         }
 `,
     },
+    rating: {
+      icon: {
+        size: '1.5rem',
+        color: '{gray.300}',
+      },
+    },
     tooltip: {
       root: {
         padding: '0.5rem',

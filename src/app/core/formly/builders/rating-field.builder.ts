@@ -13,6 +13,7 @@ export class RatingFieldBuilder extends BaseFieldBuilder<RatingPropsType, Rating
     super({
       type: RatingType.Numbers,
       stars: 5,
+      required: true,
     });
   }
 
