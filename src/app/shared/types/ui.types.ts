@@ -1,4 +1,4 @@
-import { LUCIDE_ICONS } from '@shared/components/icon/constants/icons';
+import { LUCIDE_ICONS } from '@shared/components/ui-icon/constants/icons';
 
 export type LucideIconType = keyof typeof LUCIDE_ICONS;
 

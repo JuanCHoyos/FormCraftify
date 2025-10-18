@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, input, signal } from '@angular/core';
-import { UIICon } from '@shared/components/icon/ui-icon';
+import { UIICon } from '@shared/components/ui-icon/ui-icon';
 import { UITitle } from '@shared/components/ui-title/ui-title';
 import { HeadingType } from '@shared/types/ui.types';
 import { SortablejsModule } from 'nxt-sortablejs';

@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MenuItemType } from '@shared/types/ui.types';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
-import { UIICon } from '../icon/ui-icon';
+import { UIICon } from '../ui-icon/ui-icon';
 
 @Component({
   selector: 'ui-tab',

@@ -3,7 +3,7 @@ import { Component, computed, contentChild, input, TemplateRef } from '@angular/
 import { MenuItemType, TreeMenuType } from '@shared/types/ui.types';
 import { AccordionModule } from 'primeng/accordion';
 
-import { UIICon } from '../icon/ui-icon';
+import { UIICon } from '../ui-icon/ui-icon';
 
 @Component({
   selector: 'ui-accordion',

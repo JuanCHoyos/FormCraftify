@@ -4,7 +4,7 @@ import { GenericTemplateGuard, ItemSearchFilter } from '@shared/components/index
 import { Popover, PopoverModule } from 'primeng/popover';
 
 import { HeadingType, MenuItemType, TreeMenuType } from '../../types/ui.types';
-import { UIICon } from '../icon/ui-icon';
+import { UIICon } from '../ui-icon/ui-icon';
 import { UISearchInput } from '../ui-search-input/ui-search-input';
 import { UITitle } from '../ui-title/ui-title';
 

@@ -3,7 +3,7 @@ import { Component, input, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 import { AsidePosition, HeadingType } from '../../types/ui.types';
-import { UIICon } from '../icon/ui-icon';
+import { UIICon } from '../ui-icon/ui-icon';
 import { UITitle } from '../ui-title/ui-title';
 
 @Component({

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
-import { UIICon } from '@shared/components/icon/ui-icon';
+import { UIICon } from '@shared/components/ui-icon/ui-icon';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
