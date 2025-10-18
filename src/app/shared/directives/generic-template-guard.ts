@@ -6,13 +6,13 @@ export interface GenericTemplateContext<T> {
 @Directive({
   selector: 'ng-template[appGenericContextGuard]',
 })
-export class GenericTemplateTypeGuard<T> {
+export class GenericTemplateGuard<T> {
   public templateRef = inject(TemplateRef<GenericTemplateContext<T>>);
 
   appGenericContextGuard = input<T>();
 
   static ngTemplateContextGuard<T>(
-    dir: GenericTemplateTypeGuard<T>,
+    dir: GenericTemplateGuard<T>,
     ctx: unknown,
   ): ctx is GenericTemplateContext<T> {
     return true;

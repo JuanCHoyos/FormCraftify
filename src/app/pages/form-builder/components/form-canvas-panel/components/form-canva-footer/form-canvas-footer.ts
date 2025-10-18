@@ -3,10 +3,10 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormCanvasNavigation } from '@pages/form-builder/services/form-canvas-navigation';
 import { UIICon } from '@shared/components/index';
+import { KeyboardArrowNavigation } from '@shared/components/index';
 import { ButtonModule } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SelectModule } from 'primeng/select';
-import { ArrowNavigation } from 'src/app/core/directives/arrow-navigation';
 
 @Component({
   selector: 'app-form-canvas-footer',
@@ -16,7 +16,7 @@ import { ArrowNavigation } from 'src/app/core/directives/arrow-navigation';
     ButtonModule,
     ProgressBarModule,
     SelectModule,
-    ArrowNavigation,
+    KeyboardArrowNavigation,
     UIICon,
   ],
   templateUrl: './form-canvas-footer.html',

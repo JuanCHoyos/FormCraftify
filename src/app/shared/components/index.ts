@@ -1,3 +1,5 @@
+export * from '../directives';
+export * from '../pipes/item-search-filter';
 export * from './icon/ui-icon';
 export * from './ui-accordion/ui-accordion';
 export * from './ui-alert/ui-alert';

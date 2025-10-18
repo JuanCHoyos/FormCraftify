@@ -8,7 +8,7 @@ import { Directive, ElementRef, inject, output, Renderer2, signal } from '@angul
     '(blur)': 'onBlur()',
   },
 })
-export class ArrowNavigation {
+export class KeyboardArrowNavigation {
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
   arrowLeft = output<void>();

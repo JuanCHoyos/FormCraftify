@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input, model, signal, viewChild } from '@angular/core';
-import { GenericTemplateTypeGuard } from '@core/directives/template-type-guard';
-import { SearchPipe } from '@shared/pipes/search-pipe';
+import { GenericTemplateGuard, ItemSearchFilter } from '@shared/components/index';
 import { Popover, PopoverModule } from 'primeng/popover';
 
 import { HeadingType, MenuItemType, TreeMenuType } from '../../types/ui.types';
@@ -14,8 +13,8 @@ import { UITitle } from '../ui-title/ui-title';
   imports: [
     CommonModule,
     PopoverModule,
-    GenericTemplateTypeGuard,
-    SearchPipe,
+    GenericTemplateGuard,
+    ItemSearchFilter,
     UIICon,
     UISearchInput,
     UITitle,

@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'search',
 })
-export class SearchPipe implements PipeTransform {
+export class ItemSearchFilter implements PipeTransform {
   transform<T>(items: T[], searchText: string, fields: string[]): T[] {
     if (!items || !searchText?.trim()) return items ?? [];
 
@@ -76,7 +76,7 @@ export class SearchPipe implements PipeTransform {
   private normalizeText(text: string): string {
     return text
       .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
+      .replaceAll(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .trim();
   }
