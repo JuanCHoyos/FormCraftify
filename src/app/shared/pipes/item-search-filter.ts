@@ -12,10 +12,18 @@ export class ItemSearchFilter implements PipeTransform {
     return items.map((item) => this.filterItem(item, fields, term)).filter((i): i is T => !!i);
   }
 
+  private deepClone<T>(obj: T): T {
+    try {
+      return structuredClone(obj);
+    } catch {
+      return JSON.parse(JSON.stringify(obj));
+    }
+  }
+
   private filterItem<T>(item: T, fields: string[], searchText: string): T | null {
     let match = false;
 
-    const cloned = JSON.parse(JSON.stringify(item));
+    const cloned = this.deepClone(item);
 
     for (const path of fields) {
       const result = this.getNestedValue(item, path);
