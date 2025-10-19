@@ -6,7 +6,7 @@ import {
   ElementRef,
   inject,
   signal,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import {
   AlignType,
@@ -44,10 +44,7 @@ import { FormCanvasFooter, FormCanvasHeader, FormCanvasSections } from './compon
   `,
 })
 export class FormDesignCanvas implements AfterViewInit {
-  canvasPanelContainer = signal<ElementRef | null>(null);
-  @ViewChild('canvasPanelContainer') set canvasPanelContainerRef(ref: ElementRef) {
-    this.canvasPanelContainer.set(ref);
-  }
+  canvasPanelContainer = viewChild<ElementRef>('canvasPanelContainer');
 
   public readonly formDesignNavigation = inject(FormDesignNavigation);
   NavigationMode = NavigationMode;
