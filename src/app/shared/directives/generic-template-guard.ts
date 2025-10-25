@@ -2,6 +2,7 @@ import { Directive, inject, input, TemplateRef } from '@angular/core';
 
 export interface GenericTemplateContext<T> {
   $implicit: T;
+  index: number;
 }
 @Directive({
   selector: 'ng-template[appGenericContextGuard]',

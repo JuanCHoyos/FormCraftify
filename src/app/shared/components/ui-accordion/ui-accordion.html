@@ -21,6 +21,7 @@
           [ngTemplateOutlet]="content()"
           [ngTemplateOutletContext]="{
             $implicit: item.items,
+            index: $index,
           }"
         ></ng-container>
       </p-accordion-content>
