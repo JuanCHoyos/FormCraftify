@@ -6,12 +6,19 @@ import {
   WrapperType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class RadioFieldBuilder extends BaseFieldBuilder<RadioPropsType, RadioFieldBuilder> {
+export class RadioFieldBuilder extends FormFieldBaseBuilder<RadioPropsType> {
   constructor() {
     super({
       options: [],
+      disabled: false,
+      readonly: false,
+      required: false,
+      tabindex: 0,
+      description: '',
+      label: '',
+      tooltip: '',
     });
   }
 
@@ -20,15 +27,14 @@ export class RadioFieldBuilder extends BaseFieldBuilder<RadioPropsType, RadioFie
   }
 
   setOptions(options: OptionType[]) {
-    this.props.options = [...options];
+    this.field.props.options = [...options];
     return this;
   }
 
   override build(): RadioFieldType {
     return {
       ...super.build(),
-      type: FormType.radio,
-      props: this.props,
+      type: FormType.Radio,
       wrappers: [WrapperType.Field],
     };
   }

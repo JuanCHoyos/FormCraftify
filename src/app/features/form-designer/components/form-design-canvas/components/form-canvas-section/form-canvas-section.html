@@ -1,1 +1,20 @@
-<app-form-canvas-fields [fields]="fieldss()?.fieldGroup!"></app-form-canvas-fields>
+<article
+  class="w-full grid grid-rows-[auto_1fr_auto] min-h-64 md:min-h-96 border-1 border-gray-300 rounded-lg p-4 md:p-6 relative"
+  [ngClass]="{
+    'bg-white': groupField().fieldGroup.length !== 0 || !whileDragging(),
+    'bg-indigo-50': groupField().fieldGroup.length === 0 && whileDragging(),
+    'border-indigo-300': whileDragging(),
+  }"
+>
+  @if (groupField().props.label) {
+    <div class="border-b border-b-gray-300 pb-2">
+      <ui-title [heading]="HeadingType.H4">{{ groupField().props.label }}</ui-title>
+    </div>
+  }
+
+  <form-canvas-fields [groupField]="groupField()"></form-canvas-fields>
+
+  <app-form-canvas-add-element-placeholder
+    (addElement)="addElement($event)"
+  ></app-form-canvas-add-element-placeholder>
+</article>

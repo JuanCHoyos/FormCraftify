@@ -1,21 +1,22 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
 export enum FormType {
-  alert = 'alert',
-  checkbox = 'checkbox',
-  divider = 'divider',
-  email = 'email',
-  group = 'group',
-  multicheckbox = 'multicheckbox',
-  multiselect = 'multiselect',
-  number = 'number',
-  paragraph = 'paragraph',
-  radio = 'radio',
-  rating = 'rating',
-  select = 'select',
-  text = 'text',
-  textarea = 'textarea',
-  title = 'title',
+  Alert = 'alert',
+  Checkbox = 'checkbox',
+  Divider = 'divider',
+  Email = 'email',
+  Field = 'Field',
+  Group = 'group',
+  Multicheckbox = 'multicheckbox',
+  Multiselect = 'multiselect',
+  Number = 'number',
+  Paragraph = 'paragraph',
+  Radio = 'radio',
+  Rating = 'rating',
+  Select = 'select',
+  Text = 'text',
+  Textarea = 'textarea',
+  Title = 'title',
 }
 
 export enum TextFormattingOptionType {
@@ -82,51 +83,66 @@ export interface FieldPropsBaseType {
   tabindex: number;
 }
 
-export interface AlertPropsType extends FieldPropsBaseType {
+export interface FormFieldConfig<Props> extends Omit<FormlyFieldConfig, 'props' | 'fieldGroup'> {
+  id: string;
+  key: string;
+  props: Props;
+  wrappers?: (FormViewWrapperType | WrapperType)[];
+}
+
+export interface AlertPropsType {
+  label: string;
   severity: SeverityType;
   align: AlignType;
   textFormattingOptions: TextFormattingOptionType[];
 }
 
-export interface AlertFieldType extends FormlyFieldConfig<AlertPropsType> {
-  type: FormType.alert;
+export interface AlertFieldType extends FormFieldConfig<AlertPropsType> {
+  type: FormType.Alert;
 }
 
-export interface CheckboxFieldType extends FormlyFieldConfig<FieldPropsBaseType> {
-  type: FormType.checkbox;
+export interface CheckboxFieldType extends FormFieldConfig<FieldPropsBaseType> {
+  type: FormType.Checkbox;
   wrappers: [WrapperType.Field];
 }
 
-export interface DividerFieldType extends FormlyFieldConfig<FieldPropsBaseType> {
-  type: FormType.divider;
+export interface DividerPropsType {
+  color: string;
 }
 
-export interface FormPropsType extends FieldPropsBaseType {
-  label: FieldPropsBaseType['label'];
+export interface DividerFieldType extends FormFieldConfig<DividerPropsType> {
+  type: FormType.Divider;
 }
 
-export interface FormFieldType extends FormlyFieldConfig<FormPropsType> {
+export interface FormPropsType {
+  label: string;
+}
+
+export interface FormFieldType extends FormFieldConfig<FormPropsType> {
+  type: FormType.Group;
   fieldGroup: GroupFieldType[];
   wrappers: [FormViewWrapperType];
 }
 
-export interface GroupPropsType extends FieldPropsBaseType {
+export interface GroupPropsType {
   cols: number;
   label: FieldPropsBaseType['label'];
 }
 
-export interface GroupFieldType extends FormlyFieldConfig<GroupPropsType> {
-  type: FormType.group;
+export interface GroupFieldType extends FormFieldConfig<GroupPropsType> {
+  type: FormType.Group;
   fieldGroup: AnyFieldType[];
+  props: GroupPropsType;
 }
 
 export interface MulticheckboxPropsType extends FieldPropsBaseType {
   options: OptionType[];
 }
 
-export interface MultiCheckboxFieldType extends FormlyFieldConfig<MulticheckboxPropsType> {
-  type: FormType.multicheckbox;
+export interface MultiCheckboxFieldType extends FormFieldConfig<MulticheckboxPropsType> {
+  type: FormType.Multicheckbox;
   wrappers: [WrapperType.Field];
+  props: MulticheckboxPropsType;
 }
 
 export interface MultiSelectPropsType extends FieldPropsBaseType {
@@ -134,8 +150,8 @@ export interface MultiSelectPropsType extends FieldPropsBaseType {
   options: OptionType[];
 }
 
-export interface MultiSelectFieldType extends FormlyFieldConfig<MultiSelectPropsType> {
-  type: FormType.multiselect;
+export interface MultiSelectFieldType extends FormFieldConfig<MultiSelectPropsType> {
+  type: FormType.Multiselect;
   wrappers: [WrapperType.Field];
 }
 
@@ -145,26 +161,27 @@ export interface NumberPropsType extends FieldPropsBaseType {
   max: number;
 }
 
-export interface NumberFieldType extends FormlyFieldConfig<NumberPropsType> {
-  type: FormType.number;
+export interface NumberFieldType extends FormFieldConfig<NumberPropsType> {
+  type: FormType.Number;
   wrappers: [WrapperType.Field];
 }
 
-export interface ParagraphPropsType extends FieldPropsBaseType {
+export interface ParagraphPropsType {
   align: AlignType;
+  label: string;
   textFormattingOptions: TextFormattingOptionType[];
 }
 
-export interface ParagraphFieldType extends FormlyFieldConfig<ParagraphPropsType> {
-  type: FormType.paragraph;
+export interface ParagraphFieldType extends FormFieldConfig<ParagraphPropsType> {
+  type: FormType.Paragraph;
 }
 
 export interface RadioPropsType extends FieldPropsBaseType {
   options: OptionType[];
 }
 
-export interface RadioFieldType extends FormlyFieldConfig<RadioPropsType> {
-  type: FormType.radio;
+export interface RadioFieldType extends FormFieldConfig<RadioPropsType> {
+  type: FormType.Radio;
   wrappers: [WrapperType.Field];
 }
 
@@ -173,8 +190,8 @@ export interface RatingPropsType extends FieldPropsBaseType {
   stars: number;
 }
 
-export interface RatingFieldType extends FormlyFieldConfig<RatingPropsType> {
-  type: FormType.rating;
+export interface RatingFieldType extends FormFieldConfig<RatingPropsType> {
+  type: FormType.Rating;
   wrappers: [WrapperType.Field];
 }
 
@@ -183,8 +200,8 @@ export interface SelectPropsType extends FieldPropsBaseType {
   options: OptionType[];
 }
 
-export interface SelectFieldType extends FormlyFieldConfig<SelectPropsType> {
-  type: FormType.select;
+export interface SelectFieldType extends FormFieldConfig<SelectPropsType> {
+  type: FormType.Select;
   wrappers: [WrapperType.Field];
 }
 
@@ -194,8 +211,8 @@ export interface TextAreaPropsType extends FieldPropsBaseType {
   maxLength: number;
 }
 
-export interface TextAreaFieldType extends FormlyFieldConfig<TextAreaPropsType> {
-  type: FormType.textarea;
+export interface TextAreaFieldType extends FormFieldConfig<TextAreaPropsType> {
+  type: FormType.Textarea;
   wrappers: [WrapperType.Field];
 }
 
@@ -205,19 +222,20 @@ export interface TextPropsType extends FieldPropsBaseType {
   maxLength: number;
 }
 
-export interface TextFieldType extends FormlyFieldConfig<TextPropsType> {
-  type: FormType.text;
+export interface TextFieldType extends FormFieldConfig<TextPropsType> {
+  type: FormType.Text;
   wrappers: [WrapperType.Field];
 }
 
-export interface TitlePropsType extends FieldPropsBaseType {
+export interface TitlePropsType {
+  label: string;
   headingType: HeadingType;
   align: AlignType;
   textFormattingOptions: TextFormattingOptionType[];
 }
 
-export interface TitleFieldType extends FormlyFieldConfig<TitlePropsType> {
-  type: FormType.title;
+export interface TitleFieldType extends FormFieldConfig<TitlePropsType> {
+  type: FormType.Title;
 }
 
 export type AnyFieldType =

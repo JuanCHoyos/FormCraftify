@@ -6,14 +6,22 @@
     [expandAll]="!isSearchEmpty"
     [multiple]="!isSearchEmpty"
   >
-    <ng-template [appGenericContextGuard]="filteredCategories[0].items" let-items #content
-      ><div [nxtSortablejs]="items" [config]="sortableOptions()">
+    <ng-template
+      [appGenericContextGuard]="filteredCategories[0].items"
+      let-items
+      #content
+      let-index="index"
+      ><div
+        [nxtSortablejs]="items"
+        [config]="sortableOptions()"
+        id="accordion-{{ index }}"
+      >
         @for (item of items; track item.id) {
-          <app-form-element-item
+          <form-element-item
             class="border-b border-gray-100 block last:border-0"
             [item]="item"
             [attr.field-type]="item.value"
-          ></app-form-element-item>
+          />
         }
       </div>
     </ng-template>

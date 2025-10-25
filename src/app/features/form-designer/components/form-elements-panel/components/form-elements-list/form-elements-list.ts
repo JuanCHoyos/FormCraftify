@@ -14,10 +14,10 @@ import { FormElementItem } from '../form-element-item/form-element-item';
   imports: [
     CommonModule,
     FormElementItem,
-    SortablejsModule,
-    ItemSearchFilter,
-    UIAccordion,
     GenericTemplateGuard,
+    ItemSearchFilter,
+    SortablejsModule,
+    UIAccordion,
   ],
   templateUrl: './form-elements-list.html',
 })

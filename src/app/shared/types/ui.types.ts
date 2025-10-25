@@ -17,6 +17,27 @@ export interface TreeMenuType<T = unknown> {
   items: MenuItemType<T>[];
 }
 
+export interface TreeItem<T = unknown> {
+  id: string;
+  label: string;
+  description?: string;
+  icon: LucideIconType;
+  value: T;
+}
+
+export interface TreeNode<T = unknown> {
+  nodes: TreeType<T>[];
+}
+
+export interface TreeType<T = unknown> {
+  id: string;
+  label: string;
+  description?: string;
+  icon: LucideIconType;
+  value: T;
+  nodes?: TreeType<T>[];
+}
+
 export enum AsidePosition {
   Left = 'left',
   Right = 'right',

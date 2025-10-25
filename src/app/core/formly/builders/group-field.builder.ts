@@ -5,9 +5,9 @@ import {
   GroupPropsType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class GroupFieldBuilder extends BaseFieldBuilder<GroupPropsType, GroupFieldBuilder> {
+export class GroupFieldBuilder extends FormFieldBaseBuilder<GroupPropsType> {
   private fieldGroup: AnyFieldType[] = [];
 
   constructor() {
@@ -17,7 +17,7 @@ export class GroupFieldBuilder extends BaseFieldBuilder<GroupPropsType, GroupFie
     return new GroupFieldBuilder();
   }
   setCols(cols: number) {
-    this.props.cols = cols;
+    this.field.props.cols = cols;
     return this;
   }
 
@@ -29,9 +29,8 @@ export class GroupFieldBuilder extends BaseFieldBuilder<GroupPropsType, GroupFie
   override build(): GroupFieldType {
     return {
       ...super.build(),
-      type: FormType.group,
+      type: FormType.Group,
       fieldGroup: this.fieldGroup,
-      props: this.props,
     };
   }
 }

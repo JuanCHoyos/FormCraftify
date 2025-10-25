@@ -7,13 +7,14 @@ import {
   TextFormattingOptionType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class AlertFieldBuilder extends BaseFieldBuilder<AlertPropsType, AlertFieldBuilder> {
+export class AlertFieldBuilder extends FormFieldBaseBuilder<AlertPropsType> {
   constructor() {
     super({
-      severity: SeverityType.Info,
       align: AlignType.Center,
+      label: '',
+      severity: SeverityType.Info,
       textFormattingOptions: [
         TextFormattingOptionType.Bold,
         TextFormattingOptionType.Italic,
@@ -26,25 +27,27 @@ export class AlertFieldBuilder extends BaseFieldBuilder<AlertPropsType, AlertFie
   }
 
   setSeverity(severity: SeverityType) {
-    this.props.severity = severity;
+    this.field.props.severity = severity;
     return this;
   }
 
   setAlign(align: AlignType) {
-    this.props.align = align;
+    this.field.props.align = align;
     return this;
   }
 
   setTextFormatting(textFormattingOption: TextFormattingOptionType) {
-    this.props.textFormattingOptions = [...this.props.textFormattingOptions, textFormattingOption];
+    this.field.props.textFormattingOptions = [
+      ...this.field.props.textFormattingOptions,
+      textFormattingOption,
+    ];
     return this;
   }
 
   override build(): AlertFieldType {
     return {
       ...super.build(),
-      type: FormType.alert,
-      props: this.props,
+      type: FormType.Alert,
     };
   }
 }

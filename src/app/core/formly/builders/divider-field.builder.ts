@@ -1,14 +1,10 @@
-import {
-  DividerFieldType,
-  FieldPropsBaseType,
-  FormType,
-} from '@core/formly/models/form-field-item';
+import { DividerFieldType, DividerPropsType, FormType } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class DividerFieldBuilder extends BaseFieldBuilder<FieldPropsBaseType, DividerFieldBuilder> {
+export class DividerFieldBuilder extends FormFieldBaseBuilder<DividerPropsType> {
   constructor() {
-    super({});
+    super({ color: '' });
   }
 
   newInstance(): DividerFieldBuilder {
@@ -18,8 +14,7 @@ export class DividerFieldBuilder extends BaseFieldBuilder<FieldPropsBaseType, Di
   override build(): DividerFieldType {
     return {
       ...super.build(),
-      type: FormType.divider,
-      props: this.props,
+      type: FormType.Divider,
     };
   }
 }

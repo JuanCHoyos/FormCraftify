@@ -1,19 +1,21 @@
-<main class="flex flex-col gap-8" #scrollContainer>
+<main>
   @if (formDesignNavigation.viewMode() === NavigationMode.SECTION) {
     <p-stepper [value]="formDesignNavigation.activeSectionIndex()">
       <p-step-panels class="p-0!">
         @for (field of fields(); track field.key) {
           <p-step-panel [value]="$index">
             <ng-template #content let-activateCallback="activateCallback">
-              <app-form-canvas-section [field]="field"></app-form-canvas-section>
+              <app-form-canvas-section [groupField]="field"></app-form-canvas-section>
             </ng-template>
           </p-step-panel>
         }
       </p-step-panels>
     </p-stepper>
   } @else {
-    @for (field of fields(); track field.key) {
-      <app-form-canvas-section [field]="field"></app-form-canvas-section>
-    }
+    <div class="flex flex-col gap-8">
+      @for (field of fields(); track field.key) {
+        <app-form-canvas-section [groupField]="field"></app-form-canvas-section>
+      }
+    </div>
   }
 </main>

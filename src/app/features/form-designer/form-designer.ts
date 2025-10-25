@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, model } from '@angular/core';
+import { Component } from '@angular/core';
 
 import {
   FormDesignCanvas,
@@ -14,6 +14,4 @@ import {
   templateUrl: './form-designer.html',
   styleUrl: './form-designer.scss',
 })
-export class FormDesigner {
-  showFormElementsPanel = model<boolean>(false);
-}
+export class FormDesigner {}

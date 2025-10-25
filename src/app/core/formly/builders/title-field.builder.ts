@@ -7,13 +7,14 @@ import {
   TitlePropsType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class TitleFieldBuilder extends BaseFieldBuilder<TitlePropsType, TitleFieldBuilder> {
+export class TitleFieldBuilder extends FormFieldBaseBuilder<TitlePropsType> {
   constructor() {
     super({
       align: AlignType.Left,
       headingType: HeadingType.H1,
+      label: '',
       textFormattingOptions: [],
     });
   }
@@ -23,25 +24,27 @@ export class TitleFieldBuilder extends BaseFieldBuilder<TitlePropsType, TitleFie
   }
 
   setHeadingType(type: HeadingType) {
-    this.props.headingType = type;
+    this.field.props.headingType = type;
     return this;
   }
 
   setAlign(align: AlignType) {
-    this.props.align = align;
+    this.field.props.align = align;
     return this;
   }
 
   addTextFormatting(textFormattingOption: TextFormattingOptionType) {
-    this.props.textFormattingOptions = [...this.props.textFormattingOptions, textFormattingOption];
+    this.field.props.textFormattingOptions = [
+      ...this.field.props.textFormattingOptions,
+      textFormattingOption,
+    ];
     return this;
   }
 
   override build(): TitleFieldType {
     return {
       ...super.build(),
-      type: FormType.title,
-      props: this.props,
+      type: FormType.Title,
     };
   }
 }

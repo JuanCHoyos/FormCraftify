@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
-import { AnyFieldType } from '@core/formly/models/form-field-item';
+import { GroupFieldType } from '@core/formly/models/form-field-item';
 import { NavigationMode } from '@features/form-designer/model/form-designer';
-import { FormDesignNavigation } from '@features/form-designer/services/form-design-navigation';
+import { FormDesignerNavigation } from '@features/form-designer/services/form-designer-navigation';
 import { StepperModule } from 'primeng/stepper';
 
 import { FormCanvasSection } from '../form-canvas-section/form-canvas-section';
@@ -13,7 +13,7 @@ import { FormCanvasSection } from '../form-canvas-section/form-canvas-section';
   templateUrl: './form-canvas-sections.html',
 })
 export class FormCanvasSections {
-  fields = input.required<AnyFieldType[]>();
-  public readonly formDesignNavigation = inject(FormDesignNavigation);
+  fields = input.required<GroupFieldType[]>();
+  public readonly formDesignNavigation = inject(FormDesignerNavigation);
   NavigationMode = NavigationMode;
 }

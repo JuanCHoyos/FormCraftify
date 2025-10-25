@@ -1,56 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, Input, input, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { FieldBuilderFactory } from '@core/formly/factory/field-builder-factory';
-import { AnyFieldType, FormType } from '@core/formly/models/form-field-item';
-import { UITitle } from '@shared/components/index';
-import { HeadingType } from '@shared/types/ui.types';
+import { AnyFieldType, FormType, GroupFieldType } from '@core/formly/models/form-field-item';
+import {
+  MoveItemBetweenGroupsOptions,
+  MoveItemInTreeOptions,
+} from '@features/form-designer/services/field-tree.utils';
+import { FormDesignerStore } from '@features/form-designer/services/form-designer-store';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { SortableEvent, SortableOptions } from 'sortablejs';
 
-import { FormCanvasAddElementPlaceholder } from '../form-canvas-add-element-placeholder/form-canvas-add-element-placeholder';
+import { FieldLayoutManager } from '../../layouts/form-canvas-field-layout/form-canvas-field-layout';
 import { FormCanvasEmptyMessage } from '../form-canvas-empty-message/form-canvas-empty-message';
 import { FormCanvasField } from '../form-canvas-field/form-canvas-field';
-
 @Component({
-  selector: 'app-form-canvas-fields',
+  selector: 'form-canvas-fields',
   imports: [
     CommonModule,
-    SortablejsModule,
+    FieldLayoutManager,
     FormCanvasEmptyMessage,
     FormCanvasField,
-    FormCanvasAddElementPlaceholder,
-    UITitle,
+    SortablejsModule,
   ],
-  host: {
-    '(dragenter)': 'onDragStateChange(true, $event)',
-    '(dragover)': 'onDragStateChange(true, $event)',
-    '(dragleave)': 'onDragStateChange(false, $event)',
-    '(drop)': 'onDragStateChange(false, $event)',
-    '(dragend)': 'onDragStateChange(false, $event)',
-  },
   templateUrl: './form-canvas-fields.html',
 })
 export class FormCanvasFields {
-  _fields = signal<AnyFieldType[]>([]);
-  @Input() set fields(fields: AnyFieldType[]) {
-    this._fields.set(fields);
-  }
-  title = input<string | undefined>('');
-  HeadingType = HeadingType;
-  isDragOver = signal<boolean>(false);
-  constructor() {
-    effect(() => {
-      console.log(this._fields(), 'aa');
-    });
-  }
-
-  onDragStateChange(isInside: boolean, event: DragEvent) {
-    const target = event.currentTarget as HTMLElement;
-    const related = event.relatedTarget as HTMLElement | null;
-    if (related && target.contains(related)) return;
-
-    this.isDragOver.set(isInside);
-  }
+  private readonly formDesignerStore = inject(FormDesignerStore);
+  groupField = input.required<GroupFieldType>();
+  cols = computed<number>(() => this.groupField().props.cols || 1);
+  fields = computed(() => structuredClone(this.groupField().fieldGroup));
+  FormType = FormType;
 
   sortableConfig: SortableOptions = {
     group: {
@@ -61,16 +40,69 @@ export class FormCanvasFields {
     sort: true,
     handle: '.handle',
     fallbackOnBody: true,
-    ghostClass: 'ghost-element',
-    swapThreshold: 0.5,
-    onAdd: (event: SortableEvent) => {
-      const formType = event.item.getAttribute('field-type') as FormType;
-      if (!formType) return;
-      const newField = new FieldBuilderFactory().create(formType).setDescription('Write something');
-
-      const fields = [...this._fields()];
-      fields.splice(event.newIndex ?? 0, 1, newField.build());
-      this._fields.set(fields);
-    },
+    ghostClass: 'example-custom-placeholder',
+    swapThreshold: 0.75,
+    removeCloneOnHide: true,
+    onAdd: (event: SortableEvent) => this.handleAddEvent(event),
+    onUpdate: (event: SortableEvent) => this.handleUpdateEvent(event),
   };
+
+  private extractSortableData(event: SortableEvent) {
+    const { oldIndex: fromIndex, newIndex: toIndex, from, to } = event;
+    if (fromIndex === undefined || toIndex === undefined) return null;
+    return { fromIndex, toIndex, source: from.id, target: to.id };
+  }
+
+  private handleAddEvent(event: SortableEvent): void {
+    const data = this.extractSortableData(event);
+    if (!data) return;
+
+    const formType = event.item.getAttribute('field-type') as FormType | null;
+    if (formType) return this.createAndAddNewField(formType, data.toIndex);
+
+    this.dispatchMoveBetweenGroups(data);
+  }
+
+  private handleUpdateEvent(event: SortableEvent): void {
+    const data = this.extractSortableData(event);
+    if (!data) return;
+    this.dispatchMoveWithinGroup(data);
+  }
+
+  createAndAddNewField(formType: FormType, toIndex: number): void {
+    const newField = new FieldBuilderFactory().create(formType).build();
+    this.addFieldToGroup(newField, toIndex);
+  }
+
+  addFieldToGroup(newField: AnyFieldType, toIndex: number): void {
+    this.formDesignerStore.addFieldToGroup({
+      target: this.groupField().key,
+      field: newField,
+      toIndex,
+    });
+  }
+
+  remove(field: AnyFieldType) {
+    console.log('1111');
+    this.formDesignerStore.remove({
+      key: field.key,
+      target: this.groupField().key,
+    });
+  }
+
+  clone(field: AnyFieldType) {
+    console.log('11112');
+    this.formDesignerStore.clone({
+      key: field.key,
+      target: this.groupField().key,
+    });
+  }
+
+  dispatchMoveBetweenGroups(payload: MoveItemBetweenGroupsOptions): void {
+    this.formDesignerStore.dispatchMoveBetweenGroups(payload);
+  }
+
+  dispatchMoveWithinGroup(payload: MoveItemInTreeOptions): void {
+    this.formDesignerStore.dispatchMoveWithinGroup(payload);
+  }
 }

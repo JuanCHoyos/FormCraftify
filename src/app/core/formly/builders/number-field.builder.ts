@@ -5,14 +5,21 @@ import {
   WrapperType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class NumberFieldBuilder extends BaseFieldBuilder<NumberPropsType, NumberFieldBuilder> {
+export class NumberFieldBuilder extends FormFieldBaseBuilder<NumberPropsType> {
   constructor() {
     super({
       placeholder: '',
       min: -Infinity,
       max: Infinity,
+      disabled: false,
+      readonly: false,
+      required: false,
+      tabindex: 0,
+      description: '',
+      label: '',
+      tooltip: '',
     });
   }
 
@@ -21,25 +28,24 @@ export class NumberFieldBuilder extends BaseFieldBuilder<NumberPropsType, Number
   }
 
   setPlaceholder(placeholder: string) {
-    this.props.placeholder = placeholder;
+    this.field.props.placeholder = placeholder;
     return this;
   }
 
   setMin(min: number) {
-    this.props.min = min;
+    this.field.props.min = min;
     return this;
   }
 
   setMax(max: number) {
-    this.props.max = max;
+    this.field.props.max = max;
     return this;
   }
 
   override build(): NumberFieldType {
     return {
       ...super.build(),
-      type: FormType.number,
-      props: this.props,
+      type: FormType.Number,
       wrappers: [WrapperType.Field],
     };
   }

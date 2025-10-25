@@ -6,13 +6,20 @@ import {
   WrapperType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class SelectFieldBuilder extends BaseFieldBuilder<SelectPropsType, SelectFieldBuilder> {
+export class SelectFieldBuilder extends FormFieldBaseBuilder<SelectPropsType> {
   constructor() {
     super({
       placeholder: '',
       options: [],
+      disabled: false,
+      readonly: false,
+      required: false,
+      tabindex: 0,
+      description: '',
+      label: '',
+      tooltip: '',
     });
   }
 
@@ -21,20 +28,19 @@ export class SelectFieldBuilder extends BaseFieldBuilder<SelectPropsType, Select
   }
 
   setPlaceholder(placeholder: string) {
-    this.props.placeholder = placeholder;
+    this.field.props.placeholder = placeholder;
     return this;
   }
 
   setOptions(options: OptionType[]) {
-    this.props.options = [...options];
+    this.field.props.options = [...options];
     return this;
   }
 
   override build(): SelectFieldType {
     return {
       ...super.build(),
-      type: FormType.select,
-      props: this.props,
+      type: FormType.Select,
       wrappers: [WrapperType.Field],
     };
   }

@@ -1,83 +1,63 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, input, signal } from '@angular/core';
-import { UIICon } from '@shared/components/ui-icon/ui-icon';
-import { UITitle } from '@shared/components/ui-title/ui-title';
-import { HeadingType } from '@shared/types/ui.types';
-import { SortablejsModule } from 'nxt-sortablejs';
-import { MoveEvent, Options, SortableEvent } from 'sortablejs';
+import { Component, input, model, OnChanges, output, viewChild } from '@angular/core';
+import { GenericTemplateGuard } from '@shared/directives';
+import { UIButtonProps } from '@shared/types/ui-button-props';
+import { UITreeNode } from '@shared/types/ui-tree';
+import { TreeDragDropService, TreeNode } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { Tree, TreeModule, TreeNodeDropEvent } from 'primeng/tree';
 
-import { UiTreeItem } from './components/ui-tree-item/ui-tree-item';
-
+import { UIICon } from '../ui-icon/ui-icon';
 @Component({
   selector: 'ui-tree',
-  imports: [CommonModule, SortablejsModule, UIICon, UITitle, UiTreeItem],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    ContextMenuModule,
+    TreeModule,
+    GenericTemplateGuard,
+    UIICon,
+  ],
+  providers: [TreeDragDropService],
   templateUrl: './ui-tree.html',
+  styleUrl: './ui-tree.scss',
 })
-export class UITree {
-  items = input<Item[]>([
-    {
-      label: 'Contact',
-      nodes: [
-        {
-          label: 'Nombres',
-          nodes: [
-            {
-              label: 'Nombre',
-            },
-            {
-              label: 'Apellido',
-            },
-          ],
-        },
-        {
-          label: 'Direccion',
-          nodes: [
-            {
-              label: 'Carrera',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: 'Options',
-      nodes: [],
-    },
-  ]);
+export class UITree implements OnChanges {
+  items = input.required<UITreeNode[]>();
+  buttons = input<UIButtonProps<UITreeNode>[]>([]);
+  selectedFile = model<TreeNode>();
+  dropEvent = output<TreeNodeDropEvent>();
+  primeTree = viewChild<Tree>('primeTree');
 
-  flat = computed<Item[]>(() =>
-    this.items().map(({ nodes, ...item }) => {
-      console.log(nodes);
-      return item;
-    }),
-  );
-  principal = input<boolean>(true);
-  HeadingType = HeadingType;
-  sortableOptions = signal<Options>({
-    group: 'nested',
-    animation: 300,
-    sort: true,
-    fallbackOnBody: true,
-    swapThreshold: 0.5,
-    ghostClass: 'ghost-element',
-    onAdd: (event: SortableEvent) => {
-      const index = event.newIndex;
-      console.log(index, 'add');
-    },
-    onMove: (event: MoveEvent) => {
-      const index = event;
-      console.log(index, 'sort');
-    },
-  });
-
-  constructor() {
-    effect(() => {
-      console.log(this.items(), 'changed');
-    });
+  ngOnChanges(): void {
+    for (const item of this.items()) {
+      this.expandRecursive(item, true);
+    }
   }
-}
 
-interface Item {
-  label: string;
-  nodes?: Item[];
+  private expandRecursive(node: TreeNode, isExpand: boolean) {
+    node.expanded = isExpand;
+    if (node.children) {
+      for (const childNode of node.children) {
+        this.expandRecursive(childNode, isExpand);
+      }
+    }
+  }
+
+  handleUIButtonInteraction(
+    event: MouseEvent,
+    button: UIButtonProps<UITreeNode>,
+    item: UITreeNode,
+  ) {
+    event.stopPropagation();
+    if (button.command) button.command(item);
+  }
+
+  drop(event: TreeNodeDropEvent) {
+    event.accept = () => {
+      return false;
+    };
+    this.dropEvent.emit(event);
+  }
 }

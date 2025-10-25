@@ -18,21 +18,22 @@ import {
 } from '../builders/index';
 
 const builderMap = {
-  [FormType.alert]: () => new AlertFieldBuilder(),
-  [FormType.email]: () => new AlertFieldBuilder(),
-  [FormType.checkbox]: () => new CheckboxFieldBuilder(),
-  [FormType.divider]: () => new DividerFieldBuilder(),
-  [FormType.group]: () => new GroupFieldBuilder(),
-  [FormType.multicheckbox]: () => new MultiCheckboxFieldBuilder(),
-  [FormType.multiselect]: () => new MultiSelectFieldBuilder(),
-  [FormType.number]: () => new NumberFieldBuilder(),
-  [FormType.paragraph]: () => new ParagraphFieldBuilder(),
-  [FormType.radio]: () => new RadioFieldBuilder(),
-  [FormType.rating]: () => new RatingFieldBuilder(),
-  [FormType.select]: () => new SelectFieldBuilder(),
-  [FormType.text]: () => new TextFieldBuilder(),
-  [FormType.textarea]: () => new TextAreaFieldBuilder(),
-  [FormType.title]: () => new TitleFieldBuilder(),
+  [FormType.Alert]: () => new AlertFieldBuilder(),
+  [FormType.Email]: () => new AlertFieldBuilder(),
+  [FormType.Checkbox]: () => new CheckboxFieldBuilder(),
+  [FormType.Divider]: () => new DividerFieldBuilder(),
+  [FormType.Field]: () => new GroupFieldBuilder(),
+  [FormType.Group]: () => new GroupFieldBuilder(),
+  [FormType.Multicheckbox]: () => new MultiCheckboxFieldBuilder(),
+  [FormType.Multiselect]: () => new MultiSelectFieldBuilder(),
+  [FormType.Number]: () => new NumberFieldBuilder(),
+  [FormType.Paragraph]: () => new ParagraphFieldBuilder(),
+  [FormType.Radio]: () => new RadioFieldBuilder(),
+  [FormType.Rating]: () => new RatingFieldBuilder(),
+  [FormType.Select]: () => new SelectFieldBuilder(),
+  [FormType.Text]: () => new TextFieldBuilder(),
+  [FormType.Textarea]: () => new TextAreaFieldBuilder(),
+  [FormType.Title]: () => new TitleFieldBuilder(),
 };
 export class FieldBuilderFactory {
   create(type: FormType) {

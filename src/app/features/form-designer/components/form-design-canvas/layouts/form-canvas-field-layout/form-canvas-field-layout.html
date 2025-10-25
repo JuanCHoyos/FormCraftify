@@ -1,0 +1,32 @@
+<article
+  class="flex bg-white flex-col justify-between gap-2 border border-gray-300 hover:border-indigo-500 rounded p-2 md:p-4 md:pt-2 relative"
+  (mouseenter)="hover.set(true)"
+  (mouseleave)="hover.set(false)"
+>
+  <header class="flex items-center justify-between w-full relative p-0">
+    <div class="flex items-center gap-2">
+      <ui-icon name="lucideGripVertical" class="cursor-grab handle"></ui-icon>
+
+      @if (label()) {
+        <span class="text-sm">{{ label() }}</span>
+      }
+    </div>
+
+    <ul class="flex gap-1" [ngClass]="{ 'md:visible': hover(), 'md:invisible': !hover() }">
+      @for (option of options(); track option.label) {
+        <li>
+          <p-button
+            size="small"
+            variant="text"
+            [severity]="option.severity"
+            (onClick)="command($event, option)"
+          >
+            <ui-icon [name]="option.icon!"></ui-icon>
+          </p-button>
+        </li>
+      }
+    </ul>
+  </header>
+
+  <ng-content></ng-content>
+</article>

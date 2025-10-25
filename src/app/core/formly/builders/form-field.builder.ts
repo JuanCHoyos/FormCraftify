@@ -1,13 +1,14 @@
 import {
   FormFieldType,
   FormPropsType,
+  FormType,
   FormViewWrapperType,
   GroupFieldType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class FormFieldBuilder extends BaseFieldBuilder<FormPropsType, FormFieldBuilder> {
+export class FormFieldBuilder extends FormFieldBaseBuilder<FormPropsType> {
   protected fieldGroup: GroupFieldType[] = [];
   constructor() {
     super({ label: '' });
@@ -24,8 +25,8 @@ export class FormFieldBuilder extends BaseFieldBuilder<FormPropsType, FormFieldB
   override build(): FormFieldType {
     return {
       ...super.build(),
+      type: FormType.Group,
       fieldGroup: this.fieldGroup,
-      props: this.props,
       wrappers: [FormViewWrapperType.Card],
     };
   }

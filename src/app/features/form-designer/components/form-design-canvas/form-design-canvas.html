@@ -1,17 +1,25 @@
 <div class="grid grid-rows-[1fr_auto] bg-[#f5f5f5] w-full h-full relative overflow-hidden">
-  <div class="overflow-y-scroll px-4 py-8" #canvasPanelContainer>
+  <div
+    class="overflow-y-scroll px-4 py-8"
+    scrollThresholdWatcher
+    [threshold]="40"
+    #scrollWatcher="scrollThresholdWatcher"
+    cdkScrollable
+  >
     <div class="max-w-full md:max-w-2xl mx-auto flex flex-col gap-4">
       <app-form-canvas-header></app-form-canvas-header>
-      <app-form-canvas-sections [fields]="fields().fieldGroup"></app-form-canvas-sections>
+      <app-form-canvas-sections
+        [fields]="formDesignerStore.fields().fieldGroup"
+      ></app-form-canvas-sections>
     </div>
-    @if (isScrollAvailable()) {
+    @if (scrollWatcher.isScrollThresholdReached()) {
       <p-button
         class="absolute right-8"
         size="small"
-        (onClick)="scrollToTop()"
+        (onClick)="scrollWatcher.scrollToTop()"
         [ngClass]="{
-          'bottom-36': formDesignNavigation.viewMode() === NavigationMode.SECTION,
-          'bottom-8': formDesignNavigation.viewMode() === NavigationMode.SCROLL,
+          'bottom-36': formDesignNavigation.isSectionView(),
+          'bottom-8': formDesignNavigation.isScrollView(),
         }"
       >
         <ui-icon name="lucideChevronUp"></ui-icon>
@@ -19,7 +27,7 @@
     }
   </div>
 
-  @if (formDesignNavigation.viewMode() === NavigationMode.SECTION) {
+  @if (formDesignNavigation.isSectionView()) {
     <app-form-canvas-footer></app-form-canvas-footer>
   }
 </div>

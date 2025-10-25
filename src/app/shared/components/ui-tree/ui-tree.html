@@ -1,31 +1,58 @@
-<ul
-  class="flex flex-col gap-2 pl-3 borde border-gray-300 relative"
-  [ngClass]="{ 'overflow-y-clip my-4': principal() }"
-  [nxtSortablejs]="flat()"
-  [config]="sortableOptions()"
+<p-tree
+  [value]="items()"
+  class="w-full p-0!"
+  draggableScope="self"
+  droppableScope="self"
+  [draggableNodes]="true"
+  [droppableNodes]="true"
+  selectionMode="single"
+  [(selection)]="selectedFile"
+  [filter]="true"
+  (onNodeDrop)="drop($event)"
+  #primeTree
 >
-  @if (principal()) {
-    <ui-title [heading]="HeadingType.H5">
-      <span class="flex items-center gap-2 overflow-hidden">
-        <ui-icon name="lucideFileText" class="bg-white text-indigo-500"></ui-icon>
-        <span class="overflow-hidden whitespace-nowrap text-ellipsis">Contact form</span></span
-      >
-    </ui-title>
-  }
-  @for (item of items(); track $index) {
-    <li>
-      <span
-        class="absolute -top-[24px] left-0 block h-full w-[1px] bg-gray-300 z-0"
-      ></span>
-      <ui-tree-item [item]="item" #treeItem></ui-tree-item>
+  <ng-template pTemplate="togglericon" let-expanded>
+    @if (expanded) {
+      <ui-icon name="lucideChevronUp"></ui-icon>
+    } @else {
+      <ui-icon name="lucideChevronDown"></ui-icon>
+    }
+  </ng-template>
 
-      @if ('nodes' in item) {
-        <ui-tree
-          [items]="item.nodes!"
-          [principal]="false"
-          [ngClass]="{ 'hidden pb-4': !treeItem.expanded() }"
-        ></ui-tree>
+  <ng-template let-node [appGenericContextGuard]="items()[0]" pTemplate="default">
+    <div class="flex items-center justify-between group">
+      <span class="flex items-center gap-2 text-sm">
+        <span
+          class="p-0.5 flex justify-center items-center text-indigo-500"
+          [style.backgroundColor]="'var(--p-tree-node-selected-background)'"
+        >
+          <ui-icon [name]="node.icon" class="text-sm text-indigo-500"></ui-icon>
+        </span>
+
+        {{ node.label }}</span
+      >
+
+      @if (buttons().length) {
+        <div
+          class="items-center gap-1 flex min-w-fit md:hidden md:group-hover:flex"
+          [ngClass]="{
+            'md:hidden': node.key !== selectedFile()?.key,
+            flex: node.key === selectedFile()?.key,
+          }"
+        >
+          @for (button of buttons(); track button.id + $index) {
+            <p-button
+              size="small"
+              [outlined]="true"
+              [text]="true"
+              [disabled]="button.disabled"
+              [severity]="button.severity"
+              (onClick)="handleUIButtonInteraction($event, button, node)"
+            >
+              <ui-icon [name]="button.icon!" class="text-sm"></ui-icon>
+            </p-button>
+          }
+        </div>
       }
-    </li>
-  }
-</ul>
+    </div> </ng-template
+></p-tree>

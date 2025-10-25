@@ -1,0 +1,46 @@
+:host ::ng-deep {
+  --item-height: 40px;
+  --tree-border-color: #ececec;
+  .p-button {
+    padding: 0.2rem;
+  }
+
+  .p-tree-node-label {
+    width: 100%;
+  }
+
+  .p-tree-node-content {
+    min-height: var(--item-height);
+  }
+
+  .p-tree-node-leaf > .p-tree-node-content .p-tree-node-toggle-button {
+    display: none;
+  }
+
+  .p-tree-node-toggle-icon {
+    height: 16px;
+  }
+
+  .p-tree-node {
+    position: relative;
+    padding-left: 8px;
+  }
+
+  .p-tree-node-content::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    height: 0;
+    width: 32px;
+    border-bottom: 1px solid var(--tree-border-color);
+  }
+
+  .p-tree-node::before {
+    content: '';
+    position: absolute;
+    top: calc(((var(--item-height) / 2) + 1px) * -1);
+    left: -24px;
+    height: calc(100% + 2px);
+    border-left: 1px solid var(--tree-border-color);
+  }
+}

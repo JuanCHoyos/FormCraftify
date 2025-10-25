@@ -6,14 +6,20 @@ import {
   WrapperType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class RatingFieldBuilder extends BaseFieldBuilder<RatingPropsType, RatingFieldBuilder> {
+export class RatingFieldBuilder extends FormFieldBaseBuilder<RatingPropsType> {
   constructor() {
     super({
       type: RatingType.Numbers,
       stars: 5,
-      required: true,
+      disabled: false,
+      readonly: false,
+      required: false,
+      tabindex: 0,
+      description: '',
+      label: '',
+      tooltip: '',
     });
   }
 
@@ -22,20 +28,19 @@ export class RatingFieldBuilder extends BaseFieldBuilder<RatingPropsType, Rating
   }
 
   setType(type: RatingType) {
-    this.props.type = type;
+    this.field.props.type = type;
     return this;
   }
 
   setStarts(stars: number) {
-    this.props.stars = stars;
+    this.field.props.stars = stars;
     return this;
   }
 
   override build(): RatingFieldType {
     return {
       ...super.build(),
-      type: FormType.rating,
-      props: this.props,
+      type: FormType.Rating,
       wrappers: [WrapperType.Field],
     };
   }

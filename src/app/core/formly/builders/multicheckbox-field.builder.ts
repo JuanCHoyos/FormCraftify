@@ -6,30 +6,33 @@ import {
   WrapperType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class MultiCheckboxFieldBuilder extends BaseFieldBuilder<
-  MulticheckboxPropsType,
-  MultiCheckboxFieldBuilder
-> {
+export class MultiCheckboxFieldBuilder extends FormFieldBaseBuilder<MulticheckboxPropsType> {
   constructor() {
     super({
       options: [],
+      disabled: false,
+      readonly: false,
+      required: false,
+      tabindex: 0,
+      description: '',
+      label: '',
+      tooltip: '',
     });
   }
   newInstance(): MultiCheckboxFieldBuilder {
     return new MultiCheckboxFieldBuilder();
   }
   setOptions(options: OptionType[]) {
-    this.props.options = [...options];
+    this.field.props.options = [...options];
     return this;
   }
 
   override build(): MultiCheckboxFieldType {
     return {
       ...super.build(),
-      type: FormType.multicheckbox,
-      props: this.props,
+      type: FormType.Multicheckbox,
       wrappers: [WrapperType.Field],
     };
   }

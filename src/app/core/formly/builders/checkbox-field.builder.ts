@@ -5,14 +5,19 @@ import {
   WrapperType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class CheckboxFieldBuilder extends BaseFieldBuilder<
-  FieldPropsBaseType,
-  CheckboxFieldBuilder
-> {
+export class CheckboxFieldBuilder extends FormFieldBaseBuilder<FieldPropsBaseType> {
   constructor() {
-    super({});
+    super({
+      disabled: false,
+      readonly: false,
+      required: false,
+      tabindex: 0,
+      description: '',
+      label: '',
+      tooltip: '',
+    });
   }
   newInstance(): CheckboxFieldBuilder {
     return new CheckboxFieldBuilder();
@@ -20,9 +25,8 @@ export class CheckboxFieldBuilder extends BaseFieldBuilder<
   override build(): CheckboxFieldType {
     return {
       ...super.build(),
-      type: FormType.checkbox,
+      type: FormType.Checkbox,
       wrappers: [WrapperType.Field],
-      props: this.props,
     };
   }
 }

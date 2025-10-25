@@ -6,15 +6,13 @@ import {
   TextFormattingOptionType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class ParagraphFieldBuilder extends BaseFieldBuilder<
-  ParagraphPropsType,
-  ParagraphFieldBuilder
-> {
+export class ParagraphFieldBuilder extends FormFieldBaseBuilder<ParagraphPropsType> {
   constructor() {
     super({
       align: AlignType.Left,
+      label: '',
       textFormattingOptions: [],
     });
   }
@@ -24,20 +22,22 @@ export class ParagraphFieldBuilder extends BaseFieldBuilder<
   }
 
   setAlign(align: AlignType) {
-    this.props.align = align;
+    this.field.props.align = align;
     return this;
   }
 
   addTextFormatting(textFormattingOption: TextFormattingOptionType) {
-    this.props.textFormattingOptions = [...this.props.textFormattingOptions, textFormattingOption];
+    this.field.props.textFormattingOptions = [
+      ...this.field.props.textFormattingOptions,
+      textFormattingOption,
+    ];
     return this;
   }
 
   override build(): ParagraphFieldType {
     return {
       ...super.build(),
-      type: FormType.paragraph,
-      props: this.props,
+      type: FormType.Paragraph,
     };
   }
 }

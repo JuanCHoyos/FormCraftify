@@ -5,14 +5,21 @@ import {
   WrapperType,
 } from '@core/formly/models/form-field-item';
 
-import { BaseFieldBuilder } from './base/base-field.builder';
+import { FormFieldBaseBuilder } from './base/base-field.builder';
 
-export class TextFieldBuilder extends BaseFieldBuilder<TextPropsType, TextFieldBuilder> {
+export class TextFieldBuilder extends FormFieldBaseBuilder<TextPropsType> {
   constructor() {
     super({
       placeholder: '',
       minLength: 0,
       maxLength: Infinity,
+      disabled: false,
+      readonly: false,
+      required: false,
+      tabindex: 0,
+      description: '',
+      label: '',
+      tooltip: '',
     });
   }
 
@@ -21,25 +28,24 @@ export class TextFieldBuilder extends BaseFieldBuilder<TextPropsType, TextFieldB
   }
 
   setPlaceholder(placeholder: string) {
-    this.props.placeholder = placeholder;
+    this.field.props.placeholder = placeholder;
     return this;
   }
 
   setMinLength(min: number) {
-    this.props.minLength = min;
+    this.field.props.minLength = min;
     return this;
   }
 
   setMaxLength(max: number) {
-    this.props.maxLength = max;
+    this.field.props.maxLength = max;
     return this;
   }
 
   override build(): TextFieldType {
     return {
       ...super.build(),
-      type: FormType.text,
-      props: this.props,
+      type: FormType.Text,
       wrappers: [WrapperType.Field],
     };
   }
