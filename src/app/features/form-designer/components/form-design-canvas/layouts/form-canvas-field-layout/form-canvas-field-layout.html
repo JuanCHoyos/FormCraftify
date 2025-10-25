@@ -1,19 +1,17 @@
 <article
-  class="flex bg-white flex-col justify-between gap-2 border border-gray-300 hover:border-indigo-500 rounded p-2 md:p-4 md:pt-2 relative"
-  (mouseenter)="hover.set(true)"
-  (mouseleave)="hover.set(false)"
+  class="flex content bg-white flex-col justify-between gap-2 border border-gray-300 rounded p-2 md:p-4 md:pt-2 relative hover:border-indigo-500 has-[article:hover]:border-gray-300 has-[article:hover]:[&:hover>header>ul]:invisible [&:hover>header>ul]:visible"
 >
   <header class="flex items-center justify-between w-full relative p-0">
     <div class="flex items-center gap-2">
-      <ui-icon name="lucideGripVertical" class="cursor-grab handle"></ui-icon>
+      <ui-icon name="lucideGripVertical" class="cursor-move handle"></ui-icon>
 
       @if (label()) {
-        <span class="text-sm">{{ label() }}</span>
+        <ui-title [heading]="HeadingType.H5">{{ label() }}</ui-title>
       }
     </div>
 
-    <ul class="flex gap-1" [ngClass]="{ 'md:visible': hover(), 'md:invisible': !hover() }">
-      @for (option of options(); track option.label) {
+    <ul class="flex gap-1 md:invisible">
+      @for (option of options(); track option.id) {
         <li>
           <p-button
             size="small"

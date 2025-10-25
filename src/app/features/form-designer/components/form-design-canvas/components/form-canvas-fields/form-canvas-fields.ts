@@ -42,7 +42,6 @@ export class FormCanvasFields {
     fallbackOnBody: true,
     ghostClass: 'example-custom-placeholder',
     swapThreshold: 0.75,
-    removeCloneOnHide: true,
     onAdd: (event: SortableEvent) => this.handleAddEvent(event),
     onUpdate: (event: SortableEvent) => this.handleUpdateEvent(event),
   };
@@ -91,7 +90,7 @@ export class FormCanvasFields {
   }
 
   clone(field: AnyFieldType) {
-    console.log('11112');
+    console.log('11112', field);
     this.formDesignerStore.clone({
       key: field.key,
       target: this.groupField().key,

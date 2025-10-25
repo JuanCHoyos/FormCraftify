@@ -7,11 +7,15 @@
 >
   @for (field of groupField().fieldGroup; track field.id) {
     @if (field.type === FormType.Group) {
-      <form-canvas-field-layout [label]="field.props.label!">
+      <form-canvas-field-layout
+        [label]="field.props.label!"
+        (removeItem)="remove(field)"
+        (cloneItem)="clone(field)"
+      >
         <form-canvas-fields [groupField]="field"></form-canvas-fields>
       </form-canvas-field-layout>
     } @else {
-      <form-canvas-field-layout>
+      <form-canvas-field-layout (removeItem)="remove(field)" (cloneItem)="clone(field)">
         <app-form-canvas-field [field]="field"></app-form-canvas-field>
       </form-canvas-field-layout>
     }
