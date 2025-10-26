@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { FieldBuilderFactory } from '@core/formly/factory/field-builder-factory';
 import { AnyFieldType, FormType, GroupFieldType } from '@core/formly/models/form-field-item';
 import {
@@ -28,34 +28,32 @@ export class FormCanvasFields {
   private readonly formDesignerStore = inject(FormDesignerStore);
   groupField = input.required<GroupFieldType>();
   cols = computed<number>(() => this.groupField().props.cols || 1);
-  empty = computed<number[]>(
-    () => new Array(Math.abs(this.cols() - this.groupField().fieldGroup.length)),
-  );
   fields = computed(() => structuredClone(this.groupField().fieldGroup));
-
   FormType = FormType;
 
-  sortableConfig: SortableOptions = {
+  sortableConfig = signal<SortableOptions>({
     group: {
       name: 'nested',
       put: true,
     },
     animation: 300,
+    invertSwap: true,
     sort: true,
     fallbackOnBody: true,
-    ghostClass: 'example-custom-placeholder',
-    swapThreshold: 0.75,
+    ghostClass: 'drag-custom-placeholder',
+    filter: '.no-drag',
+    swapThreshold: 0.5,
     onAdd: (event: SortableEvent) => this.handleAddEvent(event),
     onUpdate: (event: SortableEvent) => this.handleUpdateEvent(event),
-  };
+  });
 
-  private extractSortableData(event: SortableEvent) {
+  extractSortableData(event: SortableEvent) {
     const { oldIndex: fromIndex, newIndex: toIndex, from, to } = event;
     if (fromIndex === undefined || toIndex === undefined) return null;
     return { fromIndex, toIndex, source: from.id, target: to.id };
   }
 
-  private handleAddEvent(event: SortableEvent): void {
+  handleAddEvent(event: SortableEvent): void {
     const data = this.extractSortableData(event);
     if (!data) return;
 
@@ -65,7 +63,7 @@ export class FormCanvasFields {
     this.dispatchMoveBetweenGroups(data);
   }
 
-  private handleUpdateEvent(event: SortableEvent): void {
+  handleUpdateEvent(event: SortableEvent): void {
     const data = this.extractSortableData(event);
     if (!data) return;
     this.dispatchMoveWithinGroup(data);

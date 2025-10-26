@@ -1,7 +1,8 @@
 <article
-  class="w-full h-full bg-white border border-gray-300 rounded p-2 md:p-4 md:pt-2 grid grid-rows-[auto_1fr] grid-cols-1 justify-between gap-2 relative cursor-pointer hover:border-primary-300 has-[article:hover]:border-gray-300 [&:hover>header>ul]:visible has-[article:hover]:[&:hover>header>ul]:invisible"
+  class="w-full bg-white border border-gray-300 rounded p-2 md:p-4 grid grid-rows-[auto_1fr] grid-cols-1 justify-between gap-2 relative cursor-pointer hover:border-primary-300 has-[article:hover]:border-gray-300 [&:hover>header>ul]:visible has-[article:hover]:[&:hover>header>ul]:invisible"
   [ngClass]="{
-    'min-h-64 md:min-h-96': type() === 'GROUP_FIELD',
+    'min-h-96': type() === 'GROUP_FIELD',
+    'min-h-48': type() === 'GROUP',
   }"
   (click)="clickItem.emit()"
   (keydown.enter)="clickItem.emit()"
