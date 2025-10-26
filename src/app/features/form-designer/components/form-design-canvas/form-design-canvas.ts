@@ -1,4 +1,3 @@
-import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormDesignerNavigation } from '@features/form-designer/services/form-designer-navigation';
@@ -15,7 +14,6 @@ import { FormCanvasFooter, FormCanvasHeader, FormCanvasSections } from './compon
   imports: [
     CommonModule,
     ButtonModule,
-    CdkScrollable,
     ProgressBarModule,
     SelectModule,
     FormCanvasFooter,
