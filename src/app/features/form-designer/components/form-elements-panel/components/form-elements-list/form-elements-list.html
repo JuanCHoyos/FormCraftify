@@ -15,7 +15,7 @@
         [nxtSortablejs]="items"
         [config]="sortableOptions()"
         id="accordion-{{ index }}"
-        class="flex flex-col gap-2 py-2"
+        class="flex flex-col gap-2"
       >
         @for (item of items; track item.id) {
           <form-element-item [item]="item" [attr.field-type]="item.value" />
