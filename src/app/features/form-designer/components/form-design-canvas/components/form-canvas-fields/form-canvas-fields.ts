@@ -28,7 +28,11 @@ export class FormCanvasFields {
   private readonly formDesignerStore = inject(FormDesignerStore);
   groupField = input.required<GroupFieldType>();
   cols = computed<number>(() => this.groupField().props.cols || 1);
+  empty = computed<number[]>(
+    () => new Array(Math.abs(this.cols() - this.groupField().fieldGroup.length)),
+  );
   fields = computed(() => structuredClone(this.groupField().fieldGroup));
+
   FormType = FormType;
 
   sortableConfig: SortableOptions = {
@@ -38,7 +42,6 @@ export class FormCanvasFields {
     },
     animation: 300,
     sort: true,
-    handle: '.handle',
     fallbackOnBody: true,
     ghostClass: 'example-custom-placeholder',
     swapThreshold: 0.75,
@@ -82,7 +85,6 @@ export class FormCanvasFields {
   }
 
   remove(field: AnyFieldType) {
-    console.log('1111');
     this.formDesignerStore.remove({
       key: field.key,
       target: this.groupField().key,
@@ -90,7 +92,6 @@ export class FormCanvasFields {
   }
 
   clone(field: AnyFieldType) {
-    console.log('11112', field);
     this.formDesignerStore.clone({
       key: field.key,
       target: this.groupField().key,

@@ -8,7 +8,7 @@ import {
   SeverityType,
   WrapperType,
 } from '@core/formly/models/form-field-item';
-import { UITreeNode } from '@shared/types/ui-tree';
+import { UITreeNodeType, UITreeType } from '@shared/types/ui-tree';
 
 import { FORM_ELEMENTS_ICONS } from '../constants/form-elements';
 import {
@@ -54,36 +54,6 @@ export class FormDesignerStore {
             },
             fieldGroup: [
               {
-                id: '111111',
-                key: 'firstName43',
-                type: FormType.Alert,
-                wrappers: [WrapperType.Field],
-                props: {
-                  label: 'First Name',
-                  align: AlignType.Left,
-                  severity: SeverityType.Info,
-                  textFormattingOptions: [],
-                },
-              },
-              {
-                id: '111',
-                key: 'firsa',
-                type: FormType.Text,
-                wrappers: [WrapperType.Field],
-                props: {
-                  label: 'First Name',
-                  description: 'Enter your first name',
-                  tooltip: 'Your given name',
-                  required: true,
-                  readonly: false,
-                  disabled: false,
-                  tabindex: 1,
-                  minLength: 0,
-                  maxLength: 1000,
-                  placeholder: 'aaaaa',
-                },
-              },
-              {
                 id: 'firstName2',
                 key: 'firstName2',
                 type: FormType.Alert,
@@ -96,42 +66,6 @@ export class FormDesignerStore {
                 },
               },
             ],
-          },
-          {
-            id: 'firstName232231322',
-            key: 'firstName232231322',
-            type: FormType.Text,
-            wrappers: [WrapperType.Field],
-            props: {
-              label: 'Noertwertwertrewmbre',
-              description: 'etwrtrt',
-              tooltip: 'Your given name',
-              required: true,
-              readonly: false,
-              disabled: false,
-              tabindex: 1,
-              placeholder: 'John',
-              minLength: 2,
-              maxLength: 50,
-            },
-          },
-          {
-            id: 'firstName23223322',
-            key: 'firstName23223322',
-            type: FormType.Text,
-            wrappers: [WrapperType.Field],
-            props: {
-              label: 'Nombre',
-              description: 'Enter your first name',
-              tooltip: 'Your given name',
-              required: true,
-              readonly: false,
-              disabled: false,
-              tabindex: 1,
-              placeholder: 'John',
-              minLength: 2,
-              maxLength: 50,
-            },
           },
           {
             id: 'firstName31241234132424',
@@ -161,7 +95,10 @@ export class FormDesignerStore {
     ],
   });
 
-  fieldTree = computed<UITreeNode[]>(() => [this.mapFormToTree(this.fields())]);
+  fieldTree = computed<UITreeType>(() => ({
+    label: this.fields().props.label,
+    nodes: this.fields().fieldGroup.map((group, index) => this.mapFormToTree(group, index)),
+  }));
 
   constructor() {
     effect(() => {
@@ -169,18 +106,20 @@ export class FormDesignerStore {
     });
   }
 
-  mapFormToTree(field: FormFieldType | GroupFieldType): UITreeNode {
+  mapFormToTree(field: GroupFieldType, index: number): UITreeNodeType {
     if (!field) return field;
     const nodesArray = 'fieldGroup' in field ? (field.fieldGroup as GroupFieldType[]) : [];
 
-    const nodes: UITreeNode[] = nodesArray.map((field) => this.mapFormToTree(field));
+    const nodes: UITreeNodeType[] = nodesArray.map((field, _index) =>
+      this.mapFormToTree(field, _index),
+    );
     const fieldWithNodes = new Set([FormType.Group, FormType.Field]);
     const isDroppable = fieldWithNodes.has(field.type);
     return {
       key: field.key,
       label: field.props?.label,
       icon: FORM_ELEMENTS_ICONS[field.type],
-      data: field.type,
+      data: { ...field, oldIndex: index },
       children: isDroppable ? nodes : undefined,
       droppable: isDroppable,
     };

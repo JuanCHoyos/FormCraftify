@@ -1,10 +1,15 @@
 <article
-  class="flex content bg-white flex-col justify-between gap-2 border border-gray-300 rounded p-2 md:p-4 md:pt-2 relative hover:border-indigo-500 has-[article:hover]:border-gray-300 has-[article:hover]:[&:hover>header>ul]:invisible [&:hover>header>ul]:visible"
+  class="w-full h-full bg-white border border-gray-300 rounded p-2 md:p-4 md:pt-2 grid grid-rows-[auto_1fr] grid-cols-1 justify-between gap-2 relative cursor-pointer hover:border-primary-300 has-[article:hover]:border-gray-300 [&:hover>header>ul]:visible has-[article:hover]:[&:hover>header>ul]:invisible"
+  [ngClass]="{
+    'min-h-64 md:min-h-96': type() === 'GROUP_FIELD',
+  }"
+  (click)="clickItem.emit()"
+  (keydown.enter)="clickItem.emit()"
+  role="button"
+  tabindex
 >
-  <header class="flex items-center justify-between w-full relative p-0">
+  <header class="flex items-center justify-between">
     <div class="flex items-center gap-2">
-      <ui-icon name="lucideGripVertical" class="cursor-move handle"></ui-icon>
-
       @if (label()) {
         <ui-title [heading]="HeadingType.H5">{{ label() }}</ui-title>
       }

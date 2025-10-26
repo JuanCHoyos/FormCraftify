@@ -1,11 +1,11 @@
 @if (type() === RatingType.Numbers) {
-  <div class="rating-container flex flex-wrap gap-2 mb-2 text-indigo-500">
+  <div class="rating-container flex flex-wrap gap-2 mb-2 text-primary-500">
     @for (ratingLevel of maxRatingLevels(); track $index) {
       <button
         class="text-base flex items-center justify-center w-10 h-10 rounded border hover:scale-110 transition-transform duration-100 cursor-pointer outline-0 select-none"
         [ngClass]="{
-          'border-indigo-500 text-indigo-500': !disabled(),
-          'text-white font-bold bg-indigo-500 scale-100': value() === $index + 1,
+          'border-primary-300 text-primary-500': !disabled(),
+          'text-white font-bold bg-primary-500 scale-100': value() === $index + 1,
           'pointer-events-none border-gray-300 text-gray-500': disabled(),
         }"
         (click)="setRating($index + 1)"

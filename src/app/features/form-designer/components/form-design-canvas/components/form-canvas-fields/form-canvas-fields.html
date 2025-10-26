@@ -1,26 +1,25 @@
 <div
   [id]="groupField().key"
-  class="grid gap-4 h-full relative py-4"
+  class="grid gap-4 h-full relative"
   [class.grid-cols-2]="cols() > 1"
   [nxtSortablejs]="fields()"
   [config]="sortableConfig"
 >
   @for (field of groupField().fieldGroup; track field.id) {
-    @if (field.type === FormType.Group) {
-      <form-canvas-field-layout
-        [label]="field.props.label!"
-        (removeItem)="remove(field)"
-        (cloneItem)="clone(field)"
-      >
+    <form-canvas-field-layout
+      [type]="field.type === FormType.Group ? 'GROUP' : 'FIELD'"
+      [label]="field.type === FormType.Group ? field.props.label! : ''"
+      (removeItem)="remove(field)"
+      (cloneItem)="clone(field)"
+    >
+      @if (field.type === FormType.Group) {
         <form-canvas-fields [groupField]="field"></form-canvas-fields>
-      </form-canvas-field-layout>
-    } @else {
-      <form-canvas-field-layout (removeItem)="remove(field)" (cloneItem)="clone(field)">
+      } @else {
         <app-form-canvas-field [field]="field"></app-form-canvas-field>
-      </form-canvas-field-layout>
-    }
+      }
+    </form-canvas-field-layout>
   } @empty {
-    <div class="absolute w-full h-full top-0 left-0 my-auto">
+    <div class="absolute w-full h-full z-0">
       <app-form-canvas-empty-message></app-form-canvas-empty-message>
     </div>
   }
