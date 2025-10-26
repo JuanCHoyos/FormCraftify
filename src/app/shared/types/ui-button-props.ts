@@ -5,5 +5,6 @@ import { LucideIconType } from './ui.types';
 export interface UIButtonProps<B = unknown> extends Omit<ButtonProps, 'icon'> {
   icon?: LucideIconType;
   id: string;
+  tooltip?: string;
   command?: (args: B) => void;
 }

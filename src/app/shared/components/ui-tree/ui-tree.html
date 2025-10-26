@@ -1,58 +1,59 @@
-<p-tree
-  [value]="items()"
-  class="w-full p-0!"
-  draggableScope="self"
-  droppableScope="self"
-  [draggableNodes]="true"
-  [droppableNodes]="true"
-  selectionMode="single"
-  [(selection)]="selectedFile"
-  [filter]="true"
-  (onNodeDrop)="drop($event)"
-  #primeTree
->
-  <ng-template pTemplate="togglericon" let-expanded>
-    @if (expanded) {
-      <ui-icon name="lucideChevronUp"></ui-icon>
-    } @else {
-      <ui-icon name="lucideChevronDown"></ui-icon>
-    }
-  </ng-template>
-
-  <ng-template let-node [appGenericContextGuard]="items()[0]" pTemplate="default">
-    <div class="flex items-center justify-between group">
-      <span class="flex items-center gap-2 text-sm">
-        <span
-          class="p-0.5 flex justify-center items-center text-indigo-500"
-          [style.backgroundColor]="'var(--p-tree-node-selected-background)'"
-        >
-          <ui-icon [name]="node.icon" class="text-sm text-indigo-500"></ui-icon>
-        </span>
-
-        {{ node.label }}</span
-      >
-
-      @if (buttons().length) {
-        <div
-          class="items-center gap-1 flex min-w-fit md:hidden md:group-hover:flex"
-          [ngClass]="{
-            'md:hidden': node.key !== selectedFile()?.key,
-            flex: node.key === selectedFile()?.key,
-          }"
-        >
-          @for (button of buttons(); track button.id + $index) {
-            <p-button
-              size="small"
-              [outlined]="true"
-              [text]="true"
-              [disabled]="button.disabled"
-              [severity]="button.severity"
-              (onClick)="handleUIButtonInteraction($event, button, node)"
-            >
-              <ui-icon [name]="button.icon!" class="text-sm"></ui-icon>
-            </p-button>
-          }
-        </div>
+<section class="flex flex-col gap-2">
+  <header class="flex items-center gap-2 text-gray-700 text-xs font-semibold">
+    <ui-icon name="lucideFolder"></ui-icon>
+    <span>{{ tree().label }}</span>
+  </header>
+  <p-tree
+    [value]="tree().nodes"
+    class="w-full p-0!"
+    draggableScope="self"
+    droppableScope="self"
+    [draggableNodes]="true"
+    [droppableNodes]="true"
+    selectionMode="single"
+    [(selection)]="selectedFile"
+    (onNodeDrop)="drop($event)"
+    #primeTree
+  >
+    <ng-template pTemplate="togglericon" let-expanded>
+      @if (expanded) {
+        <ui-icon name="lucideChevronDown" class="text-sm"></ui-icon>
+      } @else {
+        <ui-icon name="lucideChevronRight" class="text-sm"></ui-icon>
       }
-    </div> </ng-template
-></p-tree>
+    </ng-template>
+
+    <ng-template let-node [appGenericContextGuard]="tree().nodes[0]" pTemplate="default">
+      <div class="flex items-center justify-between group">
+        <span class="flex items-center gap-2 text-xs">
+          <ui-icon [name]="node.icon" class="text-xs text-primary-500"></ui-icon>
+
+          {{ node.label }}</span
+        >
+
+        @if (buttons().length) {
+          <div
+            class="items-center gap-2 flex min-w-fit md:hidden md:group-hover:flex"
+            [ngClass]="{
+              'md:hidden': node.key !== selectedFile()?.key,
+              flex: node.key === selectedFile()?.key,
+            }"
+          >
+            @for (button of buttons(); track button.id + $index) {
+              <p-button
+                size="small"
+                [outlined]="true"
+                [text]="true"
+                [disabled]="button.disabled"
+                [severity]="button.severity"
+                (onClick)="handleUIButtonInteraction($event, button, node)"
+                [pTooltip]="button.tooltip"
+              >
+                <ui-icon [name]="button.icon!" class="text-sm"></ui-icon>
+              </p-button>
+            }
+          </div>
+        }
+      </div> </ng-template
+  ></p-tree>
+</section>

@@ -1,54 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, model, OnChanges, output, viewChild } from '@angular/core';
+import { Component, input, model, output, viewChild } from '@angular/core';
 import { GenericTemplateGuard } from '@shared/directives';
 import { UIButtonProps } from '@shared/types/ui-button-props';
-import { UITreeNode } from '@shared/types/ui-tree';
+import { UITreeNodeType, UITreeType } from '@shared/types/ui-tree';
 import { TreeDragDropService, TreeNode } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { ContextMenuModule } from 'primeng/contextmenu';
+import { TooltipModule } from 'primeng/tooltip';
 import { Tree, TreeModule, TreeNodeDropEvent } from 'primeng/tree';
 
 import { UIICon } from '../ui-icon/ui-icon';
 @Component({
   selector: 'ui-tree',
-  imports: [
-    CommonModule,
-    ButtonModule,
-    ContextMenuModule,
-    TreeModule,
-    GenericTemplateGuard,
-    UIICon,
-  ],
+  imports: [CommonModule, ButtonModule, TreeModule, TooltipModule, GenericTemplateGuard, UIICon],
   providers: [TreeDragDropService],
   templateUrl: './ui-tree.html',
   styleUrl: './ui-tree.scss',
 })
-export class UITree implements OnChanges {
-  items = input.required<UITreeNode[]>();
-  buttons = input<UIButtonProps<UITreeNode>[]>([]);
+export class UITree {
+  tree = input.required<UITreeType>();
+  buttons = input<UIButtonProps<UITreeNodeType>[]>([]);
   selectedFile = model<TreeNode>();
   dropEvent = output<TreeNodeDropEvent>();
   primeTree = viewChild<Tree>('primeTree');
 
-  ngOnChanges(): void {
-    for (const item of this.items()) {
-      this.expandRecursive(item, true);
-    }
-  }
-
-  private expandRecursive(node: TreeNode, isExpand: boolean) {
-    node.expanded = isExpand;
-    if (node.children) {
-      for (const childNode of node.children) {
-        this.expandRecursive(childNode, isExpand);
-      }
-    }
-  }
-
   handleUIButtonInteraction(
     event: MouseEvent,
-    button: UIButtonProps<UITreeNode>,
-    item: UITreeNode,
+    button: UIButtonProps<UITreeNodeType>,
+    item: UITreeNodeType,
   ) {
     event.stopPropagation();
     if (button.command) button.command(item);
