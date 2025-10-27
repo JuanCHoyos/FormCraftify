@@ -10,6 +10,7 @@ import { provideFormlyCore } from '@ngx-formly/core';
 import { withFormlyPrimeNG } from '@ngx-formly/primeng';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { MyPreset } from 'src/themes/primeng/theme';
 
@@ -17,6 +18,7 @@ import { routes } from './app.routes';
 import { formlyConfig } from './core/formly/formly.config';
 export const appConfig: ApplicationConfig = {
   providers: [
+    MessageService,
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
