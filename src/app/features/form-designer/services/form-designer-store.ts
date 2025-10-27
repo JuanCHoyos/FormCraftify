@@ -1,6 +1,7 @@
-import { computed, effect, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import {
   AlignType,
+  AnyFieldType,
   FormFieldType,
   FormType,
   FormViewWrapperType,
@@ -8,6 +9,7 @@ import {
   SeverityType,
   WrapperType,
 } from '@core/formly/models/form-field-item';
+import { ToastManager } from '@core/services/toast-manager';
 import { UITreeNodeType, UITreeType } from '@shared/types/ui-tree';
 
 import { FORM_ELEMENTS_ICONS } from '../constants/form-elements';
@@ -16,6 +18,7 @@ import {
   CloneItemOptions,
   FieldActionType,
   findField,
+  findFieldGroup,
   manageFieldGroupActions,
   MoveItemBetweenGroupsOptions,
   MoveItemInTreeOptions,
@@ -26,6 +29,7 @@ import {
   providedIn: 'root',
 })
 export class FormDesignerStore {
+  private readonly toastManager = inject(ToastManager);
   fields = signal<FormFieldType>({
     id: 'dsfgsdf',
     key: 'dsfgsdf',
@@ -52,20 +56,7 @@ export class FormDesignerStore {
               label: 'MULTI GRUPO',
               cols: 2,
             },
-            fieldGroup: [
-              {
-                id: 'firstName2',
-                key: 'firstName2',
-                type: FormType.Alert,
-                wrappers: [WrapperType.Field],
-                props: {
-                  label: 'Alerta de error',
-                  align: AlignType.Center,
-                  severity: SeverityType.Error,
-                  textFormattingOptions: [],
-                },
-              },
-            ],
+            fieldGroup: [],
           },
           {
             id: 'firstName31241234132424',
@@ -125,7 +116,23 @@ export class FormDesignerStore {
     };
   }
 
+  canAddGroupAtLevel(newField: AnyFieldType, target: string) {
+    const group = findFieldGroup(this.fields().fieldGroup, target);
+    if (!group) return false;
+    return group.level < 2 || newField.type !== FormType.Group;
+  }
+
+  showGroupNestingWarning() {
+    this.toastManager.warning({
+      header: 'Warning',
+      message: 'No es posible agregar un grupo dentro de otro',
+    });
+  }
+
   addFieldToGroup(payload: AddItemOptions): void {
+    if (!this.canAddGroupAtLevel(payload.field, payload.target)) {
+      return this.showGroupNestingWarning();
+    }
     this.handleFieldActionDispatch({
       type: 'ADD_FIELD',
       payload,
@@ -150,8 +157,9 @@ export class FormDesignerStore {
     const { source, fromIndex, target, toIndex } = options;
     const oldField = findField(this.fields().fieldGroup, { index: fromIndex, target: source });
     if (!oldField) return;
-    this.remove({ key: oldField.key, target: source });
+    if (!this.canAddGroupAtLevel(oldField, target)) return this.showGroupNestingWarning();
     this.addFieldToGroup({ field: oldField, target, toIndex });
+    this.remove({ key: oldField.key, target: source });
   }
 
   dispatchMoveWithinGroup(options: MoveItemInTreeOptions): void {

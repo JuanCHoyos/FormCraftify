@@ -1,6 +1,5 @@
 import { FieldBuilderFactory } from '@core/formly/factory/field-builder-factory';
 import { AnyFieldType, FormType, GroupFieldType } from '@core/formly/models/form-field-item';
-
 export interface AddItemOptions {
   target: string;
   field: AnyFieldType;
@@ -43,7 +42,7 @@ export type FieldActionType =
   | { type: 'CLONE_FIELD'; payload: CloneItemOptions }
   | { type: 'MOVE_WITHIN_GROUP'; payload: MoveItemInTreeOptions };
 
-const addFieldToGroup = (
+export const addFieldToGroup = (
   fieldGroup: AnyFieldType[],
   { field: newField, toIndex }: AddItemOptions,
 ): AnyFieldType[] => {
@@ -146,23 +145,42 @@ export const manageFieldGroupActions = (
 
 export const findField = (
   groups: GroupFieldType[],
-  criteria: { key?: string; index?: number; target?: string },
+  criteria: { index: number; target: string },
 ): AnyFieldType | null => {
   for (const group of groups) {
-    if (criteria.key === group.key) return group;
-
     const fieldGroup = group.fieldGroup ?? [];
 
-    if (criteria.target === group.key && criteria.index !== undefined) {
-      const field = fieldGroup[criteria.index];
-      if (field) return field;
+    if (group.key === criteria.target && criteria.index != null) {
+      return fieldGroup[criteria.index] ?? null;
     }
 
-    const nestedGroups = fieldGroup.filter((f): f is GroupFieldType => f.type === FormType.Group);
+    const nestedGroups = fieldGroup.filter(
+      (field): field is GroupFieldType => field.type === FormType.Group,
+    );
 
-    const found = findField(nestedGroups, criteria);
-    if (found) return found;
+    const foundField = findField(nestedGroups, criteria);
+    if (foundField) return foundField;
   }
 
+  return null;
+};
+
+export const findFieldGroup = (
+  groups: GroupFieldType[],
+  target: string,
+  level = 1,
+): {
+  group: AnyFieldType;
+  level: number;
+} | null => {
+  for (const group of groups) {
+    const fieldGroup = group.fieldGroup ?? [];
+    if (group.key === target) return { group, level };
+    const nestedGroups = fieldGroup.filter(
+      (field): field is GroupFieldType => field.type === FormType.Group,
+    );
+    const foundField = findFieldGroup(nestedGroups, target, level + 1);
+    if (foundField) return foundField;
+  }
   return null;
 };
