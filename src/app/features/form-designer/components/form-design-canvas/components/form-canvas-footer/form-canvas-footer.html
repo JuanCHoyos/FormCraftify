@@ -29,7 +29,7 @@
           <button
             class="size-2 bg-gray-300 rounded-full transition-all duration-300 hover:cursor-pointer"
             [ngClass]="{
-              'w-6 bg-pr-500': formDesignNavigation.activeSectionIndex() === section.value,
+              'w-6 bg-primary-500': formDesignNavigation.activeSectionIndex() === section.value,
             }"
             (click)="formDesignNavigation.goToSection($index)"
             (keydown.enter)="formDesignNavigation.goToSection($index)"
