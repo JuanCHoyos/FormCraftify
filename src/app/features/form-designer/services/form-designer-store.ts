@@ -1,12 +1,10 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import {
-  AlignType,
   AnyFieldType,
   FormFieldType,
   FormType,
   FormViewWrapperType,
   GroupFieldType,
-  SeverityType,
   WrapperType,
 } from '@core/formly/models/form-field-item';
 import { ToastManager } from '@core/services/toast-manager';
@@ -40,39 +38,6 @@ export class FormDesignerStore {
     },
     fieldGroup: [
       {
-        id: 'userInfo1',
-        key: 'userInfo1',
-        type: FormType.Group,
-        props: {
-          cols: 1,
-          label: 'User Information 1',
-        },
-        fieldGroup: [
-          {
-            id: '1111111',
-            key: 'multi33',
-            type: FormType.Group,
-            props: {
-              label: 'MULTI GRUPO',
-              cols: 2,
-            },
-            fieldGroup: [],
-          },
-          {
-            id: 'firstName31241234132424',
-            key: 'firstName31241234132424',
-            type: FormType.Alert,
-            wrappers: [WrapperType.Field],
-            props: {
-              label: 'Alerta informativa',
-              align: AlignType.Left,
-              severity: SeverityType.Info,
-              textFormattingOptions: [],
-            },
-          },
-        ],
-      },
-      {
         id: 'userInfo333',
         key: 'userInfo333',
         type: FormType.Group,
@@ -83,6 +48,17 @@ export class FormDesignerStore {
         },
         fieldGroup: [],
       },
+      {
+        id: 'contact',
+        key: 'contact',
+        type: FormType.Group,
+        wrappers: [WrapperType.Field],
+        props: {
+          cols: 1,
+          label: 'Contact',
+        },
+        fieldGroup: [],
+      },
     ],
   });
 
@@ -90,7 +66,22 @@ export class FormDesignerStore {
     label: this.fields().props.label,
     nodes: this.fields().fieldGroup.map((group, index) => this.mapFormToTree(group, index)),
   }));
+  fieldGroupKeys = computed(() => this.getGroupKeys(this.fields().fieldGroup));
 
+  getGroupKeys(fields: GroupFieldType[] = []): string[] {
+    const keys: string[] = [];
+
+    for (const field of fields) {
+      if (field.type === FormType.Group) {
+        keys.push(field.key);
+        if (Array.isArray(field.fieldGroup)) {
+          keys.push(...this.getGroupKeys(field.fieldGroup as GroupFieldType[]));
+        }
+      }
+    }
+
+    return keys;
+  }
   constructor() {
     effect(() => {
       console.log(this.fields(), 'initial fields');
@@ -98,7 +89,6 @@ export class FormDesignerStore {
   }
 
   mapFormToTree(field: GroupFieldType, index: number): UITreeNodeType {
-    if (!field) return field;
     const nodesArray = 'fieldGroup' in field ? (field.fieldGroup as GroupFieldType[]) : [];
 
     const nodes: UITreeNodeType[] = nodesArray.map((field, _index) =>

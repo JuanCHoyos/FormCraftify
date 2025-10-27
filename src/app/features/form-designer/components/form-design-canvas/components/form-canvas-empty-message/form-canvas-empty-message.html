@@ -1,11 +1,9 @@
 <article
   class="bg-primary-50 w-full h-full flex justify-center items-center rounded relative"
-  [nxtSortablejs]="[]"
-  [config]="sortableConfig()"
-  [id]="groupField().key"
   dropHover
+  [isHovering]="whileDragging()"
 >
-  <div class="flex flex-col justify-center items-center gap-2 p-4 absolute no-drag">
+  <div class="flex flex-col justify-center items-center gap-2 p-4">
     <ui-icon name="lucideSquaresSubtract" class="text-xl text-primary-500"></ui-icon>
     <ui-title [heading]="HeadingType.H4">Form Preview</ui-title>
     <p class="text-xs text-center text-gray-500">

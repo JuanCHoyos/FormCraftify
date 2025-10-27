@@ -1,3 +1,4 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormDesignerNavigation } from '@features/form-designer/services/form-designer-navigation';
@@ -20,6 +21,7 @@ import { FormCanvasFooter, FormCanvasHeader, FormCanvasSections } from './compon
     FormCanvasSections,
     FormCanvasHeader,
     ScrollThresholdWatcher,
+    CdkScrollable,
     UIICon,
   ],
   templateUrl: './form-design-canvas.html',

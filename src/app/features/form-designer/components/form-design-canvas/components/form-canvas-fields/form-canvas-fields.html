@@ -1,32 +1,34 @@
-@if (groupField().fieldGroup.length) {
-  <div
-    [id]="groupField().key"
-    class="grid grid-rows-[min-content] gap-4 h-full relative"
-    [ngClass]="{
-      'grid-cols-2': cols() === 2,
-      'grid-cols-3': cols() === 3,
-    }"
-    [nxtSortablejs]="fields()"
-    [config]="sortableConfig()"
-  >
-    @for (field of groupField().fieldGroup; track field.id) {
-      <form-canvas-field-layout
-        [type]="field.type === FormType.Group ? 'GROUP' : 'FIELD'"
-        [label]="field.type === FormType.Group ? field.props.label! : ''"
-        (removeItem)="remove(field)"
-        (cloneItem)="clone(field)"
-      >
-        @if (field.type === FormType.Group) {
-          <form-canvas-fields [groupField]="field"></form-canvas-fields>
-        } @else {
-          <app-form-canvas-field [field]="field"></app-form-canvas-field>
-        }
-      </form-canvas-field-layout>
-    }
-  </div>
-} @else {
-  <app-form-canvas-empty-message
-    [groupField]="groupField()"
-    [sortableConfig]="sortableConfig()"
-  ></app-form-canvas-empty-message>
-}
+<div
+  [id]="groupField().key"
+  class="flex flex-col gap-4 h-full relative"
+  [ngClass]="{ 'justify-center': !groupField().fieldGroup.length }"
+  cdkDropList
+  [cdkDropListConnectedTo]="formDesignerStore.fieldGroupKeys()"
+  [cdkDropListData]="groupField().fieldGroup"
+  (cdkDropListDropped)="drop($event)"
+  (cdkDropListEntered)="whileDragging.set(true)"
+  (cdkDropListDropped)="whileDragging.set(false)"
+  (cdkDropListExited)="whileDragging.set(false)"
+>
+  @for (field of groupField().fieldGroup; track field.id) {
+    <form-canvas-field-layout
+      [type]="field.type === FormType.Group ? 'GROUP' : 'FIELD'"
+      [label]="field.type === FormType.Group ? field.props.label! : ''"
+      (removeItem)="remove(field)"
+      (cloneItem)="clone(field)"
+      cdkDrag
+    >
+      @if (field.type === FormType.Group) {
+        <form-canvas-fields [groupField]="field"></form-canvas-fields>
+      } @else {
+        <app-form-canvas-field [field]="field"></app-form-canvas-field>
+      }
+      <div class="drag-placeholder" *cdkDragPlaceholder></div>
+    </form-canvas-field-layout>
+  } @empty {
+    <app-form-canvas-empty-message
+      [whileDragging]="whileDragging()"
+      class="absolute top-0 left-0 w-full h-full"
+    ></app-form-canvas-empty-message>
+  }
+</div>

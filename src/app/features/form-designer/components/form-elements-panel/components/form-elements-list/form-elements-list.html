@@ -12,10 +12,14 @@
       #content
       let-index="index"
       ><div
-        [nxtSortablejs]="items"
-        [config]="sortableOptions()"
+        cdkDropList
+        [cdkDropListData]="items"
+        [cdkDropListConnectedTo]="formDesignerStore.fieldGroupKeys()"
+        cdkDropListSortingDisabled
+        cdkDropListHasAnchor
         id="accordion-{{ index }}"
-        class="flex flex-col gap-2 overflow-hidden"
+        class="flex flex-col gap-2"
+        [attr.data-sorting-disabled]="true"
       >
         @for (item of items; track item.id) {
           <form-element-item [item]="item" [attr.field-type]="item.value" />

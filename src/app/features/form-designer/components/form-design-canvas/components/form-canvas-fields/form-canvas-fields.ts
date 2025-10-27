@@ -1,6 +1,6 @@
+import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
-import { FieldBuilderFactory } from '@core/formly/factory/field-builder-factory';
 import { AnyFieldType, FormType, GroupFieldType } from '@core/formly/models/form-field-item';
 import {
   MoveItemBetweenGroupsOptions,
@@ -8,7 +8,6 @@ import {
 } from '@features/form-designer/services/field-tree.utils';
 import { FormDesignerStore } from '@features/form-designer/services/form-designer-store';
 import { SortablejsModule } from 'nxt-sortablejs';
-import { SortableEvent, SortableOptions } from 'sortablejs';
 
 import { FieldLayoutManager } from '../../layouts/form-canvas-field-layout/form-canvas-field-layout';
 import { FormCanvasEmptyMessage } from '../form-canvas-empty-message/form-canvas-empty-message';
@@ -21,57 +20,38 @@ import { FormCanvasField } from '../form-canvas-field/form-canvas-field';
     FormCanvasEmptyMessage,
     FormCanvasField,
     SortablejsModule,
+    CdkDropList,
+    CdkDrag,
+    CdkDragPlaceholder,
   ],
   templateUrl: './form-canvas-fields.html',
 })
 export class FormCanvasFields {
-  private readonly formDesignerStore = inject(FormDesignerStore);
+  public readonly formDesignerStore = inject(FormDesignerStore);
   groupField = input.required<GroupFieldType>();
-  cols = computed<number>(() => this.groupField().props.cols || 1);
   fields = computed(() => structuredClone(this.groupField().fieldGroup));
+  whileDragging = signal<boolean>(false);
   FormType = FormType;
 
-  sortableConfig = signal<SortableOptions>({
-    group: {
-      name: 'nested',
-      put: true,
-    },
-    animation: 300,
-    invertSwap: true,
-    sort: true,
-    fallbackOnBody: true,
-    ghostClass: 'drag-custom-placeholder',
-    filter: '.no-drag',
-    swapThreshold: 0.5,
-    onAdd: (event: SortableEvent) => this.handleAddEvent(event),
-    onUpdate: (event: SortableEvent) => this.handleUpdateEvent(event),
-  });
+  drop(event: CdkDragDrop<AnyFieldType[]>) {
+    const { previousContainer, previousIndex, container, currentIndex, item } = event;
+    if (event.previousContainer === event.container) {
+      return this.dispatchMoveWithinGroup({
+        fromIndex: previousIndex,
+        toIndex: currentIndex,
+        target: container.id,
+      });
+    }
 
-  extractSortableData(event: SortableEvent) {
-    const { oldIndex: fromIndex, newIndex: toIndex, from, to } = event;
-    if (fromIndex === undefined || toIndex === undefined) return null;
-    return { fromIndex, toIndex, source: from.id, target: to.id };
-  }
-
-  handleAddEvent(event: SortableEvent): void {
-    const data = this.extractSortableData(event);
-    if (!data) return;
-
-    const formType = event.item.getAttribute('field-type') as FormType | null;
-    if (formType) return this.createAndAddNewField(formType, data.toIndex);
-
-    this.dispatchMoveBetweenGroups(data);
-  }
-
-  handleUpdateEvent(event: SortableEvent): void {
-    const data = this.extractSortableData(event);
-    if (!data) return;
-    this.dispatchMoveWithinGroup(data);
-  }
-
-  createAndAddNewField(formType: FormType, toIndex: number): void {
-    const newField = new FieldBuilderFactory().create(formType).build();
-    this.addFieldToGroup(newField, toIndex);
+    if (previousContainer.id.includes('accordion')) {
+      return this.addFieldToGroup(item.data, currentIndex);
+    }
+    return this.dispatchMoveBetweenGroups({
+      fromIndex: previousIndex,
+      source: previousContainer.id,
+      target: container.id,
+      toIndex: currentIndex,
+    });
   }
 
   addFieldToGroup(newField: AnyFieldType, toIndex: number): void {

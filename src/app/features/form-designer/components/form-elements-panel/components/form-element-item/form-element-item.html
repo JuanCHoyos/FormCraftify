@@ -1,5 +1,9 @@
 <div
-  class="grid grid-cols-[11fr_1fr] h-full items-center justify-between gap-4 p-2 border border-transparent hover:bg-primary-100 hover:border-1 hover:border-primary-500 rounded cursor-grab select-none"
+  class="grid grid-cols-[11fr_1fr] gap-4 p-2 border border-transparent hover:bg-primary-100 hover:border-primary-500 rounded cursor-grab select-none"
+  cdkDrag
+  (cdkDragStarted)="whileDragging.set(true)"
+  (cdkDragEnded)="whileDragging.set(false)"
+  [cdkDragData]="field()"
 >
   <div class="flex items-center gap-2">
     <div
@@ -13,4 +17,8 @@
     </div>
   </div>
   <ui-icon class="text-gray-500" name="lucideGripVertical"></ui-icon>
+  <div class="drag-placeholder" *cdkDragPlaceholder></div>
 </div>
+@if (whileDragging()) {
+  <form-element-item [item]="item()"></form-element-item>
+}
