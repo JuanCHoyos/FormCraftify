@@ -6,5 +6,6 @@ export interface UIButtonProps<B = unknown> extends Omit<ButtonProps, 'icon'> {
   icon?: LucideIconType;
   id: string;
   tooltip?: string;
+  visibleOn?: ('mobile' | 'desktop' | 'all')[];
   command?: (args: B) => void;
 }

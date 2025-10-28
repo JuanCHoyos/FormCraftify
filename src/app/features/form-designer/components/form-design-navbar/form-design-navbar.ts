@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, output, signal, viewChild } from '@angular/core';
+import { Component, computed, inject, output, viewChild } from '@angular/core';
+import { FormDesignerStore } from '@features/form-designer/services/form-designer-store';
 import { UIICon, UITitle } from '@shared/components/index';
-import { HeadingType, LucideIconType } from '@shared/types/ui.types';
+import { HeadingType } from '@shared/types/ui.types';
+import { UIButtonProps } from '@shared/types/ui-button-props';
 import { ButtonModule } from 'primeng/button';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
@@ -12,91 +14,82 @@ import { TooltipModule } from 'primeng/tooltip';
   templateUrl: './form-design-navbar.html',
 })
 export class FormDesignNavbar {
+  public readonly formDesignerStore = inject(FormDesignerStore);
   menuTemplate = viewChild.required<Popover>('menuTemplate');
   HeadingType = HeadingType;
-  menu = signal<
+  navbarMenuItems = computed<UIButtonProps<Event>[]>(() => [
     {
-      label: string;
-      icon: LucideIconType;
-      visibleOn: ('mobile' | 'desktop' | 'all')[];
-      command: ($event: Event) => void;
-      disabled?: boolean;
-    }[]
-  >([
-    {
-      label: '.',
+      id: 'form-designer:undo',
       icon: 'lucideUndo',
       visibleOn: ['all'],
-      command: () => {
-        console.log('');
-      },
+      disabled: this.formDesignerStore.FormDesignerHistory.isFirstState(),
+      command: () => this.formDesignerStore.undo(),
     },
     {
-      label: '..',
+      id: 'form-designer:redo',
       icon: 'lucideRedo',
       visibleOn: ['all'],
-      command: () => {
-        console.log('');
-      },
+      disabled: this.formDesignerStore.FormDesignerHistory.isLastState(),
+      command: () => this.formDesignerStore.redo(),
     },
     {
-      label: 'Save',
+      id: 'form-designer:save',
       icon: 'lucideSave',
       visibleOn: ['all'],
-      command: () => {
-        console.log('');
-      },
+      command: () => console.log('save'),
     },
     {
+      id: 'form-designer:preview',
       label: 'Preview',
       icon: 'lucideEye',
       visibleOn: ['desktop'],
       command: () => {
-        console.log('');
+        console.log('preview');
         this.closeMenu();
       },
     },
     {
+      id: 'form-designer:export',
       label: 'Export',
       icon: 'lucideDownload',
       visibleOn: ['desktop'],
       command: () => {
-        console.log('');
+        console.log('export');
         this.closeMenu();
       },
     },
     {
+      id: 'form-designer:settings',
       label: 'Settings',
       icon: 'lucideSettings',
       visibleOn: ['desktop'],
       command: () => {
-        console.log('');
+        console.log('settings');
         this.closeMenu();
       },
     },
     {
+      id: 'form-designer:theme',
       label: 'Theme',
       icon: 'lucideMoon',
       visibleOn: ['desktop'],
       command: () => {
-        console.log('');
+        console.log('theme');
         this.closeMenu();
       },
     },
     {
-      label: '...',
+      id: 'form-designer:menu-toggle',
       icon: 'lucideEllipsis',
       visibleOn: ['mobile'],
-      command: (event: Event) => {
-        this.menuTemplate().toggle(event);
-      },
+      command: (event: Event) => this.menuTemplate().toggle(event),
     },
   ]);
 
   toggleFormElementsPanel = output<boolean>();
 
   menuShowOnMobile = computed(() => {
-    return this.menu().filter((item) => item.visibleOn.includes('desktop'));
+    return this.navbarMenuItems().filter((item) => item.visibleOn?.includes('desktop'));
   });
 
   closeMenu() {
@@ -105,5 +98,10 @@ export class FormDesignNavbar {
 
   openFormElementsPanel() {
     this.toggleFormElementsPanel.emit(true);
+  }
+  command(event: Event, item: UIButtonProps<Event>) {
+    if (item.command) {
+      item.command(event);
+    }
   }
 }

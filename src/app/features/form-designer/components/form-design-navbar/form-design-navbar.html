@@ -14,26 +14,27 @@
       <ui-title [heading]="HeadingType.H2">Form Designer</ui-title>
     </div>
     <div class="flex items-center gap-2">
-      @for (item of menu(); track item.label) {
+      @for (item of navbarMenuItems(); track item.id) {
         <p-button
           size="small"
           [outlined]="true"
-          (click)="item.command($event)"
+          (click)="command($event, item)"
           [ngClass]="{
-            'hidden md:block': item.visibleOn.includes('desktop'),
-            'md:hidden': item.visibleOn.includes('mobile'),
+            'hidden md:block': item.visibleOn?.includes('desktop'),
+            'md:hidden': item.visibleOn?.includes('mobile'),
           }"
-          (keydown.enter)="item.command($event)"
-          [pTooltip]="item.label"
+          (keydown.enter)="command($event, item)"
+          [pTooltip]="item.tooltip"
+          [disabled]="item.disabled"
           tooltipPosition="bottom"
           severity="secondary"
         >
           <div class="flex text-sm font-semibold items-center gap-2">
-            <ui-icon [name]="item.icon"></ui-icon>
+            <ui-icon [name]="item.icon!"></ui-icon>
             @if (item.label) {
               <span
                 [ngClass]="{
-                  'hidden md:block': item.visibleOn.includes('all'),
+                  'hidden md:block': item.visibleOn?.includes('all'),
                 }"
                 >{{ item.label }}</span
               >
@@ -51,11 +52,11 @@
       <li class="hover:bg-gray-100 cursor-pointer rounded-border">
         <button
           class="flex items-center gap-4 p-2 w-full text-sm bg-transparent cursor-pointer"
-          (click)="item.command($event)"
-          (keydown.enter)="item.command($event)"
+          (click)="command($event, item)"
+          (keydown.enter)="command($event, item)"
           tabindex="0"
         >
-          <ui-icon [name]="item.icon"></ui-icon>
+          <ui-icon [name]="item.icon!"></ui-icon>
           <span>{{ item.label }}</span>
         </button>
       </li>
