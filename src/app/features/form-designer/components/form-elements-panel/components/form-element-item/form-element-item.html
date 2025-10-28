@@ -3,7 +3,7 @@
   cdkDrag
   (cdkDragStarted)="whileDragging.set(true)"
   (cdkDragEnded)="whileDragging.set(false)"
-  [cdkDragData]="field()"
+  [cdkDragData]="item().value"
 >
   <div class="flex items-center gap-2">
     <div

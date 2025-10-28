@@ -1,6 +1,7 @@
 import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
+import { FieldBuilderFactory } from '@core/formly/factory/field-builder-factory';
 import { AnyFieldType, FormType, GroupFieldType } from '@core/formly/models/form-field-item';
 import {
   MoveItemBetweenGroupsOptions,
@@ -44,7 +45,8 @@ export class FormCanvasFields {
     }
 
     if (previousContainer.id.includes('accordion')) {
-      return this.addFieldToGroup(item.data, currentIndex);
+      const newField = new FieldBuilderFactory().create(item.data).build();
+      return this.addFieldToGroup(newField, currentIndex);
     }
     return this.dispatchMoveBetweenGroups({
       fromIndex: previousIndex,
