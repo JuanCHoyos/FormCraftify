@@ -1,4 +1,4 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal, untracked } from '@angular/core';
 import {
   AnyFieldType,
   FormFieldType,
@@ -22,12 +22,14 @@ import {
   MoveItemInTreeOptions,
   RemoveItemOptions,
 } from './field-tree.utils';
+import { FormDesignerHistory } from './form-designer-history';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormDesignerStore {
   private readonly toastManager = inject(ToastManager);
+  public readonly FormDesignerHistory = new FormDesignerHistory();
   fields = signal<FormFieldType>({
     id: 'dsfgsdf',
     key: 'dsfgsdf',
@@ -82,9 +84,13 @@ export class FormDesignerStore {
 
     return keys;
   }
+
   constructor() {
     effect(() => {
-      console.log(this.fields(), 'initial fields');
+      const fields = this.fields();
+      untracked(() => {
+        this.FormDesignerHistory.save(fields);
+      });
     });
   }
 
@@ -104,6 +110,18 @@ export class FormDesignerStore {
       children: isDroppable ? nodes : undefined,
       droppable: isDroppable,
     };
+  }
+
+  redo() {
+    const field = this.FormDesignerHistory.redo();
+    if (!field) return;
+    this.fields.set(field);
+  }
+
+  undo() {
+    const field = this.FormDesignerHistory.undo();
+    if (!field) return;
+    this.fields.set(field);
   }
 
   canAddGroupAtLevel(newField: AnyFieldType, target: string) {
