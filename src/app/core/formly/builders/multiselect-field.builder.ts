@@ -11,15 +11,19 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class MultiSelectFieldBuilder extends FormFieldBaseBuilder<MultiSelectPropsType> {
   constructor() {
     super({
-      options: [],
-      placeholder: '',
+      options: [
+        { id: 'opt1', label: 'Opción 1', value: 'opcion1' },
+        { id: 'opt2', label: 'Opción 2', value: 'opcion2' },
+        { id: 'opt3', label: 'Opción 3', value: 'opcion3' },
+      ],
+      placeholder: 'Selecciona una o varias opciones',
       disabled: false,
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Selecciona las opciones que correspondan.',
+      label: 'Selecciona opciones',
+      tooltip: 'Puedes elegir más de una opción.',
     });
   }
   newInstance(): MultiSelectFieldBuilder {

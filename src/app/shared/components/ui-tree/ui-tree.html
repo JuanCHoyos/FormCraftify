@@ -24,12 +24,16 @@
     </ng-template>
 
     <ng-template let-node [appGenericContextGuard]="tree().nodes[0]" pTemplate="default">
-      <div class="flex items-center justify-between group">
-        <span class="flex items-center gap-2 text-xs">
-          <ui-icon [name]="node.icon" class="text-xs text-primary-500"></ui-icon>
-
-          {{ node.label }}</span
-        >
+      <div
+        class="grid grid-cols-[auto_auto] items-center justify-between group"
+        [class.hide-toggle-button]="node.children?.length === null"
+      >
+        <span class="flex items-center gap-2 text-xs overflow-hidden">
+          <ui-icon [name]="node.icon" class="text-primary-500"></ui-icon>
+          <span class="whitespace-nowrap text-ellipsis overflow-hidden" [pTooltip]="node.label">
+            {{ node.label }}</span
+          >
+        </span>
 
         @if (buttons().length) {
           <div
@@ -48,6 +52,7 @@
                 [severity]="button.severity"
                 (onClick)="handleUIButtonInteraction($event, button, node)"
                 [pTooltip]="button.tooltip"
+                tooltipPosition="top"
               >
                 <ui-icon [name]="button.icon!" class="text-sm"></ui-icon>
               </p-button>

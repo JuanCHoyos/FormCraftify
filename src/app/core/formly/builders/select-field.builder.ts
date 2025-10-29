@@ -11,15 +11,19 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class SelectFieldBuilder extends FormFieldBaseBuilder<SelectPropsType> {
   constructor() {
     super({
-      placeholder: '',
-      options: [],
+      placeholder: 'Selecciona una opción',
+      options: [
+        { id: 'opt1', label: 'Opción 1', value: 'opcion1' },
+        { id: 'opt2', label: 'Opción 2', value: 'opcion2' },
+        { id: 'opt3', label: 'Opción 3', value: 'opcion3' },
+      ],
       disabled: false,
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Elige una sola opción de la lista.',
+      label: 'Selecciona una opción',
+      tooltip: 'Solo puedes elegir una opción.',
     });
   }
 

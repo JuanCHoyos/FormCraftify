@@ -2,12 +2,13 @@
   @for (option of props.options; track option.id) {
     <label [for]="option.id" class="flex items-center gap-2">
       <p-checkbox
+        size="small"
         [inputId]="option.id"
         [formControl]="formControl"
-        [name]="field.id!"
+        [name]="field.id"
         [value]="option.value"
       />
-      <span>{{ option.label }}</span>
+      <span class="text-sm">{{ option.label }}</span>
     </label>
   }
 </section>

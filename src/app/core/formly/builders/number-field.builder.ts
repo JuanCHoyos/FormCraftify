@@ -10,16 +10,16 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class NumberFieldBuilder extends FormFieldBaseBuilder<NumberPropsType> {
   constructor() {
     super({
-      placeholder: '',
+      placeholder: 'Ingresa un número',
       min: -Infinity,
       max: Infinity,
       disabled: false,
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Campo para ingresar valores numéricos.',
+      label: 'Número',
+      tooltip: 'Introduce un valor válido.',
     });
   }
 

@@ -1,7 +1,8 @@
 <input
-  id="{{ field.id }}"
   type="text"
+  size="small"
   pInputText
+  [id]="field.id"
   [formControl]="formControl"
   [placeholder]="props.placeholder"
   [fluid]="true"

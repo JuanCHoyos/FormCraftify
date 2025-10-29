@@ -13,8 +13,8 @@ export class TitleFieldBuilder extends FormFieldBaseBuilder<TitlePropsType> {
   constructor() {
     super({
       align: AlignType.Left,
-      headingType: HeadingType.H1,
-      label: '',
+      headingType: HeadingType.H2,
+      label: 'Este es un título de ejemplo',
       textFormattingOptions: [],
     });
   }

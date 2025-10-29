@@ -12,7 +12,7 @@ export class ParagraphFieldBuilder extends FormFieldBaseBuilder<ParagraphPropsTy
   constructor() {
     super({
       align: AlignType.Left,
-      label: '',
+      label: 'Por favor, revisa la información antes de continuar.',
       textFormattingOptions: [],
     });
   }

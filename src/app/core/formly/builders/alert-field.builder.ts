@@ -12,14 +12,10 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class AlertFieldBuilder extends FormFieldBaseBuilder<AlertPropsType> {
   constructor() {
     super({
-      align: AlignType.Center,
-      label: '',
+      align: AlignType.Left,
+      label: 'Completa todos los campos requeridos.',
       severity: SeverityType.Info,
-      textFormattingOptions: [
-        TextFormattingOptionType.Bold,
-        TextFormattingOptionType.Italic,
-        TextFormattingOptionType.Underline,
-      ],
+      textFormattingOptions: [],
     });
   }
   newInstance(): AlertFieldBuilder {

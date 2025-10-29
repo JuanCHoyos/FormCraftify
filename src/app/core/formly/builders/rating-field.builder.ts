@@ -12,14 +12,14 @@ export class RatingFieldBuilder extends FormFieldBaseBuilder<RatingPropsType> {
   constructor() {
     super({
       type: RatingType.Numbers,
-      stars: 5,
+      stars: 10,
       disabled: false,
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Indica tu nivel de satisfacción del 1 al 10.',
+      label: 'Calificación',
+      tooltip: 'Selecciona una puntuación entre 1 y 10.',
     });
   }
 

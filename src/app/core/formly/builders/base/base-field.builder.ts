@@ -1,5 +1,6 @@
 import {
   FormFieldConfig,
+  FormType,
   FormViewWrapperType,
   WrapperType,
 } from '@core/formly/models/form-field-item';
@@ -8,7 +9,7 @@ export class FormFieldBaseBuilder<Props> {
   protected field: FormFieldConfig<Props>;
 
   constructor(props: Props) {
-    this.field = { id: `${uuidv4()}`, key: `${uuidv4()}`, props };
+    this.field = { id: `${uuidv4()}`, key: `${uuidv4()}`, props, type: FormType.Alert };
   }
 
   setId(id: string) {

@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-2">
-  @if (props.label) {
-    <label for="" class="text-sm">{{ props.label }}</label>
+  @if (props.label && !hiddenLabelTypes().includes(field.type)) {
+    <label [for]="field.id" class="text-sm">{{ props.label }}</label>
   }
 
   <ng-container #fieldComponent></ng-container>

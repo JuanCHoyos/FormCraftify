@@ -1,8 +1,9 @@
 <textarea
-  id="{{ field.id }}"
   rows="5"
   cols="30"
   pInputTextarea
+  pSize="small"
+  [id]="field.id"
   [formControl]="formControl"
   [placeholder]="props.placeholder"
   [autoResize]="true"

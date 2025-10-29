@@ -10,16 +10,16 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class TextFieldBuilder extends FormFieldBaseBuilder<TextPropsType> {
   constructor() {
     super({
-      placeholder: '',
+      placeholder: 'Escribe aquí',
       minLength: 0,
       maxLength: Infinity,
       disabled: false,
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Campo para ingresar texto libre.',
+      label: 'Texto',
+      tooltip: 'Ingresa la información solicitada.',
     });
   }
 

@@ -10,16 +10,16 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class TextAreaFieldBuilder extends FormFieldBaseBuilder<TextAreaPropsType> {
   constructor() {
     super({
-      placeholder: '',
+      placeholder: 'Ingresa el contenido aquí',
       minLength: 0,
       maxLength: 10000,
       disabled: false,
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Campo para ingresar texto más extenso.',
+      label: 'Área de texto',
+      tooltip: 'Ejemplo de campo para escribir varias líneas.',
     });
   }
 

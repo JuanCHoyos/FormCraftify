@@ -14,14 +14,15 @@ export class CheckboxFieldBuilder extends FormFieldBaseBuilder<FieldPropsBaseTyp
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Marca esta opción si aceptas los términos y condiciones.',
+      label: 'Aceptar términos',
+      tooltip: 'Obligatorio para continuar con el registro.',
     });
   }
   newInstance(): CheckboxFieldBuilder {
     return new CheckboxFieldBuilder();
   }
+
   override build(): CheckboxFieldType {
     return {
       ...super.build(),

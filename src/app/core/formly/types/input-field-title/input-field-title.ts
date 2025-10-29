@@ -1,20 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import {
-  HeadingType,
-  TextFormattingOptionType,
-  TitlePropsType,
-} from '@core/formly/models/form-field-item';
+import { Component, computed } from '@angular/core';
+import { TextFormattingOptionType, TitlePropsType } from '@core/formly/models/form-field-item';
 import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
+import { UITitle } from '@shared/components';
 
 @Component({
   selector: 'input-field-title',
-  imports: [CommonModule],
+  imports: [CommonModule, UITitle],
   templateUrl: './input-field-title.html',
 })
 export class InputFieldTitle extends FieldType<FormlyFieldConfig<TitlePropsType>> {
-  HeadingType = HeadingType;
-  get customClass() {
+  customClass = computed(() => {
     return {
       'font-bold': this.props['textFormattingOptions'].includes(TextFormattingOptionType.Bold),
       'line-through': this.props['textFormattingOptions'].includes(
@@ -23,5 +19,5 @@ export class InputFieldTitle extends FieldType<FormlyFieldConfig<TitlePropsType>
       italic: this.props['textFormattingOptions'].includes(TextFormattingOptionType.Italic),
       underline: this.props['textFormattingOptions'].includes(TextFormattingOptionType.Underline),
     };
-  }
+  });
 }

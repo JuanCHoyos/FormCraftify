@@ -83,9 +83,11 @@ export interface FieldPropsBaseType {
   tabindex: number;
 }
 
-export interface FormFieldConfig<Props> extends Omit<FormlyFieldConfig, 'props' | 'fieldGroup'> {
+export interface FormFieldConfig<Props>
+  extends Omit<FormlyFieldConfig, 'props' | 'fieldGroup' | 'type'> {
   id: string;
   key: string;
+  type: FormType;
   props: Props;
   wrappers?: (FormViewWrapperType | WrapperType)[];
 }

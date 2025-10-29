@@ -16,6 +16,9 @@
   .p-tree-node-content {
     --p-tree-node-padding: 4px 8px;
     min-height: var(--item-height);
+    &:has(*.hide-toggle-button) .p-tree-node-toggle-button {
+      display: none;
+    }
   }
 
   .p-tree-node-toggle-button {

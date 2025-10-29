@@ -1,17 +1,3 @@
-@switch (props.headingType) {
-  @case (HeadingType.H1) {
-    <h1 class="text-3xl title" [style.textAlign]="props.align" [ngClass]="customClass">
-      {{ props.label }}
-    </h1>
-  }
-  @case (HeadingType.H2) {
-    <h2 class="text-2xl title" [style.textAlign]="props.align" [ngClass]="customClass">
-      {{ props.label }}
-    </h2>
-  }
-  @case (HeadingType.H3) {
-    <h3 class="text-xl title" [style.textAlign]="props.align" [ngClass]="customClass">
-      {{ props.label }}
-    </h3>
-  }
-}
+<ui-title [heading]="props.headingType">
+  <span [style.textAlign]="props.align" [ngClass]="customClass()">{{ props.label }}</span>
+</ui-title>

@@ -11,14 +11,18 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class MultiCheckboxFieldBuilder extends FormFieldBaseBuilder<MulticheckboxPropsType> {
   constructor() {
     super({
-      options: [],
+      options: [
+        { id: 'opt1', label: 'Opción 1', value: 'opcion1' },
+        { id: 'opt2', label: 'Opción 2', value: 'opcion2' },
+        { id: 'opt3', label: 'Opción 3', value: 'opcion3' },
+      ],
       disabled: false,
       readonly: false,
       required: false,
       tabindex: 0,
-      description: '',
-      label: '',
-      tooltip: '',
+      description: 'Selecciona todas las opciones que correspondan.',
+      label: 'Selecciona opciones',
+      tooltip: 'Puedes marcar más de una opción si lo deseas.',
     });
   }
   newInstance(): MultiCheckboxFieldBuilder {

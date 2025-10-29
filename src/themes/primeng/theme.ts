@@ -60,15 +60,7 @@ export const MyPreset = definePreset(Aura, {
     inputtext: {
       root: {
         borderRadius: '0.25rem',
-        lg: {
-          fontSize: '12px',
-        },
       },
-      css: `
-        .p-inputtext {
-          font-size: 0.75rem
-        }
-`,
     },
     rating: {
       icon: {
