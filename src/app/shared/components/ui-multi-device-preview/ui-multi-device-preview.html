@@ -1,0 +1,37 @@
+<main class="grid grid-rows-[auto_1fr] gap-4">
+  <header class="flex justify-center">
+    <p-selectbutton [options]="devices" [(ngModel)]="device" optionValue="value">
+      <ng-template #item let-item>
+        <ui-icon [name]="item.icon"></ui-icon>
+      </ng-template>
+    </p-selectbutton>
+  </header>
+
+  <div class="flex flex-wrap gap-4 justify-center">
+    @switch (device()) {
+      @case (DeviceType.Desktop) {
+        <div class="device-preview device-preview-desktop">
+          <div class="device-preview__notch"></div>
+          <ng-container *ngTemplateOutlet="content"></ng-container>
+        </div>
+      }
+      @case (DeviceType.Tablet) {
+        <div class="device-preview device-preview-tablet">
+          <div class="device-preview__notch"></div>
+          <ng-container *ngTemplateOutlet="content"></ng-container>
+        </div>
+      }
+      @case (DeviceType.Mobile) {
+        <div class="device-preview device-preview-mobile">
+          <div class="device-preview__notch"></div>
+          <ng-container *ngTemplateOutlet="content"></ng-container>
+        </div>
+      }
+    }
+  </div>
+</main>
+<ng-template #content>
+  <div class="overflow-y-auto h-full">
+    <ng-content />
+  </div>
+</ng-template>

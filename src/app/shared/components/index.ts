@@ -4,6 +4,7 @@ export * from './ui-accordion/ui-accordion';
 export * from './ui-alert/ui-alert';
 export * from './ui-icon/ui-icon';
 export * from './ui-menu-popover/ui-menu-popover';
+export * from './ui-multi-device-preview/ui-multi-device-preview';
 export * from './ui-rating/ui-rating';
 export * from './ui-search-input/ui-search-input';
 export * from './ui-sidebar/ui-sidebar';

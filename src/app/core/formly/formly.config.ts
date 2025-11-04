@@ -1,4 +1,4 @@
-import { FormType, WrapperType } from '@core/formly/models/form-field-item';
+import { FormType, FormViewWrapperType, WrapperType } from '@core/formly/models/form-field-item';
 import { ConfigOption } from '@ngx-formly/core';
 
 import {
@@ -16,14 +16,19 @@ import {
   InputFieldTextArea,
   InputFieldTitle,
 } from './types/index';
+import { InputFieldGroup } from './types/input-field-group/input-field-group';
+import { AccordionWrapper } from './wrappers/accordion-wrapper/accordion-wrapper';
+import { CardWrapper } from './wrappers/card-wrapper/card-wrapper';
 import { InputFieldWrapper } from './wrappers/index';
+import { StepperWrapper } from './wrappers/stepper-wrapper/stepper-wrapper';
+import { TabsWrapper } from './wrappers/tabs-wrapper/tabs-wrapper';
 
 export const formlyConfig: ConfigOption = {
   types: [
     { name: FormType.Alert, component: InputFieldAlert },
     { name: FormType.Checkbox, component: InputFieldCheckbox },
     { name: FormType.Divider, component: InputFieldDivider },
-    { name: FormType.Group, component: InputFieldDivider },
+    { name: FormType.Group, component: InputFieldGroup },
     { name: FormType.Number, component: InputFieldNumber },
     { name: FormType.Multicheckbox, component: InputFieldMultiCheckbox },
     { name: FormType.Multiselect, component: InputFieldMultiSelect },
@@ -35,5 +40,11 @@ export const formlyConfig: ConfigOption = {
     { name: FormType.Title, component: InputFieldTitle },
     { name: FormType.Paragraph, component: InputFieldParagraph },
   ],
-  wrappers: [{ name: WrapperType.Field, component: InputFieldWrapper }],
+  wrappers: [
+    { name: WrapperType.Field, component: InputFieldWrapper },
+    { name: FormViewWrapperType.Accordion, component: AccordionWrapper },
+    { name: FormViewWrapperType.Card, component: CardWrapper },
+    { name: FormViewWrapperType.Stepper, component: StepperWrapper },
+    { name: FormViewWrapperType.Tabs, component: TabsWrapper },
+  ],
 };

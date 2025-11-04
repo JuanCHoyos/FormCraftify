@@ -4,7 +4,7 @@ import { UISidebar } from '@shared/components/index';
 import { AsidePosition } from '@shared/types/ui.types';
 
 @Component({
-  selector: 'app-form-settings-panel',
+  selector: 'form-settings-panel',
   imports: [CommonModule, UISidebar],
   templateUrl: './form-settings-panel.html',
 })

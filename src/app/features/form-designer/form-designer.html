@@ -1,13 +1,17 @@
 <div class="form-designer-container">
-  <app-form-design-navbar></app-form-design-navbar>
+  <form-designer-navbar></form-designer-navbar>
 
   <div class="form-designer-content">
-    <app-form-elements-panel></app-form-elements-panel>
+    <form-elements-panel></form-elements-panel>
 
     <main class="form-designer-main">
-      <app-form-design-canvas></app-form-design-canvas>
+      @if (formDesignerNavigation.showPreview()) {
+        <form-designer-preview></form-designer-preview>
+      } @else {
+        <form-designer-canvas></form-designer-canvas>
+      }
     </main>
 
-    <app-form-settings-panel></app-form-settings-panel>
+    <form-settings-panel></form-settings-panel>
   </div>
 </div>

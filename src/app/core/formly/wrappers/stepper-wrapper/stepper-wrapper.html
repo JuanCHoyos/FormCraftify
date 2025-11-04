@@ -1,0 +1,19 @@
+<div class="grid grid-rows-[auto_1fr_auto] gap-4 h-full p-4">
+  <ui-title [heading]="HeadingType.H2">{{ field.props?.label }}</ui-title>
+  <p-stepper [value]="1">
+    <p-step-list>
+      @for (group of field.fieldGroup; track group.id) {
+        <p-step [value]="$index + 1">{{ group.props?.label }}</p-step>
+      }
+    </p-step-list>
+    <p-step-panels>
+      @for (group of field.fieldGroup; track group.id) {
+        <p-step-panel [value]="$index + 1">
+          <ng-template #content let-activateCallback="activateCallback">
+            <formly-field [field]="group"></formly-field>
+          </ng-template>
+        </p-step-panel>
+      }
+    </p-step-panels>
+  </p-stepper>
+</div>

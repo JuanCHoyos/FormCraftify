@@ -1,0 +1,31 @@
+<div class="grid grid-rows-[auto_1fr_auto] gap-4 h-full p-4">
+  <ui-title [heading]="HeadingType.H2">{{ field.props?.label }}</ui-title>
+
+  <p-accordion>
+    @for (group of field.fieldGroup; track group.id) {
+      <p-accordion-panel [value]="group.id">
+        <p-accordion-header>
+          <ng-template #toggleicon let-isActive="active">
+            @if (isActive) {
+              <ui-icon name="lucideChevronDown"></ui-icon>
+            } @else {
+              <ui-icon name="lucideChevronRight"></ui-icon>
+            }
+          </ng-template>
+          <span class="text-sm font-semibold">{{ group.props?.label }}</span>
+          <small class="text-xs font-semibold text-gray-500 ml-auto mr-2">
+            {{ group.fieldGroup?.length }}
+          </small>
+        </p-accordion-header>
+        <p-accordion-content class="overflow-auto">
+          <formly-field [field]="group"></formly-field>
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+  </p-accordion>
+
+  <footer class="p-4 flex justify-between self-end">
+    <p-button [outlined]="true"> Anterior </p-button>
+    <p-button> Siguiente </p-button>
+  </footer>
+</div>

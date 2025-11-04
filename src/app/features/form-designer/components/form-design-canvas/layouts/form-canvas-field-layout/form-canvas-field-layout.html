@@ -1,36 +1,64 @@
-<article
-  class="w-full bg-white border border-gray-300 rounded p-2 md:p-4 grid grid-rows-[auto_1fr] grid-cols-1 justify-between gap-2 relative cursor-pointer hover:border-primary-300 has-[article:hover]:border-gray-300 [&:hover>header>ul]:visible has-[article:hover]:[&:hover>header>ul]:invisible"
+<p-card
+  class="w-full grid! grid-rows-1 border border-surface-300 dark:border-surface-800 relative cursor-pointer hover:border-primary-500 has-[.p-card:hover]:border-gray-300"
   [ngClass]="{
     'min-h-96': type() === 'GROUP_FIELD',
     'min-h-48': type() === 'GROUP',
   }"
-  (click)="clickItem.emit()"
+  hoverToggleChild
+  [targets]="['.field-menu', '.handle']"
+  activeClass="md:visible"
+  inactiveClass="md:invisible"
+  (click)="$event.stopPropagation(); clickItem.emit(); selectedId.set(id())"
   (keydown.enter)="clickItem.emit()"
-  role="button"
   tabindex
 >
+  @if (type() === 'FIELD') {
+    <div class="grid grid-cols-[auto_1fr_auto] items-start h-full pt-4 gap-2 cc">
+      <ng-container *ngTemplateOutlet="handle"></ng-container>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+      <ng-container *ngTemplateOutlet="menuItems"></ng-container>
+    </div>
+  } @else {
+    <div class="grid grid-rows-[auto_1fr] grid-cols-[1fr] h-full pt-4 gap-2">
+      <ng-container *ngTemplateOutlet="header"></ng-container>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+  }
+</p-card>
+
+<ng-template #header>
   <header class="flex items-center justify-between">
     <div class="flex items-center gap-2">
+      <ng-container *ngTemplateOutlet="handle"></ng-container>
       @if (label()) {
         <ui-title [heading]="HeadingType.H5">{{ label() }}</ui-title>
       }
     </div>
-
-    <ul class="flex gap-1 md:invisible">
-      @for (option of options(); track option.id) {
-        <li>
-          <p-button
-            size="small"
-            variant="text"
-            [severity]="option.severity"
-            (onClick)="command($event, option)"
-          >
-            <ui-icon [name]="option.icon!"></ui-icon>
-          </p-button>
-        </li>
-      }
-    </ul>
+    <ng-container *ngTemplateOutlet="menuItems"></ng-container>
   </header>
+</ng-template>
 
+<ng-template #handle>
+  <ui-icon name="lucideGripVertical" class="handle"></ui-icon>
+</ng-template>
+
+<ng-template #menuItems>
+  <ul class="field-menu flex gap-1">
+    @for (option of options(); track option.id) {
+      <li>
+        <p-button
+          size="small"
+          variant="text"
+          [severity]="option.severity"
+          (onClick)="command($event, option)"
+        >
+          <ui-icon [name]="option.icon!"></ui-icon>
+        </p-button>
+      </li>
+    }
+  </ul>
+</ng-template>
+
+<ng-template #content>
   <ng-content></ng-content>
-</article>
+</ng-template>

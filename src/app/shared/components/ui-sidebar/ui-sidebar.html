@@ -1,6 +1,6 @@
 <aside
   aria-label="settings panel"
-  class="absolute top-0 w-80 bg-white z-10 border-gray-300 grid grid-rows-[70px_1fr] transition-all duration-300 overflow-hidden h-full md:relative md:left-0 md:z-0"
+  class="absolute top-0 w-80 border-surface-100 dark:border-surface-800 bg-surface-0 dark:bg-surface-900 z-10 grid grid-rows-[70px_1fr] transition-all duration-300 overflow-hidden h-full md:relative md:left-0 md:z-0"
   [ngClass]="{
     'md:w-[73px]': isCollapsed(),
     'md:w-80': !isCollapsed(),
@@ -13,11 +13,13 @@
   }"
   [attr.aria-hidden]="!showSideBar() || isCollapsed()"
 >
-  <header class="flex items-center justify-between gap-2 p-4 py-2 border-b border-gray-300">
+  <header
+    class="flex items-center justify-between gap-2 p-4 py-2 border-b border-surface-100 dark:border-surface-800"
+  >
     <div class="block" [ngClass]="{ 'md:hidden': isCollapsed() }">
       <ui-title [heading]="HeadingType.H4">{{ title() }}</ui-title>
       @if (subtitle()) {
-        <p class="text-xs text-gray-500">
+        <p class="text-xs">
           {{ subtitle() }}
         </p>
       }

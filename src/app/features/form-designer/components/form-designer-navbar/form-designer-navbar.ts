@@ -8,13 +8,16 @@ import { ButtonModule } from 'primeng/button';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
 
+import { FormDesignerNavigation } from '../../services/form-designer-navigation';
+
 @Component({
-  selector: 'app-form-design-navbar',
+  selector: 'form-designer-navbar',
   imports: [CommonModule, ButtonModule, PopoverModule, TooltipModule, UITitle, UIICon],
-  templateUrl: './form-design-navbar.html',
+  templateUrl: './form-designer-navbar.html',
 })
-export class FormDesignNavbar {
+export class FormDesignerNavbar {
   public readonly formDesignerStore = inject(FormDesignerStore);
+  private readonly formDesignerNavigation = inject(FormDesignerNavigation);
   menuTemplate = viewChild.required<Popover>('menuTemplate');
   HeadingType = HeadingType;
   navbarMenuItems = computed<UIButtonProps<Event>[]>(() => [
@@ -44,7 +47,7 @@ export class FormDesignNavbar {
       icon: 'lucideEye',
       visibleOn: ['desktop'],
       command: () => {
-        console.log('preview');
+        this.formDesignerNavigation.showPreview.update((value) => !value);
         this.closeMenu();
       },
     },

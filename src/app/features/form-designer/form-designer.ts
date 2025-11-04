@@ -1,17 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import {
-  FormDesignCanvas,
-  FormDesignNavbar,
+  FormDesignerCanvas,
+  FormDesignerNavbar,
   FormElementsPanel,
   FormSettingsPanel,
 } from './components';
+import { FormDesignerPreview } from './components/form-designer-preview/form-designer-preview';
+import { FormDesignerNavigation } from './services/form-designer-navigation';
 
 @Component({
   selector: 'app-form-designer',
-  imports: [CommonModule, FormElementsPanel, FormDesignCanvas, FormSettingsPanel, FormDesignNavbar],
+  imports: [
+    CommonModule,
+    FormElementsPanel,
+    FormDesignerCanvas,
+    FormDesignerPreview,
+    FormSettingsPanel,
+    FormDesignerNavbar,
+  ],
   templateUrl: './form-designer.html',
   styleUrl: './form-designer.scss',
 })
-export class FormDesigner {}
+export class FormDesigner {
+  public readonly formDesignerNavigation = inject(FormDesignerNavigation);
+}

@@ -1,5 +1,5 @@
 <div
-  class="grid grid-cols-[11fr_1fr] items-center gap-4 p-2 border border-transparent hover:bg-primary-100 hover:border-primary-500 rounded cursor-grab select-none"
+  class="grid grid-cols-[11fr_1fr] items-center gap-4 p-2 border border-transparent hover:bg-highlight rounded cursor-grab select-none"
   cdkDrag
   (cdkDragStarted)="whileDragging.set(true)"
   (cdkDragEnded)="whileDragging.set(false)"
@@ -13,7 +13,7 @@
     </div>
     <div>
       <p class="text-sm font-semibold">{{ item().label }}</p>
-      <small class="text-xs text-gray-500">{{ item().description }}</small>
+      <small class="text-xs text-surface-500">{{ item().description }}</small>
     </div>
   </div>
   <ui-icon class="text-gray-500" name="lucideGripVertical"></ui-icon>

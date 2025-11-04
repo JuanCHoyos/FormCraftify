@@ -1,21 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output, signal } from '@angular/core';
 import { UIICon, UITitle } from '@shared/components';
+import { HoverToggleChild } from '@shared/directives/hover-toggle-childre';
 import { HeadingType } from '@shared/types/ui.types';
 import { UIButtonProps } from '@shared/types/ui-button-props';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'form-canvas-field-layout',
-  imports: [CommonModule, ButtonModule, PanelModule, UIICon, UITitle],
+  imports: [CommonModule, ButtonModule, CardModule, HoverToggleChild, PanelModule, UIICon, UITitle],
   templateUrl: './form-canvas-field-layout.html',
+  styles: `
+    :host ::ng-deep .p-card-content {
+      height: 100%;
+    }
+  `,
 })
 export class FieldLayoutManager {
+  selectedId = signal<string>('');
   type = input.required<'GROUP_FIELD' | 'GROUP' | 'FIELD'>();
   label = input<string>('');
   id = input<string>(uuidv4());
+  r = new Date().getTime();
   removeItem = output<void>();
   editItem = output<void>();
   cloneItem = output<void>();

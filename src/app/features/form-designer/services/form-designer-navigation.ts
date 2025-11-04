@@ -16,6 +16,7 @@ export class FormDesignerNavigation {
   ]);
   viewMode = signal<NavigationMode>(NavigationMode.SCROLL);
   activeSectionIndex = signal<number>(0);
+  showPreview = signal<boolean>(false);
 
   isSectionView = computed(() => this.viewMode() === NavigationMode.SECTION);
   isScrollView = computed(() => this.viewMode() === NavigationMode.SCROLL);

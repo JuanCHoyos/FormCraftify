@@ -7,7 +7,7 @@
 >
   <div class="flex flex-col" [style.minWidth.px]="width()">
     @if (search()) {
-      <header class="p-4 sticky top-0 bg-white">
+      <header class="p-4 sticky top-0">
         <ui-search-input [(search)]="searchText" (searchChange)="align()"></ui-search-input>
       </header>
     }
@@ -15,8 +15,8 @@
       @if (tree()) {
         @for (category of filteredItems; track category.id) {
           <div class="flex flex-col gap-2">
-            <div class="border-b border-gray-300 px-4 py-2">
-              <ui-title [heading]="HeadingType.H4">{{ category.label }}</ui-title>
+            <div class="border-b border-gray-300 p-4">
+              <ui-title [heading]="HeadingType.H5">{{ category.label }}</ui-title>
             </div>
             <ng-container
               *ngTemplateOutlet="menu; context: { $implicit: category.items }"
@@ -41,7 +41,7 @@
     @for (item of items; track item.id) {
       <li>
         <button
-          class="flex items-center gap-4 w-full text-left hover:bg-primary-50 focus:bg-primary-100 hover:cursor-pointer px-4 py-2 outline-none"
+          class="flex items-center gap-4 w-full text-left hover:bg-primary-500/10 focus:bg-primary-100 hover:cursor-pointer px-4 py-2 outline-none"
           [attr.aria-label]="item.label"
           role="menuitem"
           tabindex="0"

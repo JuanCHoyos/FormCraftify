@@ -4,8 +4,10 @@
   (removeItem)="remove()"
   (cloneItem)="clone()"
 >
-  <form-canvas-fields [groupField]="groupField()"></form-canvas-fields>
-  <app-form-canvas-add-element-placeholder
-    (addElement)="addElement($event)"
-  ></app-form-canvas-add-element-placeholder>
+  <div class="grid grid-rows-[1fr_auto] grid-cols-1 gap-4 justify-between h-full">
+    <form-canvas-fields [groupField]="groupField()"></form-canvas-fields>
+    <app-form-canvas-add-element-placeholder
+      (addElement)="addElement($event)"
+    ></app-form-canvas-add-element-placeholder>
+  </div>
 </form-canvas-field-layout>

@@ -11,7 +11,7 @@ import { FormFieldBaseBuilder } from './base/base-field.builder';
 export class RatingFieldBuilder extends FormFieldBaseBuilder<RatingPropsType> {
   constructor() {
     super({
-      type: RatingType.Numbers,
+      type: RatingType.Stars,
       stars: 10,
       disabled: false,
       readonly: false,

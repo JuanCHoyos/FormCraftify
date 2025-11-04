@@ -1,12 +1,12 @@
-<div class="grid grid-rows-[1fr_auto] bg-surface-50 w-full h-full relative overflow-hidden">
+<div class="grid grid-rows-[1fr_auto] bg-surface-50 dark:bg-surface-950 w-full h-full relative overflow-hidden">
   <div
-    class="overflow-y-scroll px-4 py-8"
+    class="px-4 py-8 overflow-y-scroll"
     scrollThresholdWatcher
     [threshold]="40"
     #scrollWatcher="scrollThresholdWatcher"
     cdkScrollable
   >
-    <div class="max-w-full md:max-w-2xl mx-auto flex flex-col gap-4">
+    <div class="max-w-full md:max-w-2xl mx-auto flex flex-col gap-4 animate-fade-in">
       <app-form-canvas-header></app-form-canvas-header>
       <app-form-canvas-sections
         [fields]="formDesignerStore.fields().fieldGroup"
@@ -18,8 +18,8 @@
         size="small"
         (onClick)="scrollWatcher.scrollToTop()"
         [ngClass]="{
-          'bottom-36': formDesignNavigation.isSectionView(),
-          'bottom-8': formDesignNavigation.isScrollView(),
+          'bottom-36': formDesignerNavigation.isSectionView(),
+          'bottom-8': formDesignerNavigation.isScrollView(),
         }"
       >
         <ui-icon name="lucideChevronUp"></ui-icon>
@@ -27,7 +27,7 @@
     }
   </div>
 
-  @if (formDesignNavigation.isSectionView()) {
+  @if (formDesignerNavigation.isSectionView()) {
     <app-form-canvas-footer></app-form-canvas-footer>
   }
 </div>

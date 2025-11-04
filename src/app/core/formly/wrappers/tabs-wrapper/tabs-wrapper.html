@@ -1,0 +1,19 @@
+<div class="grid grid-rows-[auto_1fr_auto] gap-4 h-full p-4">
+  <ui-title [heading]="HeadingType.H2">{{ field.props?.label }}</ui-title>
+  <p-tabs [value]="0" scrollable>
+    <p-tablist>
+      @for (group of field.fieldGroup; track group.id) {
+        <p-tab [value]="$index">
+          {{ group.props?.label }}
+        </p-tab>
+      }
+    </p-tablist>
+    <p-tabpanels>
+      @for (group of field.fieldGroup; track group.id) {
+        <p-tabpanel [value]="$index">
+          <formly-field [field]="group"></formly-field>
+        </p-tabpanel>
+      }
+    </p-tabpanels>
+  </p-tabs>
+</div>

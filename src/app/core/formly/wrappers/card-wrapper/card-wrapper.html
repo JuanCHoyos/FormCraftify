@@ -1,0 +1,13 @@
+<div class="grid grid-rows-[auto_1fr_auto] gap-8 h-full p-4">
+  <ui-title [heading]="HeadingType.H2">{{ field.props?.label }}</ui-title>
+  @for (group of field.fieldGroup; track group.id) {
+    <p-card>
+      <ng-template #header>
+        <div class="p-4">
+          <ui-title [heading]="HeadingType.H5">{{ group.props?.label }}</ui-title>
+        </div>
+      </ng-template>
+      <formly-field [field]="group"></formly-field>
+    </p-card>
+  }
+</div>

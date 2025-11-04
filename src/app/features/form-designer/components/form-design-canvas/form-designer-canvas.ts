@@ -11,7 +11,7 @@ import { SelectModule } from 'primeng/select';
 import { FormCanvasFooter, FormCanvasHeader, FormCanvasSections } from './components';
 
 @Component({
-  selector: 'app-form-design-canvas',
+  selector: 'form-designer-canvas',
   imports: [
     CommonModule,
     ButtonModule,
@@ -24,14 +24,14 @@ import { FormCanvasFooter, FormCanvasHeader, FormCanvasSections } from './compon
     CdkScrollable,
     UIICon,
   ],
-  templateUrl: './form-design-canvas.html',
+  templateUrl: './form-designer-canvas.html',
   styles: `
     :host {
       height: 100%;
     }
   `,
 })
-export class FormDesignCanvas {
-  public readonly formDesignNavigation = inject(FormDesignerNavigation);
+export class FormDesignerCanvas {
+  public readonly formDesignerNavigation = inject(FormDesignerNavigation);
   public readonly formDesignerStore = inject(FormDesignerStore);
 }

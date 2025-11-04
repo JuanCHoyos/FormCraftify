@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormDesignerNavigation } from '@features/form-designer/services/form-designer-navigation';
-import { UIICon, UIMenuPopover, UITitle } from '@shared/components/index';
-import { HeadingType, MenuItemType } from '@shared/types/ui.types';
+import { UIICon, UIMenuPopover } from '@shared/components/index';
+import { MenuItemType } from '@shared/types/ui.types';
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -18,14 +18,12 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     SelectButtonModule,
     UIICon,
     UIMenuPopover,
-    UITitle,
   ],
   templateUrl: './form-canvas-header.html',
 })
 export class FormCanvasHeader {
   private readonly menuPopover = viewChild.required<UIMenuPopover>('sectionMenu');
   public readonly formDesignNavigation = inject(FormDesignerNavigation);
-  HeadingType = HeadingType;
 
   items = signal<MenuItemType[]>([
     {

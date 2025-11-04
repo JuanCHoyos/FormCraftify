@@ -5,7 +5,6 @@ import {
   FormType,
   FormViewWrapperType,
   GroupFieldType,
-  WrapperType,
 } from '@core/formly/models/form-field-item';
 import { ToastManager } from '@core/services/toast-manager';
 import { UITreeNodeType, UITreeType } from '@shared/types/ui-tree';
@@ -34,7 +33,7 @@ export class FormDesignerStore {
     id: 'dsfgsdf',
     key: 'dsfgsdf',
     type: FormType.Group,
-    wrappers: [FormViewWrapperType.Accordion],
+    wrappers: [FormViewWrapperType.Card],
     props: {
       label: 'Formularios para todos',
     },
@@ -43,7 +42,6 @@ export class FormDesignerStore {
         id: 'userInfo333',
         key: 'userInfo333',
         type: FormType.Group,
-        wrappers: [WrapperType.Field],
         props: {
           cols: 1,
           label: 'User Information',
@@ -54,7 +52,6 @@ export class FormDesignerStore {
         id: 'contact',
         key: 'contact',
         type: FormType.Group,
-        wrappers: [WrapperType.Field],
         props: {
           cols: 1,
           label: 'Contact',

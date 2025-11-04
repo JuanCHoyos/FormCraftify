@@ -10,7 +10,7 @@ import { FormElementsList } from './components';
 import { FormTree } from './components/form-tree/form-tree';
 
 @Component({
-  selector: 'app-form-elements-panel',
+  selector: 'form-elements-panel',
   imports: [
     CommonModule,
     FormsModule,
