@@ -43,21 +43,11 @@ export class FormDesignerNavbar {
     },
     {
       id: 'form-designer:preview',
-      label: 'Preview',
-      icon: 'lucideEye',
+      label: this.formDesignerNavigation.showPreview() ? 'Editor' : 'Preview',
+      icon: this.formDesignerNavigation.showPreview() ? 'lucidePenLine' : 'lucideEye',
       visibleOn: ['desktop'],
       command: () => {
         this.formDesignerNavigation.showPreview.update((value) => !value);
-        this.closeMenu();
-      },
-    },
-    {
-      id: 'form-designer:export',
-      label: 'Export',
-      icon: 'lucideDownload',
-      visibleOn: ['desktop'],
-      command: () => {
-        console.log('export');
         this.closeMenu();
       },
     },
